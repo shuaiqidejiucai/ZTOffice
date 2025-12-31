@@ -1,4 +1,4 @@
-﻿#include "mainwindow.h"
+#include "mainwindow.h"
 
 #include <QApplication>
 #include "libolecf.h"
@@ -79,27 +79,7 @@ QString getCompObjCLSID(libolecf_item_t* pComObjItem)
 #include "qunzip/include/quazip.h"
 #include <qbuffer.h>
 #include <qtextcodec.h>
-enum EU_DocumentType
-{
-    EU_NoType,
-    EU_DOCType,
-    EU_DOCXType,
-    EU_WPSType,
-    EU_XLSType,
-    EU_XLSXType,
-    EU_ETType,
-    EU_PPTType,
-    EU_PPTXType,
-    EU_DPSType,
-    EU_BinType
-};
-struct ST_VarantFile
-{
-    QString qsFileName;//AS:temp.zip
-    QString qsTmpFilePath;//AS:C:/user/temp/temp.zip
-    QString qsFilePath;//AS:D:/test/temp.zip
-    QByteArray fileData;//AS:zip data
-};
+
 
 
 static bool parseOle10Native2(const QByteArray& src, ST_VarantFile& stOleFile)

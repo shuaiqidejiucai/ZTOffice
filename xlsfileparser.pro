@@ -11,10 +11,15 @@ include($$shareRoot/common/common.pri)
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    zttools.cpp \
+    ztwppdocument.cpp
 
 HEADERS += \
-    mainwindow.h
+    global.h \
+    mainwindow.h \
+    zttools.h \
+    ztwppdocument.h
 
 FORMS += \
     mainwindow.ui
