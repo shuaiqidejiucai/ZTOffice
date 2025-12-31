@@ -96,6 +96,70 @@ bool ZTTools::parseOle10Native(const QByteArray &ole10NativeData, ST_VarantFile 
     return false;
 }
 
+EU_DocumentType ZTTools::getOleFileFormat(const QSharedPointer<libolecf_item_t>& intputItem, bool& haveOutput, QSharedPointer<libolecf_item_t>& outputItem)
+{
+    bool isDoc = true;
+    QSharedPointer<libolecf_item_t> outPutItem;
+    isDoc = isDoc && findOleTreeItem(intputItem, "WordDocument", outPutItem);
+
+    bool isXls = true;
+    isXls = isXls && findOleTreeItem(intputItem, "Workbook", outPutItem);
+
+    bool isPpt = true;
+    isPpt = isPpt && findOleTreeItem(intputItem, "PowerPoint Document", outPutItem);
+    isPpt = isPpt && findOleTreeItem(intputItem, "Current User", outPutItem);
+    EU_DocumentType documentType = EU_DocumentType::EU_NoType;
+    if (isDoc)
+    {
+        if (findOleTreeItem(intputItem, "WpsCustomData", outPutItem))
+        {
+            documentType = EU_WPSType;
+        }
+        else
+        {
+            documentType = EU_DOCType;
+        }
+    }
+    else if (isXls)
+    {
+        documentType = EU_XLSType;
+    }
+    else if (isPpt)
+    {
+        documentType = EU_PPTType;
+    }
+    else
+    {
+        QSharedPointer<libolecf_item_t> packageItem;
+        if (findOleTreeItem(intputItem, "Package", packageItem, false, true))
+        {
+            if (packageItem)
+            {
+                QByteArray zipData = getOleItemData(packageItem);
+                documentType = getZipPackage(zipData);
+                haveOutput = true;
+                outputItem = packageItem;
+            }
+        }
+    }
+
+    if (documentType == EU_DocumentType::EU_NoType)
+    {
+        QSharedPointer<libolecf_item_t> ole10NativeItem;
+        if (findOleTreeItem(intputItem, "Ole10Native", ole10NativeItem, true, true))
+        {
+            if (ole10NativeItem)
+            {
+                documentType = EU_DocumentType::EU_BinType;
+                haveOutput = true;
+                outputItem = ole10NativeItem;
+            }
+        }
+    }
+
+    return documentType;
+}
+
 EU_DocumentType ZTTools::getZipPackage(const QByteArray &zipBytes)
 {
     QBuffer buffer;
@@ -147,80 +211,92 @@ EU_DocumentType ZTTools::getZipPackage(const QByteArray &zipBytes)
     return EU_DocumentType::EU_NoType;
 }
 
-bool ZTTools::findOleTreeItem(QSharedPointer<libolecf_item_t> intputItem, const QString& nodeName, QSharedPointer<libolecf_item_t>& subItem, bool isRegex, bool isOutPut)
+bool ZTTools::findOleTreeItem(const QSharedPointer<libolecf_item_t>& intputItem, const QString& nodeName, QSharedPointer<libolecf_item_t>& subItem, bool isRegex, bool isOutPut)
 {
     if (isRegex)
     {
         int nItemCount = 0;
-        libolecf_item_get_number_of_sub_items(intputItem.data(), &nItemCount, nullptr);
+        ZT_libolecf_item_get_number_of_sub_items(intputItem, nItemCount, nullptr);
 
         for (int i = 0; i < nItemCount; ++i)
         {
-            libolecf_item_t* subTmpItem = nullptr;
-            libolecf_item_get_sub_item(intputItem.data(), i, &subTmpItem, nullptr);
-            QSharedPointer<libolecf_item_t> p;
-
-            libolecf_item_get_sub_item(intputItem.data(), i, &p.get(), nullptr);
+            QSharedPointer<libolecf_item_t> subTmpItem;
+            ZT_libolecf_item_get_sub_item(intputItem, i, subTmpItem, nullptr);
 
             if (!subTmpItem)
             {
                 continue;
             }
-            size_t stringSize = 0;
-            libolecf_item_get_utf8_name_size(subTmpItem, &stringSize, nullptr);
-            QByteArray nameData;
-            nameData.resize(stringSize);
-            libolecf_item_get_utf8_name(subTmpItem, (uint8_t*)nameData.data(), stringSize, nullptr);
-            QString nodeItemName = QString::fromUtf8(nameData);
+            QString nodeItemName = getOleItemName(subTmpItem);
             if (nodeItemName.contains(nodeName))
             {
                 if (isOutPut)
                 {
-                    *subItem = subTmpItem;
+                    subItem = subTmpItem;
                     return true;
                 }
             }
-            libolecf_item_free(&subTmpItem, nullptr);
-            subTmpItem = nullptr;
         }
     }
     else
     {
-        libolecf_item_t* subTmpItem = nullptr;
-        libolecf_item_get_sub_item_by_utf8_path(intputItem, (uint8_t*)nodeName.toUtf8().data(), nodeName.toUtf8().size(), &subTmpItem, nullptr);
+        QSharedPointer<libolecf_item_t> subTmpItem;
+        ZT_libolecf_item_get_sub_item_by_utf8_path(intputItem, (uint8_t*)nodeName.toUtf8().data(), nodeName.toUtf8().size(), subTmpItem, nullptr);
         if (subTmpItem)
         {
             if (isOutPut)
             {
-                *subItem = subTmpItem;
+                subItem = subTmpItem;
+                return true;
             }
-            else
-            {
-                libolecf_item_free(&subTmpItem, nullptr);
-                subTmpItem = nullptr;
-            }
-            return true;
         }
     }
-
     return false;
+}
+
+QString ZTTools::getOleItemName(const QSharedPointer<libolecf_item_t>& pItem)
+{
+	size_t stringSize = 0;
+	ZT_libolecf_item_get_utf8_name_size(pItem, &stringSize, nullptr);
+	QByteArray nameData;
+	nameData.resize(stringSize);
+	ZT_libolecf_item_get_utf8_name(pItem, (uint8_t*)nameData.data(), stringSize, nullptr);
+	QString nodeName = QString::fromUtf8(nameData);
+	return nodeName;
+}
+
+QByteArray ZTTools::getOleItemData(const QSharedPointer<libolecf_item_t>& intputItem)
+{
+    QByteArray data;
+    if (intputItem)
+    {
+        // 读取流数据
+        uint32_t stream_size = 0;
+        ZT_libolecf_item_get_size(intputItem, &stream_size, nullptr);
+        if (stream_size > 0)
+        {
+            data.resize(stream_size);
+            ZT_libolecf_stream_read_buffer(intputItem, (uint8_t*)data.data(), stream_size, nullptr);
+        }
+    }
+    return data;
 }
 
 ZTTools::ZTTools() {}
 
 
 
-int ZT_libolecf_item_get_sub_item(const QSharedPointer<libolecf_item_t> &parentItem, int num, QSharedPointer<libolecf_item_t> &subItem, QSharedPointer<libolecf_error_t> &error)
+int ZT_libolecf_item_get_sub_item(const QSharedPointer<libolecf_item_t> &parentItem, int num, QSharedPointer<libolecf_item_t> &subItem, QSharedPointer<libolecf_error_t>* error)
 {
     libolecf_item_t* rawItem = nullptr;
     libolecf_error_t* rawError = nullptr;
-    int errorCode = libolecf_item_get_sub_item(parentItem.data(), num, &subItem, &rawError);
+    int errorCode = libolecf_item_get_sub_item(parentItem.data(), num, &rawItem, &rawError);
     if (rawItem) {
         subItem = QSharedPointer<libolecf_item_t>(rawItem, oleItemDeleter);
     }
 
-    if (rawError) {
-        error = QSharedPointer<libolecf_error_t>(rawError, oleErrorDeleter);
+    if (rawError && error) {
+        *error = QSharedPointer<libolecf_error_t>(rawError, oleErrorDeleter);
     }
 
     return errorCode;
@@ -251,7 +327,7 @@ void oleErrorDeleter(libolecf_error_t *oleError)
     }
 }
 
-int ZT_libolecf_item_get_sub_item_by_utf8_path(const QSharedPointer<libolecf_item_t> &item, const uint8_t *utf8_string, size_t utf8_string_length, QSharedPointer<libolecf_item_t> &subItem, QSharedPointer<libolecf_error_t> &error)
+int ZT_libolecf_item_get_sub_item_by_utf8_path(const QSharedPointer<libolecf_item_t> &item, const uint8_t *utf8_string, size_t utf8_string_length, QSharedPointer<libolecf_item_t> &subItem, QSharedPointer<libolecf_error_t>* error)
 {
     libolecf_item_t* rawItem = nullptr;
     libolecf_error_t * oleError = nullptr;
@@ -260,9 +336,94 @@ int ZT_libolecf_item_get_sub_item_by_utf8_path(const QSharedPointer<libolecf_ite
     {
         subItem = QSharedPointer<libolecf_item_t>(rawItem, oleItemDeleter);
     }
-    if(oleError)
+    if(oleError && error)
     {
-        error = QSharedPointer<libolecf_error_t>(error, oleErrorDeleter);
+        *error = QSharedPointer<libolecf_error_t>(oleError, oleErrorDeleter);
+    }
+    return errorCode;
+}
+
+int ZT_libolecf_file_initialize(QSharedPointer<libolecf_file_t>& file, QSharedPointer<libolecf_error_t>* error)
+{
+    libolecf_file_t* filePtr = nullptr;
+    libolecf_error_t* errorPtr = nullptr;
+    int errorCode = libolecf_file_initialize(&filePtr, &errorPtr);
+    if (filePtr)
+    {
+        file = QSharedPointer<libolecf_file_t>(filePtr, oleFileDeleter);
+    }
+    if (errorPtr && error)
+    {
+        *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
+    }
+    return errorCode;
+}
+
+int ZT_libolecf_file_open(const QSharedPointer<libolecf_file_t>& file, const char* filename, int access_flags, QSharedPointer<libolecf_error_t>* error)
+{
+    libolecf_error_t* errorPtr = nullptr;
+    int errorCode = libolecf_file_open(file.data(), filename, LIBOLECF_OPEN_READ, &errorPtr);
+    if (errorPtr && error)
+    {
+        *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
+    }
+    return errorCode;
+}
+
+int ZT_libolecf_item_get_number_of_sub_items(const QSharedPointer<libolecf_item_t>& oleItem, int& count, QSharedPointer<libolecf_error_t>* error)
+{
+    int nItemCount = 0;
+    libolecf_error_t* errorPtr = nullptr;
+    int errorCode = libolecf_item_get_number_of_sub_items(oleItem.data(), &nItemCount, &errorPtr);
+    if (errorPtr && error)
+    {
+        *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
+    }
+    
+    return errorCode;
+}
+
+int ZT_libolecf_item_get_utf8_name_size(const QSharedPointer<libolecf_item_t>& oleItem, size_t* utf8_string_size, QSharedPointer<libolecf_error_t>* error)
+{
+    libolecf_error_t* errorPtr = nullptr;
+
+    int errorCode = libolecf_item_get_utf8_name_size(oleItem.data(), utf8_string_size, &errorPtr);
+    if (errorPtr && error)
+    {
+        *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
+    }
+    return errorCode;
+}
+
+int ZT_libolecf_item_get_utf8_name(const QSharedPointer<libolecf_item_t>& oleItem, uint8_t* utf8_string, const size_t& utf8_string_size, QSharedPointer<libolecf_error_t>* error)
+{
+    libolecf_error_t* errorPtr = nullptr;
+    int errorCode = libolecf_item_get_utf8_name(oleItem.data(), utf8_string, utf8_string_size, &errorPtr);
+    if (errorPtr && error)
+    {
+        *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
+    }
+    return errorCode;
+}
+
+int ZT_libolecf_item_get_size(const QSharedPointer<libolecf_item_t>& item, uint32_t* size, QSharedPointer<libolecf_error_t>* error)
+{
+    libolecf_error_t *errorPtr = nullptr;
+    int errorCode = libolecf_item_get_size(item.data(), size, &errorPtr);
+    if (errorPtr && error)
+    {
+       *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
+    }
+    return errorCode;
+}
+
+int ZT_libolecf_stream_read_buffer(const QSharedPointer<libolecf_item_t>& intputItem, uint8_t* buffer, const size_t& size, QSharedPointer<libolecf_error_t>* error)
+{
+    libolecf_error_t* errorPtr = nullptr;
+    int errorCode = libolecf_stream_read_buffer(intputItem.data(), buffer, size, &errorPtr);
+    if (errorPtr && error)
+    {
+        *error = QSharedPointer<libolecf_error_t>(errorPtr, oleErrorDeleter);
     }
     return errorCode;
 }

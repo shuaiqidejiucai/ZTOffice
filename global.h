@@ -3,6 +3,17 @@
 
 #include "libolecf.h"
 #include <qsharedpointer.h>
+#include <qendian.h>
+#include <QFile>
+#include <QPair>
+#include <qdebug.h>
+#include <QStringList>
+#include <qbuffer.h>
+#include "zlib.h"
+#include "qunzip/include/quazip.h"
+#include <qtextcodec.h>
+#include <qbytearray.h>
+#include <QString>
 enum EU_DocumentType
 {
     EU_NoType,

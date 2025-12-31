@@ -1,17 +1,19 @@
 #include "ztwppdocument.h"
-
+#include <qdir.h>
 ZTWPPDocument::ZTWPPDocument() {}
 
 bool ZTWPPDocument::openWPPFile(const QString &qsFilePath)
 {
     QString nativePath = QDir::toNativeSeparators(qsFilePath);
-    libolecf_file_t* file = nullptr;
-    int errorCode = libolecf_file_initialize(&file, &error);
-    if(errorCode == 1)
+    QSharedPointer<libolecf_error_t> error;
+    int errorCode = ZT_libolecf_file_initialize(m_oleFilePtr, error);
+    if(errorCode == 1 && m_oleFilePtr)
     {
-        libolecf_file_open(file, nativePath.toUtf8().constData(), LIBOLECF_OPEN_READ, nullptr);
-        m_oleFilePtr = QSharedPointer<libolecf_file_t>(file, oleFileDeleter);
-        return true;
+        errorCode = ZT_libolecf_file_open(m_oleFilePtr, nativePath.toUtf8().constData(), LIBOLECF_OPEN_READ, error);
+        if (errorCode == 1)
+        {
+            return true;
+        }
     }
     return false;
 }
