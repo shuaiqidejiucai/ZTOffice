@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-
+﻿#include "mainwindow.h"
+#include "global.h"
 #include <QApplication>
 #include "libolecf.h"
 #include <qendian.h>
@@ -8,16 +8,18 @@
 #include <qdebug.h>
 #include <QStringList>
 #include "zlib.h"
+
+
 enum EU_XLSReordType
 {
     MsoDrawingReordType = 236,
-    ObjReordType        = 93
+    ObjReordType = 93
 };
 
 enum EU_ContinueType
 {
     REC_MSODRAWING_CONT = 0x00EC,
-    REC_MSODRAWING_CONT2 = 0x003C /*或 0x003C 视版本*/ 
+    REC_MSODRAWING_CONT2 = 0x003C /*或 0x003C 视版本*/
 };
 
 const quint16 Container_Header = 0xF;
@@ -76,8 +78,93 @@ QString getCompObjCLSID(libolecf_item_t* pComObjItem)
     }
     return qsClsid;
 }
+#include "qunzip/include/quazip.h"
+#include <qbuffer.h>
+#include <qtextcodec.h>
 
 
+static bool parseOle10Native2(const QByteArray& src, ST_VarantFile& stOleFile)
+{
+    if (src.size() < 12) return false;
+    auto readZ = [&](int& pos)->QByteArray {
+        if (pos >= src.size()) return {};
+
+        int start = pos;
+        // 直接找到 '\0'，不要跳过开头的 '\0'
+        while (pos < src.size() && src[pos] != '\0') {
+            ++pos;
+        }
+
+        QByteArray s = src.mid(start, pos - start);
+
+        if (pos < src.size() && src[pos] == '\0') {
+            ++pos;  // 跳过终止符
+        }
+
+        return s;
+    };
+
+    int offset = 0;
+    quint32 totalSize = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(src.constData() + offset));
+    offset += 4;
+    //offset += 2;
+    bool ok = false;
+    if (offset + 2 >= src.size())
+    {
+        return false;
+    }
+    quint16 filePrexLength = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(src.constData() + offset));
+    offset += 2;
+    QTextCodec* code = QTextCodec::codecForName("GBK");
+
+    QByteArray label = readZ(offset);
+    if (!label.isEmpty())
+    {
+        qDebug() << label;
+    }
+
+    QByteArray fileNameData = readZ(offset);
+    if (!fileNameData.isEmpty())
+    {
+        stOleFile.qsFileName = code->toUnicode(fileNameData);
+    }
+
+    QByteArray filePathData = readZ(offset);
+    if (!filePathData.isEmpty())
+    {
+        stOleFile.qsFilePath = code->toUnicode(filePathData);
+    }
+    if (offset + 4 >= src.size())
+    {
+        return false;
+    }
+    quint32 mark = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(src.constData() + offset));
+    offset += 4;
+    if (offset + 4 > src.size())
+    {
+        return false;
+    }
+    quint32 tempPathLen = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(src.constData() + offset));
+    offset += 4;
+    QByteArray tempPathBa = readZ(offset);
+    if (!tempPathBa.isEmpty())
+    {
+        stOleFile.qsTmpFilePath = code->toUnicode(tempPathBa);
+    }
+    if (offset + 4 > src.size())
+    {
+        return false;
+    }
+    quint32 datasize = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(src.constData() + offset));
+    offset += 4;
+    if (offset + datasize > src.size())
+    {
+        return false;
+    }
+    QByteArray srcData = src.mid(offset, datasize);
+    stOleFile.fileData = srcData;
+    return true;
+}
 
 
 static bool parseOle10Native(const QByteArray& src, ST_VarantFile& stOleFile)
@@ -197,7 +284,7 @@ EU_DocumentType getPackage(QByteArray zipBytes)//查看内部结构是不是docx
     isDocx = isDocx && zip.setCurrentFile("[Content_Types].xml");
     isDocx = isDocx && zip.setCurrentFile("_rels/.rels");
     isDocx = isDocx && zip.setCurrentFile("word/document.xml");
-    
+
     bool isXlsx = true;
     isXlsx = isXlsx && zip.setCurrentFile("[Content_Types].xml");
     isXlsx = isXlsx && zip.setCurrentFile("_rels/.rels");
@@ -216,11 +303,11 @@ EU_DocumentType getPackage(QByteArray zipBytes)//查看内部结构是不是docx
     {
         return EU_DocumentType::EU_DOCXType;
     }
-    else if(isXlsx)
+    else if (isXlsx)
     {
         return EU_DocumentType::EU_XLSXType;
     }
-    else if(isPptx)
+    else if (isPptx)
     {
         return EU_DocumentType::EU_PPTXType;
     }
@@ -278,7 +365,7 @@ bool hasOleTreeItem(libolecf_item_t* intputItem, QString nodeName, libolecf_item
             return true;
         }
     }
-    
+
     return false;
 }
 
@@ -300,14 +387,14 @@ QByteArray getOleItemData(libolecf_item_t* intputItem)
     return data;
 }
 
-EU_DocumentType getOleFileFormat(libolecf_item_t*intputItem, bool &haveOutput, libolecf_item_t** outputItem)
+EU_DocumentType getOleFileFormat(libolecf_item_t* intputItem, bool& haveOutput, libolecf_item_t** outputItem)
 {
     /*int subItemCount = 0;
     libolecf_item_get_number_of_sub_items(intputItem, &subItemCount, nullptr);*/
 
     bool isDoc = true;
     isDoc = isDoc && hasOleTreeItem(intputItem, "WordDocument", nullptr);
-    
+
     bool isXls = true;
     isXls = isXls && hasOleTreeItem(intputItem, "Workbook", nullptr);
 
@@ -319,20 +406,20 @@ EU_DocumentType getOleFileFormat(libolecf_item_t*intputItem, bool &haveOutput, l
     {
         if (hasOleTreeItem(intputItem, "WpsCustomData", nullptr))
         {
-            documentType = EU_WPSType;
+            documentType = EU_DocumentType::EU_WPSType;
         }
         else
         {
-            documentType = EU_DOCType;
+            documentType = EU_DocumentType::EU_DOCType;
         }
     }
-    else if(isXls)
+    else if (isXls)
     {
-        documentType = EU_XLSType;
+        documentType = EU_DocumentType::EU_XLSType;
     }
-    else if(isPpt)
+    else if (isPpt)
     {
-        documentType = EU_PPTType;
+        documentType = EU_DocumentType::EU_PPTType;
     }
     else
     {
@@ -498,12 +585,12 @@ QList<libolecf_item_t*> getPptAttachmentLibOlecfItem(libolecf_item_t* inputRootI
                 pos += 2;
                 quint32 objListAtomSize = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(containerData.constData() + pos));
                 pos += 4;
-               // QByteArray objListAtomData = containerData.mid(pos, objListAtomSize);
+                // QByteArray objListAtomData = containerData.mid(pos, objListAtomSize);
                 pos += objListAtomSize;
                 containerData = containerData.mid(pos, containerData.size() - pos);
                 pos = 0;
                 //ExObjListAtom
-                
+
 
                 outputFile(containerData);
                 quint16 oleEmbedContainerHead = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(containerData.constData() + pos));
@@ -558,7 +645,7 @@ QList<libolecf_item_t*> getPptAttachmentLibOlecfItem(libolecf_item_t* inputRootI
                     pos += 2;
                     wSize = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(otherData.constData() + pos));
                     pos += 4;
-                    
+
 
                     if (wType == 0x1772)
                     {
@@ -572,9 +659,9 @@ QList<libolecf_item_t*> getPptAttachmentLibOlecfItem(libolecf_item_t* inputRootI
                         quint32 oneData = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(PersistDirectoryEntryData.constData() + tPos));
                         tPos += 4;
                         quint32 twoData = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(PersistDirectoryEntryData.constData() + tPos));
-                        
+
                         QByteArray ID2OleObjMaybeData = srcData.mid(twoData, srcData.size() - twoData);
-                        
+
                         outputFile(ID2OleObjMaybeData);
 
                         tPos = 0;
@@ -652,32 +739,38 @@ QList<libolecf_item_t*> getPptAttachmentLibOlecfItem(libolecf_item_t* inputRootI
 
                         //outputFile(datadd);
                        // QByteArray decompressed = qUncompress(datadd);
-                        
+
                         break;
                     }
                     pos += wSize;
                     outputFile(otherData.mid(pos, otherData.size() - pos));
-                } 
+                }
             }
         }
     }
     return tmpList;
 }
-
-int main(int argc, char *argv[])
+#include "ztwppdocument.h"
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     QByteArray data;
-   // QString qsETFilePath = "E:\\test\\indoc.et";
-    //QString qsPPTFilePath = "E:\\test\\new.ppt";
-    QString oleFile = "E:\\test\\partial.bin";
+    // QString qsETFilePath = "E:\\test\\indoc.et";
+    QString qsPPTFilePath = "E:\\test\\new.ppt";
+
+    ZTWPPDocument wk;
+    wk.openWPPFile(qsPPTFilePath);
+    wk.readPPTData();
+    wk.parserData();
+
+    //QString oleFile = "E:\\test\\partial.bin";
     libolecf_file_t* file = nullptr;
     libolecf_item_t* item = nullptr;
     libolecf_error_t* error = nullptr;
 
     // 打开文件
     libolecf_file_initialize(&file, &error);
-    libolecf_file_open(file, oleFile.toUtf8().constData(),
+    libolecf_file_open(file, qsPPTFilePath.toUtf8().constData(),
         LIBOLECF_OPEN_READ, &error);
 
     libolecf_item_t* pRootIem = nullptr;
@@ -700,22 +793,23 @@ int main(int argc, char *argv[])
         else if (docType == EU_PPTType || docType == EU_DPSType)
         {
             getPptAttachmentLibOlecfItem(pRootIem);
+
         }
-        else if(docType == EU_BinType)
+        else if (docType == EU_BinType)
         {
             if (haveOutPut)
             {
                 QByteArray oleData = getOleItemData(tmpItem);
-                ST_VarantFile vFile;
-                parseOle10Native(oleData, vFile);
-                QFile file("E:/test/newppt.xls");
+                //ST_VarantFile vFile;
+                //parseOle10Native(oleData, vFile);
+                /*QFile file("E:/test/newppt.xls");
                 if (file.open(QIODevice::WriteOnly))
                 {
                     file.write(vFile.fileData);
                     file.close();
-                }
+                }*/
             }
-            
+
         }
         else
         {
@@ -729,22 +823,22 @@ int main(int argc, char *argv[])
             {
                 continue;
             }
-            
+
         }
     }
 
-    
+
 
 
     // 根据路径获取项
     // streamPath 格式如 "Workbook" 或 "Root Entry/Workbook"
     const QString streamPath = "Workbook";
     if (libolecf_file_get_item_by_utf8_path(
-            file,
-            (const uint8_t *)streamPath.toUtf8().constData(),
-            streamPath.toUtf8().size(),
-            &item,
-            &error) == 1) 
+        file,
+        (const uint8_t*)streamPath.toUtf8().constData(),
+        streamPath.toUtf8().size(),
+        &item,
+        &error) == 1)
     {
 
         // 读取流数据
@@ -761,7 +855,7 @@ int main(int argc, char *argv[])
                 (uint8_t*)data.data(),
                 stream_size,
                 nullptr
-                );
+            );
         }
 
         libolecf_item_free(&item, nullptr);
@@ -771,14 +865,14 @@ int main(int argc, char *argv[])
     libolecf_file_free(&file, nullptr);
 
 
-    auto readBIFF = [&](int& pos, QByteArray & srcData)->QPair<quint16, quint16> {
+    auto readBIFF = [&](int& pos, QByteArray& srcData)->QPair<quint16, quint16> {
         BIFFHeadPair typeAndSizePair;
         typeAndSizePair.first = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(srcData.constData() + pos));
         typeAndSizePair.second = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(srcData.constData() + pos + 2));
         pos = pos + 4;
         return typeAndSizePair;
     };
-    auto readLOGIC = [&](int& pos, quint16 & head, QByteArray& srcData)->QPair<quint16, quint32> {
+    auto readLOGIC = [&](int& pos, quint16& head, QByteArray& srcData)->QPair<quint16, quint32> {
         LogicHeadPair typeAndSizePair;
         head = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(srcData.constData() + pos));
         typeAndSizePair.first = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(srcData.constData() + pos + 2));
@@ -864,7 +958,7 @@ int main(int argc, char *argv[])
                             quint16 cbData = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(objBa.constData() + objPos + 2));
                             quint16 otData = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(objBa.constData() + objPos + 4));
                             quint16 idData = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(objBa.constData() + objPos + 6));
-                            
+
                             off += biffPair.second;
                             if (off > data.size())
                             {
@@ -875,20 +969,20 @@ int main(int argc, char *argv[])
                         else
                         {
                             break;
-                            
+
                         }
                     }
-                  
+
                     /*QFile file("E:/projectGita/xlsfileparser/drawing2.bin");
                     if (file.open(QIODevice::WriteOnly))
                     {
                         file.write(tmpData);
                         file.close();
                     }*/
-                }               
+                }
             }
         }
-        else if(biffPair.first == EU_ContinueType::REC_MSODRAWING_CONT || biffPair.first == EU_ContinueType::REC_MSODRAWING_CONT2)
+        else if (biffPair.first == EU_ContinueType::REC_MSODRAWING_CONT || biffPair.first == EU_ContinueType::REC_MSODRAWING_CONT2)
         {
 
         }
@@ -896,7 +990,7 @@ int main(int argc, char *argv[])
         {
 
         }
-        
+
         off += biffPair.second;// 下一条记录
     }
 
