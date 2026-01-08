@@ -75,6 +75,10 @@ private:
     quint16 getPhysicalStructType(quint32 pos);
 
     QList<QPair<quint16, quint32> > findType(HeaderType headType);
+
+    bool oleAttachmentSecondParser(const QString& qsFilePath, ST_VarantFile& varantFile);
+
+    bool oleAttachmentSecondParser(const QByteArray& oleData);
     //quint64 getOffsetTypeID(quint32 offset, quint16 type);
     //
     //quint32 getType(quint64 offsetID);

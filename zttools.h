@@ -39,6 +39,7 @@ namespace ZT_Libolecf {
 class ZTTools
 {
 public:
+
     static bool parseOle10Native(const QByteArray& ole10NativeData, ST_VarantFile& stOleFile);
 
     static EU_DocumentType getOleFileFormat(const QSharedPointer<libolecf_item_t>& intputItem, bool& haveOutput, QSharedPointer<libolecf_item_t>& outputItem);

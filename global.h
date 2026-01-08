@@ -32,6 +32,8 @@ enum EU_DocumentType
 struct ST_VarantFile
 {
     QString qsFileName;//AS:temp.zip
+    QString qsSuffix;//AS:.zip
+    QString qsBaseName;//AS:temp
     QString qsTmpFilePath;//AS:C:/user/temp/temp.zip
     QString qsFilePath;//AS:D:/test/temp.zip
     QByteArray fileData;//AS:zip data
