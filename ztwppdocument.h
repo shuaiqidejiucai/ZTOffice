@@ -19,6 +19,9 @@ class ZTWPPDocument
         RT_SlideAtom = 0x03EF,
         RT_ExternalObjectList = 0x0409,
         RT_ExternalObjectListAtom = 0x040A,
+        RT_Environment = 0x03F2,
+        RT_SoundCollection = 0x07E4,
+        RT_DrawingGroup = 0x040B,
 
         RT_ExternalAviMovie = 0x1006,
         RT_ExternalCdAudio = 0x100E,
@@ -30,6 +33,8 @@ class ZTWPPDocument
         RT_ExternalOleLink = 0x0FCE,
         RT_ExternalWavAudioEmbedded = 0x100F,
         RT_ExternalWavAudioLink = 0x1010,
+
+
 
         RT_ExternalOleEmbedAtom = 0x0FCD,
         RT_ExternalOleObjectAtom = 0x0FC3,
@@ -54,9 +59,9 @@ protected:
 
     quint32 parserExObjList(quint32 pos);
 
-    quint32 parserExObjListAtom(quint32 pos);
+    quint32 parserExObjListAtom(quint32 pos, quint32 &count);
 
-    void parserExObjListSubContainer(quint32 pos, quint32 lastPos);
+    void parserExObjListSubContainer(quint32 pos, quint32 exObjCount);
 
     void parserExOleEmbedContainer(quint32 pos);
 
@@ -64,10 +69,11 @@ protected:
 
     int extratorAttachment(quint32 pos);
 
-    int getPptAttachmentLibOlecfItem();
+    quint32 parserDocumentTextInfoContainer(quint32 pos);
 
-    int getPPTSrcData();
+    quint32 paserSoundCollection(quint32 pos);
 
+    quint32 paserDrawingGroup(quint32 pos);
 private:
 
     bool physicalStruct(quint32 pos, quint16& ftHead, quint16& ftType, quint32& ftSize, quint32& startPos, quint32& endPos);

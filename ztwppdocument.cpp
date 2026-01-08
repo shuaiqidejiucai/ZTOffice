@@ -218,7 +218,10 @@ quint32 ZTWPPDocument::parserDocument()
 		if (isValid)
 		{
 			quint32 tmpPos = parserDocumentAtom(startPos);
-			parserExObjList(tmpPos);
+			tmpPos = parserExObjList(tmpPos);
+			tmpPos = parserDocumentTextInfoContainer(tmpPos);
+			tmpPos = paserSoundCollection(tmpPos);
+			tmpPos = paserDrawingGroup(tmpPos);
 		}
 	}
 
@@ -232,7 +235,7 @@ quint32 ZTWPPDocument::parserDocumentAtom(quint32 pos)
 	quint32 ftSize = 0;
 	quint32 startPos = 0;
 	quint32 endPos = 0;
-
+	quint32 srcPos = pos;
 	bool isValid;
 
 	bool isFind = false;
@@ -281,9 +284,9 @@ quint32 ZTWPPDocument::parserDocumentAtom(quint32 pos)
 		//是否显示批注评论
 		quint8 fShowComments = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		startPos += 1;
-
+		return endPos;
 	}
-	return endPos;
+	return srcPos;
 }
 
 quint32 ZTWPPDocument::parserExObjList(quint32 pos)
@@ -311,23 +314,25 @@ quint32 ZTWPPDocument::parserExObjList(quint32 pos)
 	{
 		quint16 recVer = ftHead & 0xF;
 		quint16 recInstance = ftHead >> 8;
-		quint32 tmpPos = parserExObjListAtom(startPos);
+		quint32 exObj = 0;
+		quint32 tmpPos = parserExObjListAtom(startPos, exObj);
 		if (ftSize - 12 > 0)//有容器
 		{
 			parserExObjListSubContainer(tmpPos, endPos);
 		}
+		return endPos;
 	}
-	return endPos;
+	return pos;
 }
 
-quint32 ZTWPPDocument::parserExObjListAtom(quint32 pos)
+quint32 ZTWPPDocument::parserExObjListAtom(quint32 pos, quint32& count)
 {
 	quint16 ftHead = 0;
 	quint16 ftType = 0;
 	quint32 ftSize = 0;
 	quint32 startPos = 0;
 	quint32 endPos = 0;
-
+	quint32 srcPos = pos;
 	bool isValid;
 
 	bool isFind = false;
@@ -343,15 +348,17 @@ quint32 ZTWPPDocument::parserExObjListAtom(quint32 pos)
 
 	if (isFind)
 	{
+		count = ftSize;
 		quint16 recVer = ftHead & 0xF;
 		quint16 recInstance = ftHead >> 8;
 		qint32 exObjIdSeed = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
 		pos += 4;
+		return endPos;
 	}
-	return endPos;
+	return srcPos;
 }
 
-void ZTWPPDocument::parserExObjListSubContainer(quint32 pos, quint32 lastPos)
+void ZTWPPDocument::parserExObjListSubContainer(quint32 pos, quint32 exObjCount)
 {
 	quint16 ftHead = 0;
 	quint16 ftType = 0;
@@ -376,8 +383,10 @@ void ZTWPPDocument::parserExObjListSubContainer(quint32 pos, quint32 lastPos)
 	subContainerList.append(RT_ExternalWavAudioEmbedded);
 	subContainerList.append(RT_ExternalWavAudioLink);
 
+	int clac = 0;
 	do
 	{
+		clac++;
 		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
 		if (isValid && subContainerList.contains((HeaderType)ftType))
 		{
@@ -430,7 +439,11 @@ void ZTWPPDocument::parserExObjListSubContainer(quint32 pos, quint32 lastPos)
 			}
 			pos += ftSize;
 		}
-	} while (pos < lastPos);
+		else
+		{
+			break;
+		}
+	} while (clac < exObjCount);
 
 	return;
 }
@@ -595,32 +608,65 @@ int ZTWPPDocument::extratorAttachment(quint32 pos)
 		} while (strm.total_in < ftSize);
 		inflateEnd(&strm);
 		file.close();
-		ST_VarantFile varFile;
-		oleAttachmentSecondParser(file.fileName(), varFile);
-		outputFile2(varFile.fileData);
+		//ST_VarantFile varFile;
+		//oleAttachmentSecondParser(file.fileName(), varFile);
+		//outputFile2(varFile.fileData);
 	}
 	return 0;
 }
 
-int ZTWPPDocument::getPptAttachmentLibOlecfItem()
+quint32 ZTWPPDocument::parserDocumentTextInfoContainer(quint32 pos)
 {
-	if (m_pRootIemPtr)
+	quint16 ftHead = 0;
+	quint16 ftType = 0;
+	quint32 ftSize = 0;
+	quint32 startPos = 0;
+	quint32 endPos = 0;
+
+	bool isValid;
+	//ExOleEmbedAtom
+	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
+	if (!isValid || ftType != RT_Environment)
 	{
-		int subItemCount = 0;
-		ZT_libolecf_item_get_number_of_sub_items(m_pRootIemPtr, subItemCount, nullptr);
-		for (int i = 0; i < subItemCount; ++i)
-		{
-			QSharedPointer<libolecf_item_t> subItem;
-			ZT_libolecf_item_get_sub_item(m_pRootIemPtr, i, subItem, nullptr);
-			QString nodeName = ZTTools::getOleItemName(subItem);
-			if (nodeName.startsWith("PowerPoint Document"))
-			{
-				//DocumentContainter
-				QByteArray pptDocData = ZTTools::getOleItemData(subItem);
-			}
-		}
+		return pos;
 	}
-	return 0;
+	return endPos;
+}
+
+quint32 ZTWPPDocument::paserSoundCollection(quint32 pos)
+{
+	quint16 ftHead = 0;
+	quint16 ftType = 0;
+	quint32 ftSize = 0;
+	quint32 startPos = 0;
+	quint32 endPos = 0;
+
+	bool isValid;
+	//ExOleEmbedAtom
+	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
+	if (!isValid || ftType != RT_SoundCollection)
+	{
+		return pos;
+	}
+	return endPos;
+}
+
+quint32 ZTWPPDocument::paserDrawingGroup(quint32 pos)
+{
+	quint16 ftHead = 0;
+	quint16 ftType = 0;
+	quint32 ftSize = 0;
+	quint32 startPos = 0;
+	quint32 endPos = 0;
+	quint32 srcPos = pos;
+	bool isValid;
+	//ExOleEmbedAtom
+	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
+	if (!isValid || ftType != RT_DrawingGroup)
+	{
+		return srcPos;
+	}
+	return endPos;
 }
 
 
