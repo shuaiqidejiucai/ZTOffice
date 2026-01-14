@@ -39,4 +39,21 @@ struct ST_VarantFile
     QByteArray fileData;//AS:zip data
 };
 
+struct ST_Variable
+{
+    quint32 startPos = 0;
+    quint32 endPos = 0;
+    quint32 srcPos = 0;
+    quint32 ftSize = 0;
+    quint16 ftHead = 0;
+    quint16 ftType = 0;
+    bool isValid;
+};
+#define VT_SIZE(var)        ((var).ftSize)
+#define VT_SRCPOS(var)      ((var).srcPos)
+#define VT_STARTPOS(var)    ((var).startPos)
+#define VT_ENDPOS(var)      ((var).endPos)
+#define VT_HEAD(var)        ((var).ftHead)
+#define VT_TYPE(var)        ((var).ftType)
+#define VT_VALID(var)       ((var).isValid)
 #endif // GLOBAL_H
