@@ -164,9 +164,13 @@ protected:
     quint32 parserPerSlideHeadersFootersContainer(quint32 pos);
     
     void parserSlide(quint32 pos);
+
+    void parserOfficeArtDgContainer(quint32 pos, quint32 endPos);
+
+    void parserOfficeArtFRITContainer(quint32 pos);
 private:
 
-    bool physicalStruct(quint32 pos, quint16& ftHead, quint16& ftType, quint32& ftSize, quint32& startPos, quint32& endPos);
+    bool physicalStruct(quint32 pos, ST_Variable & stVar);
 
     quint16 getPhysicalStructType(quint32 pos);
 

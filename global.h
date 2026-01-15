@@ -43,17 +43,24 @@ struct ST_Variable
 {
     quint32 startPos = 0;
     quint32 endPos = 0;
-    quint32 srcPos = 0;
+    quint32 originPos = 0;
     quint32 ftSize = 0;
     quint16 ftHead = 0;
     quint16 ftType = 0;
-    bool isValid;
+    
+    quint16 recVer = 0;
+    quint16 recInstance = 0;
+    //bool isValid;
 };
-#define VT_SIZE(var)        ((var).ftSize)
-#define VT_SRCPOS(var)      ((var).srcPos)
-#define VT_STARTPOS(var)    ((var).startPos)
-#define VT_ENDPOS(var)      ((var).endPos)
-#define VT_HEAD(var)        ((var).ftHead)
-#define VT_TYPE(var)        ((var).ftType)
-#define VT_VALID(var)       ((var).isValid)
+
+#define ST_SP(var)      ((var).startPos)
+#define ST_EP(var)      ((var).endPos)
+#define ST_OP(var)      ((var).originPos)
+#define ST_SZ(var)      ((var).ftSize)
+#define ST_HA(var)      ((var).ftHead)
+#define ST_TP(var)      ((var).ftType)
+
+#define ST_RV(var)      ((var).recVer)
+#define ST_RI(var)      ((var).recInstance)
+//#define ST_VL(var)      ((var).isValid)
 #endif // GLOBAL_H

@@ -48,42 +48,36 @@ bool ZTWPPDocument::readPPTData()
 
 void ZTWPPDocument::parserData()
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
-
+	ST_Variable stVar;
 	quint32 pos = 0;
 	bool isValid;
 
 	do
 	{
-		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
+		isValid = physicalStruct(pos, stVar);
 		if (isValid)
 		{
-			m_typeOffsetList.append(QPair<quint16, quint32>(ftType, pos));
+			m_typeOffsetList.append(QPair<quint16, quint32>(ST_TP(stVar), pos));
 		}
-		pos = endPos;
+		pos = ST_EP(stVar);
 	} while (isValid);
 
 	parserDocument();
 }
 
-bool ZTWPPDocument::physicalStruct(quint32 pos, quint16& ftHead, quint16& ftType, quint32& ftSize, quint32& startPos, quint32& endPos)
+bool ZTWPPDocument::physicalStruct(quint32 pos, ST_Variable& stVar)
 {
 	if (pos + 8 < m_srcData.size())
 	{
-		ftHead = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
-		pos += 2;
-		ftType = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
-		pos += 2;
-		ftSize = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
-		pos += 4;
-		if (pos + ftSize < m_srcData.size())
+		ST_HA(stVar) = GetFlagData<quint16>(m_srcData.constData(), pos);
+		ST_TP(stVar) = GetFlagData<quint16>(m_srcData.constData(), pos);
+		ST_SZ(stVar) = GetFlagData<quint32>(m_srcData.constData(), pos);
+		ST_RV(stVar) = ST_HA(stVar) & 0xF;
+		ST_RI(stVar) = ST_HA(stVar) >> 8;
+		if (pos + ST_SZ(stVar) < m_srcData.size())
 		{
-			startPos = pos;
-			endPos = pos + ftSize;
+			ST_SP(stVar) = pos;
+			ST_EP(stVar) = pos + ST_SZ(stVar);
 			return true;
 		}
 	}
@@ -214,143 +208,129 @@ bool ZTWPPDocument::oleAttachmentSecondParser(const QByteArray& oleData)
 
 quint32 ZTWPPDocument::parserDocument()
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
-	bool isValid;
-
+	ST_Variable stVar;
+	bool isValid = false;
 	bool isFind = false;
 	QList<QPair<quint16, quint32> > documentList = findType(RT_Document);
 	/*std::function<quint32(quint32)> func = std::bind(&ZTWPPDocument::parserExObjList, this, std::placeholders::_1);*/
 	for (const QPair<quint16, quint32>& tmpPair : documentList)
 	{
 		isFind = true;
-		isValid = physicalStruct(tmpPair.second, ftHead, ftType, ftSize, startPos, endPos);
+		isValid = physicalStruct(tmpPair.second, stVar);
 		if (isValid)
 		{
-			quint32 tmpPos = parserDocumentAtom(startPos);
-			quint16 ftHead2 = 0;
-			quint16 ftType2 = 0;
-			quint32 ftSize2 = 0;
-			quint32 startPos2 = 0;
-			quint32 endPos2 = 0;
+			quint32 tmpPos = parserDocumentAtom(ST_SP(stVar));
+			ST_Variable stVar2;
 			bool isValid2 = false;
 			do
 			{
-				isValid2 = physicalStruct(tmpPos, ftHead2, ftType2, ftSize2, startPos2, endPos2);
-				quint16 recVer = ftHead2 & 0xF;
-				quint16 recInstance = ftHead2 >> 8;
+				isValid2 = physicalStruct(tmpPos, stVar2);
 				if (!isValid2)
 				{
 					break;
 				}
-				if (ftType2 == RT_ExternalObjectList)
+				switch (ST_TP(stVar2))
 				{
+				case RT_ExternalObjectList: {
 					tmpPos = parserExObjList(tmpPos);
 				}
-				else if (ftType2 == RT_Environment)
-				{
+					break;
+				case RT_Environment: {
 					tmpPos = parserDocumentTextInfoContainer(tmpPos);
 				}
-				else if(ftType2 == RT_SoundCollection)
-				{
+					break;
+				case RT_SoundCollection: {
 					tmpPos = parserSoundCollection(tmpPos);
 				}
-				else if (ftType2 == RT_DrawingGroup)
-				{
+					break;
+				case RT_DrawingGroup:
 					tmpPos = parserDrawingGroup(tmpPos);
-				}
-				else if (ftType2 == RT_SlideListWithText)
-				{
-					if (recInstance == 0x001)
+					break;
+				case RT_SlideListWithText:{
+					if (ST_RI(stVar2) == 0x001)
 					{
 						tmpPos = parserMasterList(tmpPos);
 					}
-					else if (recInstance == 0x000)
+					else if (ST_RI(stVar2) == 0x000)
 					{
 						tmpPos = parserSlideList(tmpPos);
 					}
-					else if(recInstance == 0x002)
+					else if (ST_RI(stVar2) == 0x002)
 					{
 						tmpPos = parserNotesList(tmpPos);
 					}
 					else
 					{
-						tmpPos = endPos2;
+						tmpPos = ST_EP(stVar2);
 					}
 				}
-				else if (ftType2 == RT_List)
-				{
+					break;
+				case RT_List: {
 					tmpPos = parserDocInfoList(tmpPos);
 				}
-				else if(ftType2 == RT_HeadersFooters)
-				{
-					if (recInstance == 0x000)
+					break;
+				case RT_HeadersFooters: {
+					if (ST_RI(stVar2) == 0x000)
 					{
-						tmpPos = endPos2;
+						tmpPos = ST_EP(stVar2);
 						//tmpPos = parserPerSlideHeadersFootersContainer(tmpPos);
 					}
-					else if (recInstance == 0x003)
+					else if (ST_RI(stVar2) == 0x003)
 					{
 						tmpPos = parserSlideHF(tmpPos);
 					}
-					else if(recInstance == 0x004)
+					else if (ST_RI(stVar2) == 0x004)
 					{
 						tmpPos = parserNotesHF(tmpPos);
 					}
 					else
 					{
-						tmpPos = endPos2;
+						tmpPos = ST_EP(stVar2);
 					}
 				}
-				else if (ftType2 == RT_SlideShowDocInfoAtom)
-				{
+					break;
+				case RT_SlideShowDocInfoAtom: {
 					tmpPos = parserSlideShowDocInfoAtom(tmpPos);
 				}
-				else if(ftType2 == RT_NamedShows)
-				{
+					break;
+				case RT_NamedShows: {
 					tmpPos = parserNamedShows(tmpPos);
 				}
-				else if(ftType2 == RT_Summary)
-				{
+					break;
+				case RT_Summary: {
 					tmpPos = parserSummary(tmpPos);
 				}
-				else if(ftType2 == RT_DocRoutingSlipAtom)
-				{
+					break;
+				case RT_DocRoutingSlipAtom: {
 					tmpPos = parserDocRoutingSlipAtom(tmpPos);
 				}
-				else if(ftType2 == RT_PrintOptionsAtom)
-				{
+					break;
+				case RT_PrintOptionsAtom:{
 					tmpPos = parserPrintOptionsAtom(tmpPos);
 				}
-				else
-				{
-					tmpPos = endPos2;
+					break;
+				default: {
+					tmpPos = ST_EP(stVar2);
 				}
-			} while (tmpPos < endPos);
+					break;
+				}
+			} while (tmpPos < ST_EP(stVar));
 		}
 	}
 
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserDocumentAtom(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
-	quint32 srcPos = pos;
-	bool isValid;
-
+	ST_Variable stVar;
+	bool isValid = false;
 	bool isFind = false;
+	quint32 srcPos = pos;
 	do
 	{
-		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-		if (isValid && ftType == RT_DocumentAtom)
+		isValid = physicalStruct(pos, stVar);
+		if (isValid && ST_TP(stVar) == RT_DocumentAtom)
 		{
 			isFind = true;
 			break;
@@ -359,8 +339,7 @@ quint32 ZTWPPDocument::parserDocumentAtom(quint32 pos)
 
 	if (isFind)
 	{
-		quint16 recVer = ftHead & 0xF;
-		quint16 recInstance = ftHead >> 8;
+		quint32 startPos = ST_SP(stVar);
 		qint32 slideSizeX = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		startPos += 4;
 		qint32 slideSizeY = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
@@ -392,26 +371,22 @@ quint32 ZTWPPDocument::parserDocumentAtom(quint32 pos)
 		//是否显示批注评论
 		quint8 fShowComments = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		startPos += 1;
-		return endPos;
+		return ST_EP(stVar);
 	}
 	return srcPos;
 }
 
 quint32 ZTWPPDocument::parserExObjList(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 
-	bool isValid;
+	bool isValid = false;
 
 	bool isFind = false;
 	do
 	{
-		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-		if (isValid && ftType == RT_ExternalObjectList)
+		isValid = physicalStruct(pos, stVar);
+		if (isValid && ST_TP(stVar) == RT_ExternalObjectList)
 		{
 			isFind = true;
 			break;
@@ -420,34 +395,28 @@ quint32 ZTWPPDocument::parserExObjList(quint32 pos)
 
 	if (isFind)
 	{
-		quint16 recVer = ftHead & 0xF;
-		quint16 recInstance = ftHead >> 8;
 		quint32 exObj = 0;
-		quint32 tmpPos = parserExObjListAtom(startPos);
-		if (ftSize - 12 > 0)//有容器
+		quint32 tmpPos = parserExObjListAtom(ST_SP(stVar));
+		if (ST_SZ(stVar) - 12 > 0)//有容器
 		{
 			parserExObjListSubContainer(tmpPos);
 		}
-		return endPos;
+		return ST_EP(stVar);
 	}
 	return pos;
 }
 
 quint32 ZTWPPDocument::parserExObjListAtom(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 	quint32 srcPos = pos;
-	bool isValid;
+	bool isValid = false;
 
 	bool isFind = false;
 	do
 	{
-		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-		if (isValid && ftType == RT_ExternalObjectListAtom)
+		isValid = physicalStruct(pos, stVar);
+		if (isValid && ST_TP(stVar) == RT_ExternalObjectListAtom)
 		{
 			isFind = true;
 			break;
@@ -456,25 +425,17 @@ quint32 ZTWPPDocument::parserExObjListAtom(quint32 pos)
 
 	if (isFind)
 	{
-		quint16 recVer = ftHead & 0xF;
-		quint16 recInstance = ftHead >> 8;
-		qint32 exObjIdSeed = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
+		qint32 exObjIdSeed = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + ST_SP(stVar)));
 		pos += 4;
-		return endPos;
+		return ST_EP(stVar);
 	}
 	return srcPos;
 }
 
 void ZTWPPDocument::parserExObjListSubContainer(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
-
-
-	bool isValid;
+	ST_Variable stVar;
+	bool isValid = false;
 
 	bool isFind = false;
 
@@ -494,57 +455,38 @@ void ZTWPPDocument::parserExObjListSubContainer(quint32 pos)
 	do
 	{
 		clac++;
-		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-		if (isValid && subContainerList.contains((HeaderType)ftType))
+		isValid = physicalStruct(pos, stVar);
+		if (isValid && subContainerList.contains((HeaderType)ST_TP(stVar) ))
 		{
 			isFind = true;
-			quint16 recVer = ftHead & 0xF;
-			quint16 recInstance = ftHead >> 8;
-			if (ftType == RT_ExternalAviMovie)
+			switch (ST_TP(stVar))
 			{
-
+			case RT_ExternalAviMovie:
+				break;
+			case RT_ExternalCdAudio:
+				break;
+			case RT_ExternalOleControl:
+				break;
+			case RT_ExternalHyperlink:
+				break;
+			case RT_ExternalMciMovie:
+				break;
+			case RT_ExternalMidiAudio:
+				break;
+			case RT_ExternalOleEmbed:{
+				parserExOleEmbedContainer(ST_SP(stVar));
 			}
-			else if (ftType == RT_ExternalCdAudio)
-			{
-
+				break;
+			case RT_ExternalOleLink:
+				break;
+			case RT_ExternalWavAudioEmbedded:
+				break;
+			case RT_ExternalWavAudioLink:
+				break;
+			default:
+				break;
 			}
-			else if (ftType == RT_ExternalOleControl)
-			{
-
-			}
-			else if (ftType == RT_ExternalHyperlink)
-			{
-
-			}
-			else if (ftType == RT_ExternalMciMovie)
-			{
-
-			}
-			else if (ftType == RT_ExternalMidiAudio)
-			{
-
-			}
-			else if (ftType == RT_ExternalOleEmbed)
-			{
-				parserExOleEmbedContainer(startPos);
-			}
-			else if (ftType == RT_ExternalOleLink)
-			{
-
-			}
-			else if (ftType == RT_ExternalWavAudioEmbedded)
-			{
-
-			}
-			else if (ftType == RT_ExternalWavAudioLink)
-			{
-
-			}
-			else
-			{
-
-			}
-			pos += ftSize;
+			pos += ST_SZ(stVar);
 		}
 		else
 		{
@@ -557,24 +499,19 @@ void ZTWPPDocument::parserExObjListSubContainer(quint32 pos)
 
 void ZTWPPDocument::parserExOleEmbedContainer(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 
-	bool isValid;
+	bool isValid = false;
 
 	if (true)
 	{
 		//ExOleEmbedAtom
-		isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-		if (!isValid || ftType != RT_ExternalOleEmbedAtom)
+		isValid = physicalStruct(pos, stVar);
+		if (!isValid || ST_TP(stVar) != RT_ExternalOleEmbedAtom)
 		{
 			return;
 		}
-		quint16 exOleEmbedAtomRecVer = ftHead & 0xF;
-		quint16 exOleEmbedAtomRecInstance = ftHead >> 8;
+		quint32 startPos = ST_SP(stVar);
 
 		quint32 exColorFollow = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		startPos += 4;
@@ -590,8 +527,8 @@ void ZTWPPDocument::parserExOleEmbedContainer(quint32 pos)
 		quint8 OleEmbedAtomUnused = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		startPos += 1;
 		// ExOleObjAtom
-		isValid = physicalStruct(startPos, ftHead, ftType, ftSize, startPos, endPos);
-		if (!isValid || ftType != RT_ExternalOleObjectAtom)
+		isValid = physicalStruct(startPos, stVar);
+		if (!isValid || ST_TP(stVar) != RT_ExternalOleObjectAtom)
 		{
 			return;
 		}
@@ -768,102 +705,83 @@ int ZTWPPDocument::extratorText(quint32 pos)
 //默认用什么字体、多大字号、怎么对齐属于样式层
 quint32 ZTWPPDocument::parserDocumentTextInfoContainer(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 
-	bool isValid;
+	bool isValid = false;
 	//DocumentTextInfoContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_Environment)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_Environment)
 	{
 		return pos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserSoundCollection(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
-
-	bool isValid;
+	ST_Variable stVar;
+	bool isValid = false;
 	//ExOleEmbedAtom
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_SoundCollection)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_SoundCollection)
 	{
 		return pos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserDrawingGroup(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//ExOleEmbedAtom
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_DrawingGroup)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_DrawingGroup)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserMasterList(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//MasterListWithTextContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_SlideListWithText)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_SlideListWithText)
 	{
 		return srcPos;
 	}
-	quint16 recVer = ftHead & 0xF;
-	quint16 recInstance = ftHead >> 8;
-	if (recInstance != 0x001)
+
+	if (ST_RI(stVar) != 0x001)
 	{
 		return srcPos;
 	}
 
 	//MasterPersistAtom
-	for (int i = 0; i < ftSize; ++i)
+	/*for (int i = 0; i < ftSize; ++i)
 	{
 
-	}
+	}*/
 	
 
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserDocInfoList(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//DocInfoListContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_List)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_List)
 	{
 		return srcPos;
 	}
@@ -871,115 +789,89 @@ quint32 ZTWPPDocument::parserDocInfoList(quint32 pos)
 	do
 	{
 		pos = parserDocInfoListContainer(pos);
-	} while (pos < endPos);
+	} while (pos < ST_EP(stVar));
 
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserSlideHF(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 	quint32 srcPos = pos;
-	bool isValid;
+	bool isValid = false;
 	//SlideHeadersFootersContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_HeadersFooters)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_HeadersFooters)
 	{
 		return srcPos;
 	}
-	quint16 recVer = ftHead & 0xF;
-	quint16 recInstance = ftHead >> 8;
-	if (recInstance != 0x003)
+	if (ST_RI(stVar) != 0x003)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserNotesHF(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 	quint32 srcPos = pos;
-	bool isValid;
+	bool isValid = false;
 	//NotesHeadersFootersContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_HeadersFooters)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_HeadersFooters)
 	{
 		return srcPos;
 	}
-	quint16 recVer = ftHead & 0xF;
-	quint16 recInstance = ftHead >> 8;
-	if (recInstance != 0x004)
+
+	if (ST_RI(stVar) != 0x004)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserSlideList(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 	quint32 srcPos = pos;
 	bool isValid;
 	//SlideListWithTextContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_SlideListWithText)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_SlideListWithText)
 	{
 		return srcPos;
 	}
-	quint16 recVer = ftHead & 0xF;
-	quint16 recInstance = ftHead >> 8;
-	if (recInstance != 0x000)
+	
+	if (ST_RI(stVar) != 0x000)
 	{
 		return srcPos;
 	}
-	pos = startPos;
+	pos = ST_SP(stVar);
 	do
 	{
 		pos = parserSlideListWithTextSubContainerOrAtom(pos);
-	} while (pos < endPos);
+	} while (pos < ST_EP(stVar));
 
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserSlideListWithTextSubContainerOrAtom(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 	quint32 srcPos = pos;
 	bool isValid;
 	//SlideListWithTextSubContainerOrAtom
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
+	isValid = physicalStruct(pos, stVar);
 	
 	if (!isValid)
 	{
 		return srcPos;
 	}
-	
-	quint16 recVer = ftHead & 0xF;
-	quint16 recInstance = ftHead >> 8;
-	/*if (recInstance != 0x000)
+	quint32 startPos = ST_SP(stVar);
+	switch (ST_TP(stVar))
 	{
-		return srcPos;
-	}*/
-
-	if (ftType == RT_SlidePersistAtom)
-	{
+	case RT_SlidePersistAtom: {
 		quint32 persistIdRef = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		//TODO:这里有8字节的内容现在用不到不解析
 		startPos += 8;
@@ -989,215 +881,163 @@ quint32 ZTWPPDocument::parserSlideListWithTextSubContainerOrAtom(quint32 pos)
 		startPos += 4;
 		quint32 reserved3 = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
 		startPos += 4;
-		parserPersistDirectoryAtom(persistIdRef, TextType);
+		parserPersistDirectoryAtom(persistIdRef, TextType); }
+		break;
+	case RT_TextHeaderAtom:
+		break;
+	case RT_TextCharsAtom:
+		break;
+	case RT_TextBytesAtom:
+		break;
+	case RT_StyleTextPropAtom:
+		break;
+	case RT_SlideNumberMetaCharAtom:
+		break;
+	case RT_DateTimeMetaCharAtom:
+		break;
+	case RT_GenericDateMetaCharAtom:
+		break;
+	case RT_HeaderMetaCharAtom:
+		break;
+	case RT_FooterMetaCharAtom:
+		break;
+	case RT_RtfDateTimeMetaCharAtom:
+		break;
+	case RT_TextBookmarkAtom:
+		break;
+	case RT_TextSpecialInfoAtom:
+		break;
+	case RT_InteractiveInfo:
+		break;
+	case RT_TextInteractiveInfoAtom:
+		break;
+	default:return srcPos;
+		break;
+	}
 
-	}
-	else if(ftType == RT_TextHeaderAtom)
-	{
-
-	}
-	else if (ftType == RT_TextCharsAtom)
-	{
-
-	}
-	else if (ftType == RT_TextBytesAtom)
-	{
-
-	}
-	else if (ftType == RT_StyleTextPropAtom)
-	{
-
-	}
-	else if (ftType == RT_SlideNumberMetaCharAtom)
-	{
-
-	}
-	else if (ftType == RT_DateTimeMetaCharAtom)
-	{
-
-	}
-	else if (ftType == RT_GenericDateMetaCharAtom)
-	{
-
-	}
-	else if (ftType == RT_HeaderMetaCharAtom)
-	{
-
-	}
-	else if (ftType == RT_FooterMetaCharAtom)
-	{
-
-	}
-	else if (ftType == RT_RtfDateTimeMetaCharAtom)
-	{
-
-	}
-	else if (ftType == RT_TextBookmarkAtom)
-	{
-
-	}
-	else if (ftType == RT_TextSpecialInfoAtom)
-	{
-
-	}
-	else if (ftType == RT_InteractiveInfo)
-	{
-
-	}
-	else if (ftType == RT_TextInteractiveInfoAtom)
-	{
-
-	}
-	else
-	{
-		return srcPos;
-	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserNotesList(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//NotesListWithTextContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_SlideListWithText)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_SlideListWithText)
 	{
 		return srcPos;
 	}
-	quint16 recVer = ftHead & 0xF;
-	quint16 recInstance = ftHead >> 8;
-	if (recInstance != 0x002)
+
+	if (ST_RI(stVar) != 0x002)
 	{
 		return srcPos;
 	}
-	pos = startPos;
+	pos = ST_SP(stVar);
 	do
 	{
 		pos = parserDocInfoListContainer(pos);
-	} while (pos < endPos);
+	} while (pos < ST_EP(stVar));
 	
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserSlideShowDocInfoAtom(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//slideShowDocInfoAtom
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_SlideShowDocInfoAtom)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_SlideShowDocInfoAtom)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserNamedShows(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
 	quint32 srcPos = pos;
-	bool isValid;
+	bool isValid = false;
 	//NamedShowsContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_NamedShows)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_NamedShows)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserSummary(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//SummaryContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_Summary)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_Summary)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserDocRoutingSlipAtom(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//DocRoutingSlipAtom
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_DocRoutingSlipAtom)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_DocRoutingSlipAtom)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserPrintOptionsAtom(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	//PrintOptionsAtom
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	if (!isValid || ftType != RT_PrintOptionsAtom)
+	isValid = physicalStruct(pos, stVar);
+	if (!isValid || ST_TP(stVar) != RT_PrintOptionsAtom)
 	{
 		return srcPos;
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserDocInfoListContainer(quint32 pos)
 {
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
+	ST_Variable stVar;
+
 	quint32 srcPos = pos;
 	bool isValid;
 	
 	//DocInfoListContainer
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	pos = startPos;
+	isValid = physicalStruct(pos, stVar);
+	pos = ST_SP(stVar);
 	if (!isValid)
 	{
 		return srcPos;
 	}
-	if (ftType == RT_NormalViewSetInfo9)
+	if (ST_TP(stVar) == RT_NormalViewSetInfo9)
 	{
 		//TODO:和位置及状态有关，暂时不动
 		//isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
 	}
-	else if(ftType == RT_ProgTags)
+	else if(ST_TP(stVar) == RT_ProgTags)
 	{
 		//TODO:扩展？暂时不动
 		/*isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
@@ -1205,25 +1045,25 @@ quint32 ZTWPPDocument::parserDocInfoListContainer(quint32 pos)
 		quint16 recInstance = ftHead >> 8;*/
 
 	}
-	else if (ftType == RT_NotesTextViewInfo9)
+	else if (ST_TP(stVar) == RT_NotesTextViewInfo9)
 	{
 		//TODO:缩放相关暂时不动
 		//isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
 
 	}
-	else if (ftType == RT_OutlineViewInfo)
+	else if (ST_TP(stVar) == RT_OutlineViewInfo)
 	{
 		//TODO:大纲缩放相关暂时不动
 	}
-	else if (ftType == RT_SlideViewInfo)
+	else if (ST_TP(stVar) == RT_SlideViewInfo)
 	{
 		//幻灯片的页视图属性不动
 	}
-	else if (ftType == RT_SorterViewInfo)
+	else if (ST_TP(stVar) == RT_SorterViewInfo)
 	{
 		//幻灯片的顺序属性不动
 	}
-	else if (ftType == RT_VbaInfo)
+	else if (ST_TP(stVar) == RT_VbaInfo)
 	{
 		//VBA代码宏，不动
 	}
@@ -1231,7 +1071,7 @@ quint32 ZTWPPDocument::parserDocInfoListContainer(quint32 pos)
 	{
 
 	}
-	return endPos;
+	return ST_EP(stVar);
 }
 
 quint32 ZTWPPDocument::parserPerSlideHeadersFootersContainer(quint32 pos)
@@ -1245,22 +1085,18 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 	quint32 containerEndPos = ftContainterSize + pos + 4;
 	pos += 4;
 	//SlideAtom
-	quint16 ftHead = 0;
-	quint16 ftType = 0;
-	quint32 ftSize = 0;
-	quint32 startPos = 0;
-	quint32 endPos = 0;
 	quint32 srcPos = pos;
 	bool isValid;
 
-	isValid = physicalStruct(pos, ftHead, ftType, ftSize, startPos, endPos);
-	pos = startPos;
+	ST_Variable slideVar;
+
+	isValid = physicalStruct(pos, slideVar);
 	if (!isValid)
 	{
 		return;
 	}
-	pos = startPos;
-	if (ftType == RT_SlideAtom)
+	pos = ST_SP(slideVar);
+	if (ST_TP(slideVar) == RT_SlideAtom)
 	{
 		//SlideLayoutType,用不到，暂时放着
 		quint32 geom = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
@@ -1302,14 +1138,11 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 
 	do
 	{
-		quint16 ftHead2 = 0;
-		quint16 ftType2 = 0;
-		quint32 ftSize2 = 0;
-		quint32 startPos2 = 0;
-		quint32 endPos2 = 0;
-		bool isValid2 = physicalStruct(pos, ftHead2, ftType2, ftSize2, startPos2, endPos2);
-		pos = startPos2;
-		if (ftType2 == RT_SlideShowSlideInfoAtom)
+		ST_Variable stVar;
+
+		bool isValid2 = physicalStruct(pos, stVar);
+		pos = ST_SP(stVar);
+		if (ST_TP(stVar) == RT_SlideShowSlideInfoAtom)
 		{
 			//自动切换幻灯片的时间单位毫秒
 			qint32 slideTime = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
@@ -1341,7 +1174,7 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 			//unused:为了字节对其需要跳过3字节
 			pos += 3;
 		}
-		else if (ftType2 == RT_HeadersFooters)//PerSlideHeadersFootersContainer
+		else if (ST_TP(stVar) == RT_HeadersFooters)//PerSlideHeadersFootersContainer
 		{
 			//HeadersFootersAtom
 			pos += 8;
@@ -1357,84 +1190,71 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 			quint16 reserved = zonghe & 0x3FF;
 			pos += 2;
 			//userDateAtom
-			quint16 uhHead = 0;
-			quint16 uhType = 0;
-			quint32 uhSize = 0;
-			quint32 uhStartPos = 0;
-			quint32 uhEndPos = 0;
-			if (physicalStruct(pos, uhHead, uhType, uhSize, uhStartPos, uhEndPos))
+			ST_Variable uhVar;
+
+			if (physicalStruct(pos, uhVar))
 			{
-				if (uhType == RT_CString)
+				if (ST_TP(uhVar) == RT_CString)
 				{
-					quint16 recVer = ftHead & 0xF;
-					quint16 recInstance = ftHead >> 8;
-					pos = uhStartPos;
-					if (recInstance == 0x0)//userDateAtom
+					pos = ST_SP(uhVar);
+					if (ST_RI(uhVar) == 0x0)//userDateAtom
 					{
 						// 提取字符串数据
 						const char* stringData = m_srcData.constData() + pos;
-						QString qsContent = GetQString(stringData, uhSize);
+						QString qsContent = GetQString(stringData, ST_SZ(uhVar));
 					}
-					else if (recInstance == 0x002)//FooterAtom
+					else if (ST_RI(uhVar) == 0x002)//FooterAtom
 					{
 						const char* stringData = m_srcData.constData() + pos;
-						QString qsContent = GetQString(stringData, uhSize);
+						QString qsContent = GetQString(stringData, ST_SZ(uhVar));
 					}
 				}
 
-				pos = uhEndPos;
+				pos = ST_EP(uhVar);
 			}
 		}
-		else if (ftType2 == RT_RoundTripSlideSyncInfo12)//rtSlideSyncInfo12
+		else if (ST_TP(stVar) == RT_RoundTripSlideSyncInfo12)//rtSlideSyncInfo12
 		{
 			//多用户同步用不着，暂时不管
 			//pos += ftSize2;
 		}
-		else if (ftType2 == RT_Drawing)
+		else if (ST_TP(stVar) == RT_Drawing)
 		{
-			quint16 dwHead = 0;
-			quint16 dwType = 0;
-			quint32 dwSize = 0;
-			quint32 dwStartPos = 0;
-			quint32 dwEndPos = 0;
-			if (physicalStruct(pos, dwHead, dwType, dwSize, dwStartPos, dwEndPos))
-			{
-				pos = dwStartPos;
-				quint16 ordcHead = 0;
-				quint16 ordcType = 0;
-				quint32 ordcSize = 0;
-				quint32 ordcStartPos = 0;
-				quint32 ordcEndPos = 0;
-				//OfficeArtDgContainer
-				if (physicalStruct(pos, ordcHead, ordcType, ordcSize, ordcStartPos, ordcEndPos))
-				{
-					if (ordcType == 0xF002)
-					{
-						pos = ordcStartPos;
+			ST_Variable dwVar;
 
+			if (physicalStruct(pos, dwVar))
+			{
+				pos = ST_SP(dwVar);
+				ST_Variable ordcVar;
+				//OfficeArtDgContainer
+				if (physicalStruct(pos, ordcVar))
+				{
+					if (ST_TP(ordcVar) == 0xF002)
+					{
+						parserOfficeArtDgContainer(ST_SP(ordcVar), ST_EP(ordcVar));
 					}
 				}
 			}
 		}
-		else if (ftType2 == RT_ColorSchemeAtom)
+		else if (ST_TP(stVar) == RT_ColorSchemeAtom)
 		{
 
 		}
-		else if (ftType2 == RT_CString)//SlideNameAtom
+		else if (ST_TP(stVar) == RT_CString)//SlideNameAtom
 		{
 
 		}
-		else if (ftType2 == RT_ProgTags)//slideProgTagsContainer
+		else if (ST_TP(stVar) == RT_ProgTags)//slideProgTagsContainer
 		{
 
 		}
-		else if (ftType2 == RT_RoundTripTheme12Atom
-			|| ftType2 == RT_RoundTripColorMapping12Atom
-			|| ftType2 == RT_RoundTripCompositeMasterId12Atom
-			|| ftType2 == RT_RoundTripSlideSyncInfo12
-			|| ftType2 == RT_RoundTripAnimationHashAtom12Atom
-			|| ftType2 == RT_RoundTripAnimationAtom12Atom
-			|| ftType2 == RT_RoundTripContentMasterId12Atom)//RoundTripSlideRecord
+		else if (ST_TP(stVar) == RT_RoundTripTheme12Atom
+			|| ST_TP(stVar) == RT_RoundTripColorMapping12Atom
+			|| ST_TP(stVar) == RT_RoundTripCompositeMasterId12Atom
+			|| ST_TP(stVar) == RT_RoundTripSlideSyncInfo12
+			|| ST_TP(stVar) == RT_RoundTripAnimationHashAtom12Atom
+			|| ST_TP(stVar) == RT_RoundTripAnimationAtom12Atom
+			|| ST_TP(stVar) == RT_RoundTripContentMasterId12Atom)//RoundTripSlideRecord
 		{
 
 		}
@@ -1442,7 +1262,72 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 		{
 
 		}
-		pos = endPos2;
+		pos = ST_EP(stVar);
 	} while (pos < containerEndPos);
 
+}
+
+void ZTWPPDocument::parserOfficeArtDgContainer(quint32 pos, quint32 endPos)
+{
+	ST_Variable tmpVar;
+	bool alreadyParserGShape = false;
+	bool alreadyParserShape = false;
+	do
+	{
+		if (!physicalStruct(pos, tmpVar))
+		{
+			break;
+		}
+		switch (ST_TP(tmpVar))
+		{
+		case 0xFFE://drawingData:OfficeArtFDG 
+		{
+			if (ST_RI(tmpVar) <= 0xFFE && ST_TP(tmpVar) == 0xF008)
+			{
+				pos = ST_SP(tmpVar);
+				quint32 csp = GetFlagData<quint32>(m_srcData, pos);//shape count
+				quint32 spidCur = GetFlagData<quint32>(m_srcData, pos);//MSOSPID 		
+				pos = ST_EP(tmpVar);
+			}
+		}
+			break;
+		case 0xF118://regroupItems:OfficeArtFRITContainer 
+		{
+			//rgfrit 
+			pos = ST_SP(tmpVar);
+			quint16 count = ST_RI(tmpVar);
+			for (quint16 i = 0; i < count; ++i)
+			{
+				quint16 fridNew = GetFlagData<quint16>(m_srcData, pos);
+				quint16 fridOld = GetFlagData<quint16>(m_srcData, pos);
+				if (pos < ST_SZ(tmpVar))
+				{
+					break;
+				}
+			}
+		}
+			break;
+		case 0xF003://groupShape:OfficeArtSpgrContainer 
+		{
+
+		}
+			break;
+		case 0xF004://shape:OfficeArtSpContainer
+		{
+
+		}
+		break;
+		case 0xF005://solvers1:OfficeArtSolverContainer 
+		{
+
+		}
+		break;
+		default:
+			break;
+		}
+	} while (pos < endPos);
+}
+
+void ZTWPPDocument::parserOfficeArtFRITContainer(quint32 pos)
+{
 }

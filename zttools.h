@@ -56,4 +56,12 @@ public:
     ZTTools();
 };
 
+template<class T>
+inline T GetFlagData(const char* srcData, quint32 &pos)
+{
+    T data = qFromLittleEndian<T>(reinterpret_cast<const uchar*>(srcData + pos));
+    pos += sizeof(T);
+    return data;
+}
+
 #endif // ZTTOOLS_H
