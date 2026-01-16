@@ -168,6 +168,8 @@ protected:
     void parserOfficeArtDgContainer(quint32 pos, quint32 endPos);
 
     void parserOfficeArtFRITContainer(quint32 pos);
+
+    void parserOfficeArtSpContainer(quint32 pos, quint32 endPos);
 private:
 
     bool physicalStruct(quint32 pos, ST_Variable & stVar);

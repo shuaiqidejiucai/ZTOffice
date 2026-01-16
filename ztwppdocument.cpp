@@ -1151,7 +1151,7 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 			pos += 4;
 			quint8 effectDirection = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
 			pos += 1;
-			quint8 effectDirection = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
+			quint8 effectType = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
 			pos += 1;
 			quint16 zonghe = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(m_srcData.constData() + pos));
 			quint8 fManualAdvance = zonghe >> 15;
@@ -1220,19 +1220,14 @@ void ZTWPPDocument::parserSlide(quint32 pos)
 		}
 		else if (ST_TP(stVar) == RT_Drawing)
 		{
-			ST_Variable dwVar;
+			ST_Variable dwContainVar;
 
-			if (physicalStruct(pos, dwVar))
+			if (physicalStruct(pos, dwContainVar))
 			{
-				pos = ST_SP(dwVar);
-				ST_Variable ordcVar;
-				//OfficeArtDgContainer
-				if (physicalStruct(pos, ordcVar))
+				if (ST_TP(dwContainVar) == 0xF002)
 				{
-					if (ST_TP(ordcVar) == 0xF002)
-					{
-						parserOfficeArtDgContainer(ST_SP(ordcVar), ST_EP(ordcVar));
-					}
+					pos = ST_SP(dwContainVar);
+					parserOfficeArtDgContainer(pos, ST_EP(dwContainVar));
 				}
 			}
 		}
@@ -1278,23 +1273,22 @@ void ZTWPPDocument::parserOfficeArtDgContainer(quint32 pos, quint32 endPos)
 		{
 			break;
 		}
+		pos = ST_SP(tmpVar);
 		switch (ST_TP(tmpVar))
 		{
-		case 0xFFE://drawingData:OfficeArtFDG 
+		case 0xF008://drawingData:OfficeArtFDG 
 		{
 			if (ST_RI(tmpVar) <= 0xFFE && ST_TP(tmpVar) == 0xF008)
 			{
-				pos = ST_SP(tmpVar);
+				
 				quint32 csp = GetFlagData<quint32>(m_srcData, pos);//shape count
 				quint32 spidCur = GetFlagData<quint32>(m_srcData, pos);//MSOSPID 		
-				pos = ST_EP(tmpVar);
 			}
 		}
 			break;
 		case 0xF118://regroupItems:OfficeArtFRITContainer 
 		{
 			//rgfrit 
-			pos = ST_SP(tmpVar);
 			quint16 count = ST_RI(tmpVar);
 			for (quint16 i = 0; i < count; ++i)
 			{
@@ -1309,12 +1303,30 @@ void ZTWPPDocument::parserOfficeArtDgContainer(quint32 pos, quint32 endPos)
 			break;
 		case 0xF003://groupShape:OfficeArtSpgrContainer 
 		{
+			//OfficeArtSpgrContainerFileBlock
+			//alreadyParserGShape
+			ST_Variable tmpVar2;
+			if (!physicalStruct(pos, tmpVar2))
+			{
+				return;
+			}
+			if (ST_TP(tmpVar2) == 0xF004)
+			{
+				parserOfficeArtSpContainer(ST_SP(tmpVar2), ST_EP(tmpVar2));
+			}
+			else if(ST_TP(tmpVar2) == 0xF003)
+			{
 
+			}
+			else
+			{
+
+			}
 		}
 			break;
 		case 0xF004://shape:OfficeArtSpContainer
 		{
-
+			parserOfficeArtSpContainer(pos , ST_EP(tmpVar));
 		}
 		break;
 		case 0xF005://solvers1:OfficeArtSolverContainer 
@@ -1325,9 +1337,79 @@ void ZTWPPDocument::parserOfficeArtDgContainer(quint32 pos, quint32 endPos)
 		default:
 			break;
 		}
+		pos = ST_EP(tmpVar);
 	} while (pos < endPos);
 }
 
 void ZTWPPDocument::parserOfficeArtFRITContainer(quint32 pos)
 {
+}
+
+void ZTWPPDocument::parserOfficeArtSpContainer(quint32 pos, quint32 endPos)
+{
+	ST_Variable stVar;
+	do
+	{
+		if (!physicalStruct(pos, stVar))
+		{
+			return;
+		}
+		pos = ST_SP(stVar);
+		switch (ST_TP(stVar))
+		{
+		case 0xF009://shapeGroup:OfficeArtFSPGR
+		{
+			qint32 xLeft = GetFlagData<qint32>(m_srcData, pos);
+			qint32 yTop = GetFlagData<qint32>(m_srcData, pos);
+			qint32 xRight = GetFlagData<qint32>(m_srcData, pos);
+			qint32 yBottom = GetFlagData<qint32>(m_srcData, pos);
+		}
+		break;
+		case 0xF00A://shapeProp:OfficeArtFSP
+		{
+			qint16 MSOSPT = ST_RI(stVar);
+			qint32 spid = GetFlagData<qint32>(m_srcData, pos);//MSOSPDI
+			quint32 flag = GetFlagData<quint32>(m_srcData, pos);
+			quint8 fGroup = flag >> 31;
+			quint8 fChild = (flag >> 30) & 0x1;
+			quint8 fPatriarch = (flag >> 29) & 0x1;
+			quint8 fDeleted = (flag >> 28) & 0x1;
+			quint8 fOleShape = (flag >> 27) & 0x1;
+			quint8 fHaveMaster = (flag >> 26) & 0x1;
+			quint8 fFlipH = (flag >> 25) & 0x1;
+			quint8 fFlipV = (flag >> 24) & 0x1;
+			quint8 fConnector = (flag >> 23) & 0x1;
+			quint8 fHaveAnchor = (flag >> 22) & 0x1;
+			quint8 fBackground = (flag >> 21) & 0x1;
+			quint8 fHaveSpt = (flag >> 20) & 0x1;
+		}
+		break;
+		case 0xF11D://deletedShape:OfficeArtFPSPL
+		{
+			quint32 flag = GetFlagData<quint32>(m_srcData, pos);
+			quint32 spid = flag >> 2;
+			quint8 reserved1 = (flag >> 1) & 0x01;
+			quint8 fLast = flag & 0x01;
+		}
+		break;
+		case 0xF00B://shapePrimaryOptions:OfficeArtFOPT
+		{
+			quint32 count = ST_RI(stVar);//OfficeArtRGFOPTE的数量
+			
+			for (int foptIndex = 0; foptIndex < count; ++foptIndex)
+			{
+				//OfficeArtFOPTE
+				quint16 opid = GetFlagData<quint16>(m_srcData, pos);
+				quint32 op = GetFlagData<quint32>(m_srcData, pos);
+
+			}
+		}
+		break;
+		default:
+			break;
+		}
+		pos = ST_EP(stVar);
+	} while (pos < endPos);
+
+
 }
