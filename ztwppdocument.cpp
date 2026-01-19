@@ -72,8 +72,9 @@ bool ZTWPPDocument::physicalStruct(quint32 pos, ST_Variable& stVar)
 		ST_HA(stVar) = GetFlagData<quint16>(m_srcData.constData(), pos);
 		ST_TP(stVar) = GetFlagData<quint16>(m_srcData.constData(), pos);
 		ST_SZ(stVar) = GetFlagData<quint32>(m_srcData.constData(), pos);
+		
 		ST_RV(stVar) = ST_HA(stVar) & 0xF;
-		ST_RI(stVar) = ST_HA(stVar) >> 8;
+		ST_RI(stVar) = ST_HA(stVar) >> 4;
 		if (pos + ST_SZ(stVar) < m_srcData.size())
 		{
 			ST_SP(stVar) = pos;
@@ -1305,23 +1306,28 @@ void ZTWPPDocument::parserOfficeArtDgContainer(quint32 pos, quint32 endPos)
 		{
 			//OfficeArtSpgrContainerFileBlock
 			//alreadyParserGShape
-			ST_Variable tmpVar2;
-			if (!physicalStruct(pos, tmpVar2))
+			do
 			{
-				return;
-			}
-			if (ST_TP(tmpVar2) == 0xF004)
-			{
-				parserOfficeArtSpContainer(ST_SP(tmpVar2), ST_EP(tmpVar2));
-			}
-			else if(ST_TP(tmpVar2) == 0xF003)
+				ST_Variable tmpVar2;
+				if (!physicalStruct(pos, tmpVar2))
+				{
+					return;
+				}
+				if (ST_TP(tmpVar2) == 0xF004)
+				{
+					parserOfficeArtSpContainer(ST_SP(tmpVar2), ST_EP(tmpVar2));
+				}
+				pos = ST_EP(tmpVar2);
+			} while (pos < ST_EP(tmpVar));
+			
+			/*else if(ST_TP(tmpVar2) == 0xF003)
 			{
 
 			}
 			else
 			{
 
-			}
+			}*/
 		}
 			break;
 		case 0xF004://shape:OfficeArtSpContainer
@@ -1370,18 +1376,18 @@ void ZTWPPDocument::parserOfficeArtSpContainer(quint32 pos, quint32 endPos)
 			qint16 MSOSPT = ST_RI(stVar);
 			qint32 spid = GetFlagData<qint32>(m_srcData, pos);//MSOSPDI
 			quint32 flag = GetFlagData<quint32>(m_srcData, pos);
-			quint8 fGroup = flag >> 31;
-			quint8 fChild = (flag >> 30) & 0x1;
-			quint8 fPatriarch = (flag >> 29) & 0x1;
-			quint8 fDeleted = (flag >> 28) & 0x1;
-			quint8 fOleShape = (flag >> 27) & 0x1;
-			quint8 fHaveMaster = (flag >> 26) & 0x1;
-			quint8 fFlipH = (flag >> 25) & 0x1;
-			quint8 fFlipV = (flag >> 24) & 0x1;
-			quint8 fConnector = (flag >> 23) & 0x1;
-			quint8 fHaveAnchor = (flag >> 22) & 0x1;
-			quint8 fBackground = (flag >> 21) & 0x1;
-			quint8 fHaveSpt = (flag >> 20) & 0x1;
+			quint8 fGroup = flag & 0x1;
+			quint8 fChild = (flag >> 1) & 0x1;
+			quint8 fPatriarch = (flag >> 2) & 0x1;
+			quint8 fDeleted = (flag >> 3) & 0x1;
+			quint8 fOleShape = (flag >> 4) & 0x1;
+			quint8 fHaveMaster = (flag >> 5) & 0x1;
+			quint8 fFlipH = (flag >> 6) & 0x1;
+			quint8 fFlipV = (flag >> 7) & 0x1;
+			quint8 fConnector = (flag >> 8) & 0x1;
+			quint8 fHaveAnchor = (flag >> 9) & 0x1;
+			quint8 fBackground = (flag >> 10) & 0x1;
+			quint8 fHaveSpt = (flag >> 11) & 0x1;
 		}
 		break;
 		case 0xF11D://deletedShape:OfficeArtFPSPL
@@ -1399,10 +1405,25 @@ void ZTWPPDocument::parserOfficeArtSpContainer(quint32 pos, quint32 endPos)
 			for (int foptIndex = 0; foptIndex < count; ++foptIndex)
 			{
 				//OfficeArtFOPTE
-				quint16 opid = GetFlagData<quint16>(m_srcData, pos);
-				quint32 op = GetFlagData<quint32>(m_srcData, pos);
-
+				quint16 opidHead = GetFlagData<quint16>(m_srcData, pos);
+				quint16 opid = opidHead & 0x3FFF;
+				quint8 fBid = (opidHead >> 14) & 0x1;
+				quint8 fComplex = (opidHead >> 15) & 0x1;
+				qint32 op = GetFlagData<qint32>(m_srcData, pos);
+				if (fComplex == 0x1)//数据的大小
+				{
+					
+				}
+				else //数据本身
+				{
+					//GetQString()
+				}
+				
 			}
+			qint32 sizexs = 0xa;
+			QByteArray da = m_srcData.mid(pos, sizexs);
+			QString qdd = GetQString(m_srcData, sizexs);
+			qDebug() << qdd;
 		}
 		break;
 		default:
