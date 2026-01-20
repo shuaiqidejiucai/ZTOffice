@@ -12,12 +12,14 @@ include($$shareRoot/common/common.pri)
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    pptdocument.cpp \
     zttools.cpp \
     ztwppdocument.cpp
 
 HEADERS += \
     global.h \
     mainwindow.h \
+    pptdocument.h \
     zttools.h \
     ztwppdocument.h
 

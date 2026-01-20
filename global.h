@@ -45,12 +45,23 @@ struct ST_Variable
     quint32 endPos = 0;
     quint32 originPos = 0;
     quint32 ftSize = 0;
-    quint16 ftHead = 0;
     quint16 ftType = 0;
     
-    quint16 recVer = 0;
-    quint16 recInstance = 0;
+    quint16 recVer : 4;
+    quint16 recInstance : 12;
     //bool isValid;
+};
+
+struct PointStruct
+{
+    qint32 x = 0;
+    qint32 y = 0;
+};
+
+struct RatioStruct
+{
+    qint32 numer = 0;
+    qint32 denom = 0;
 };
 
 #define ST_SP(var)      ((var).startPos)
