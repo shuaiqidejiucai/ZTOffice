@@ -1,12 +1,12 @@
 #ifndef PERSISTDIRECTORYENTRY_H
 #define PERSISTDIRECTORYENTRY_H
 
-#include "global.h"
+#include "pst_base.h"
 typedef quint32 PersistOffsetEntry;
-class PersistDirectoryEntry
+class PersistDirectoryEntry : public PST_Base
 {
 public:
-    PersistDirectoryEntry();
+    PersistDirectoryEntry(const QByteArray& srcData);
 
 public:
     quint32 persistId : 20;

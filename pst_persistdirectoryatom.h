@@ -1,9 +1,9 @@
 #ifndef PST_PERSISTDIRECTORYATOM_H
 #define PST_PERSISTDIRECTORYATOM_H
 
-#include "global.h"
+#include "pst_base.h"
 #include "persistdirectoryentry.h"
-class PST_PersistDirectoryAtom
+class PST_PersistDirectoryAtom : public PST_Base
 {
 public:
     PST_PersistDirectoryAtom(const QByteArray& srcData);
@@ -11,9 +11,7 @@ public:
 
 public:
     QList<PersistDirectoryEntry> rgPersistDirEntryArray;
-private:
-    ST_Variable m_STVar;
-    const QByteArray& m_srcData;
+
 };
 
 #endif // PST_PERSISTDIRECTORYATOM_H

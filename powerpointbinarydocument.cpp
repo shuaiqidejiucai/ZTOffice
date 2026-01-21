@@ -1,6 +1,6 @@
 #include "powerpointbinarydocument.h"
 
-PowerPointBinaryDocument::PowerPointBinaryDocument()
+PowerPointBinaryDocument::PowerPointBinaryDocument(const QByteArray &srcData):m_srcData(srcData)
 {
 
 }

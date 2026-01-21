@@ -1,0 +1,15 @@
+#ifndef PST_MSOFBTOPT_H
+#define PST_MSOFBTOPT_H
+
+#include "pst_base.h"
+#include "fopte.h"
+class PST_MSOfbtOPT : public PST_Base
+{
+public:
+    PST_MSOfbtOPT(const QByteArray& srcData);
+
+    QList<Fopte> fopteList;
+    QList<FOPTEComplex> fopteComList;
+};
+
+#endif // PST_MSOFBTOPT_H
