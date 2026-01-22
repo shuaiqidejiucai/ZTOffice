@@ -65,6 +65,11 @@ void ZTWPPDocument::parserData()
 	parserDocument();
 }
 
+QByteArray& ZTWPPDocument::GetSrcData()
+{
+	return m_srcData;
+}
+
 bool ZTWPPDocument::physicalStruct(quint32 pos, ST_Variable& stVar)
 {
 	if (pos + 8 < m_srcData.size())

@@ -6,6 +6,7 @@ class PST_ExternalObjectListAtom : public PST_Base
 public:
     PST_ExternalObjectListAtom(const QByteArray& srcData);
 
+    virtual int parser();
 };
 
 #endif // PST_EXTERNALOBJECTLISTATOM_H

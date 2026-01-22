@@ -7,6 +7,8 @@ class PST_DocumentAtom : public PST_Base
 public:
     PST_DocumentAtom(const QByteArray& srcData);
 
+    virtual int parser();
+public:
     PointStruct SlideSize;
     PointStruct NotesSize;
     RatioStruct ServerZoom;

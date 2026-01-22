@@ -110,6 +110,8 @@ public:
     bool readPPTData();
 
     void parserData();
+
+    QByteArray &GetSrcData();
 protected:
     quint32 parserDocument();
 

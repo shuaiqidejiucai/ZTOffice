@@ -16,7 +16,9 @@ class PST_Document : public PST_Base
 public:
     PST_Document(const QByteArray& srcData);
 
-    QSharedPointer<PST_DocumentAtom> documentAtom;
+    virtual int parser();
+
+    QSharedPointer<PST_DocumentAtom> documentAtomPtr;
     QList<QSharedPointer<PST_ExObjList> > exObjListObjList;
     QList<QSharedPointer<PST_Environment> > envmentList;
     QList<QSharedPointer<PST_PPDrawingGroup> > ppdwGroupList;

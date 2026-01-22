@@ -118,7 +118,7 @@ QString getCompObjCLSID(libolecf_item_t* pComObjItem)
 //    }
 //    return tmpList;
 //}
-
+#include "pst_document.h"
 
 int main(int argc, char* argv[])
 {
@@ -130,7 +130,11 @@ int main(int argc, char* argv[])
     ZTWPPDocument wk;
     wk.openWPPFile(qsPPTFilePath);
     wk.readPPTData();
-    wk.parserData();
+    const QByteArray& srcData = wk.GetSrcData();
+    QSharedPointer<PST_Document> documentPtr(new PST_Document(srcData));
+    documentPtr->parser();
+
+    //wk.parserData();
 
 
 

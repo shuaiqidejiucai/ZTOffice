@@ -3,6 +3,91 @@
 
 #include "global.h"
 
+enum HeaderType
+{
+    RT_Document = 0x03E8,
+    RT_DocumentAtom = 0x03E9,
+
+    RT_SlideAtom = 0x03EF,
+    RT_ExternalObjectList = 0x0409,
+    RT_ExternalObjectListAtom = 0x040A,
+    RT_Environment = 0x03F2,
+    RT_SoundCollection = 0x07E4,
+    RT_DrawingGroup = 0x040B,
+    RT_SlideListWithText = 0x0FF0,
+    RT_List = 0x07D0,
+    RT_HeadersFooters = 0x0FD9,
+    RT_SlideShowDocInfoAtom = 0x0401,
+    RT_NamedShows = 0x0410,
+    RT_Summary = 0x0402,
+    RT_DocRoutingSlipAtom = 0x0406,
+    RT_PrintOptionsAtom = 0x1770,
+    RT_Drawing = 0x040C,
+
+
+    RT_ExternalAviMovie = 0x1006,
+    RT_ExternalCdAudio = 0x100E,
+    RT_ExternalOleControl = 0x0FEE,
+    RT_ExternalHyperlink = 0x0FD7,
+    RT_ExternalMciMovie = 0x1007,
+    RT_ExternalMidiAudio = 0x100D,
+    RT_ExternalOleEmbed = 0x0FCC,
+    RT_ExternalOleLink = 0x0FCE,
+    RT_ExternalWavAudioEmbedded = 0x100F,
+    RT_ExternalWavAudioLink = 0x1010,
+
+
+
+    RT_ExternalOleEmbedAtom = 0x0FCD,
+    RT_ExternalOleObjectAtom = 0x0FC3,
+    RT_SlidePersistAtom = 0x03F3,
+    RT_TextHeaderAtom = 0x0F9F,
+    RT_TextCharsAtom = 0x0FA0,
+    RT_TextBytesAtom = 0x0FA8,
+    RT_StyleTextPropAtom = 0x0FA1,
+    RT_SlideNumberMetaCharAtom = 0x0FD8,
+    RT_DateTimeMetaCharAtom = 0x0FF7,
+    RT_GenericDateMetaCharAtom = 0x0FF8,
+    RT_HeaderMetaCharAtom = 0x0FF9,
+    RT_FooterMetaCharAtom = 0x0FFA,
+    RT_RtfDateTimeMetaCharAtom = 0x1015,
+    RT_TextBookmarkAtom = 0x0FA7,
+    RT_TextSpecialInfoAtom = 0x0FAA,
+    RT_InteractiveInfo = 0x0FF2,
+    RT_TextInteractiveInfoAtom = 0x0FDF,
+    RT_SlideShowSlideInfoAtom = 0x03F9,
+    RT_RoundTripSlideSyncInfo12 = 0x3714,
+    RT_RoundTripSlideSyncInfoAtom12 = 0x3715,
+    RT_ColorSchemeAtom = 0x07F0,
+    RT_RoundTripTheme12Atom = 0x040E,
+    RT_RoundTripColorMapping12Atom = 0x040F,
+    RT_RoundTripCompositeMasterId12Atom = 0x041D,
+    RT_RoundTripContentMasterInfo12Atom = 0x041E,
+    RT_RoundTripAnimationHashAtom12Atom = 0x2B0D,
+    RT_RoundTripAnimationAtom12Atom = 0x2B0B,
+    RT_RoundTripContentMasterId12Atom = 0x0422,
+
+    RT_ProgTags = 0x1388,
+    RT_NormalViewSetInfo9 = 0x0414,
+    RT_NotesTextViewInfo9 = 0x0413,
+    RT_OutlineViewInfo = 0x0407,
+    RT_SlideViewInfo = 0x03FA,
+    RT_SorterViewInfo = 0x0408,
+    RT_VbaInfo = 0x03FF,
+
+    RT_MainMaster = 0x03F8,
+    RT_ExternalOleObjectStg = 0x1011,
+    RT_Slide = 0x03EE,
+    RT_Notes = 0x03F0,
+    RT_Handout = 0x0FC9,
+
+    RT_CString = 0x0FBA,
+
+
+    RT_PersistDirectoryAtom = 0x1772
+
+};
+
 namespace ZT_Libolecf {
     void oleItemDeleter(libolecf_item_t* item);
 
@@ -64,4 +149,24 @@ inline T GetFlagData(const char* srcData, quint32 &pos)
     return data;
 }
 
+inline bool physicalStruct(quint32 pos, const QByteArray& srcData, ST_Variable& stVar)
+{
+    if (pos + 8 < srcData.size())
+    {
+        stVar.originPos = pos;
+        quint16 head = GetFlagData<quint16>(srcData.constData(), pos);
+        ST_TP(stVar) = GetFlagData<quint16>(srcData.constData(), pos);
+        ST_SZ(stVar) = GetFlagData<quint32>(srcData.constData(), pos);
+
+        ST_RV(stVar) = head & 0xF;
+        ST_RI(stVar) = head >> 4;
+        if (pos + ST_SZ(stVar) < srcData.size())
+        {
+            ST_SP(stVar) = pos;
+            ST_EP(stVar) = pos + ST_SZ(stVar);
+            return true;
+        }
+    }
+    return false;
+}
 #endif // ZTTOOLS_H

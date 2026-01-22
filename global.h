@@ -73,4 +73,5 @@ struct RatioStruct
 #define ST_RV(var)      ((var).recVer)
 #define ST_RI(var)      ((var).recInstance)
 //#define ST_VL(var)      ((var).isValid)
+
 #endif // GLOBAL_H
