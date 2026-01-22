@@ -4,6 +4,8 @@
 #include "pst_base.h"
 #include "pst_roundtripdocflags12atom.h"
 #include "pst_slidetime10atom.h"
+#include "pst_styletextprop9atom.h"
+#include "pst_roundtripheaderfooterdefaults12atom.h"
 class PST_BinaryTagData : public PST_Base
 {
 public:
@@ -11,6 +13,8 @@ public:
 
     QList<PST_RoundTripDocFlags12Atom> roundTripDocFlags12Atom;
     QList<PST_SlideTime10Atom> slideTime10AtomList;
+    QList<PST_StyleTextProp9Atom> styleTxtProp9AtomList;
+    QList<PST_RoundTripHeaderFooterDefaults12Atom> RTHFD12AtomList;
 };
 
 #endif // PST_BINARYTAGDATA_H

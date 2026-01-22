@@ -60,11 +60,14 @@ SOURCES += \
     pst_ppdrawinggroup.cpp \
     pst_progbinarytag.cpp \
     pst_progtags.cpp \
+    pst_roundtripcolormapping12atom.cpp \
     pst_roundtripcontentmasterid12atom.cpp \
     pst_roundtripcustomtablestyles12.cpp \
     pst_roundtripdocflags12atom.cpp \
+    pst_roundtripheaderfooterdefaults12atom.cpp \
     pst_roundtriphfplaceholder12atom.cpp \
     pst_roundtripshapeld12atom.cpp \
+    pst_roundtriptheme12atom.cpp \
     pst_shapeclientcontainer.cpp \
     pst_shapecontainer.cpp \
     pst_slide.cpp \
@@ -75,6 +78,7 @@ SOURCES += \
     pst_slidetime10atom.cpp \
     pst_slideviewinfo.cpp \
     pst_srkinsoku.cpp \
+    pst_styletextprop9atom.cpp \
     pst_styletextpropatom.cpp \
     pst_textcharformatexceptionatom.cpp \
     pst_textcharsatom.cpp \
@@ -139,11 +143,14 @@ HEADERS += \
     pst_ppdrawinggroup.h \
     pst_progbinarytag.h \
     pst_progtags.h \
+    pst_roundtripcolormapping12atom.h \
     pst_roundtripcontentmasterid12atom.h \
     pst_roundtripcustomtablestyles12.h \
     pst_roundtripdocflags12atom.h \
+    pst_roundtripheaderfooterdefaults12atom.h \
     pst_roundtriphfplaceholder12atom.h \
     pst_roundtripshapeld12atom.h \
+    pst_roundtriptheme12atom.h \
     pst_shapeclientcontainer.h \
     pst_shapecontainer.h \
     pst_slide.h \
@@ -154,6 +161,7 @@ HEADERS += \
     pst_slidetime10atom.h \
     pst_slideviewinfo.h \
     pst_srkinsoku.h \
+    pst_styletextprop9atom.h \
     pst_styletextpropatom.h \
     pst_textcharformatexceptionatom.h \
     pst_textcharsatom.h \
