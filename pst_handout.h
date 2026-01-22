@@ -11,10 +11,11 @@ class PST_Handout : public PST_Base
 public:
     PST_Handout(const QByteArray& srcData);
 
-    PST_PPDrawing ppDwing;
-    PST_ColorSchemeAtom colorSchemeAtom;
-    PST_RoundTripTheme12Atom RTT12Atom;
-    PST_RoundTripColorMapping12Atom RTCMappingAtom;
+    QSharedPointer<PST_PPDrawing> ppDwingPtr;
+    QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtomPtr;
+    QSharedPointer<PST_ProgTags> proTagesPtr;
+    QSharedPointer<PST_RoundTripTheme12Atom> RTT12AtomPtr;
+    QSharedPointer<PST_RoundTripColorMapping12Atom> RTCMappingAtomPtr;
 };
 
 #endif // PST_HANDOUT_H

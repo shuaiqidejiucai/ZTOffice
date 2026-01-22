@@ -1,3 +1,3 @@
 #include "pst_styletextpropatom.h"
 
-PST_StyleTextPropAtom::PST_StyleTextPropAtom(const QByteArray &srcData):m_srcData(srcData) {}
+PST_StyleTextPropAtom::PST_StyleTextPropAtom(const QByteArray &srcData):PST_Base(srcData) {}

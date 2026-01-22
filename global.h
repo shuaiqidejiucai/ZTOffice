@@ -68,7 +68,6 @@ struct RatioStruct
 #define ST_EP(var)      ((var).endPos)
 #define ST_OP(var)      ((var).originPos)
 #define ST_SZ(var)      ((var).ftSize)
-#define ST_HA(var)      ((var).ftHead)
 #define ST_TP(var)      ((var).ftType)
 
 #define ST_RV(var)      ((var).recVer)

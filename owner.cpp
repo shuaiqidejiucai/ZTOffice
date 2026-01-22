@@ -1,3 +1,3 @@
 #include "owner.h"
 
-Owner::Owner(const QByteArray& srcData):m_srcData(srcData) {}
+Owner::Owner(const QByteArray& srcData):PST_Base(srcData) {}

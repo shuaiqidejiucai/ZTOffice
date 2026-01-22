@@ -13,7 +13,7 @@ class PST_SrKinsoku : public PST_Base
 {
 public:
     PST_SrKinsoku(const QByteArray& srcData);
-    QList<PST_KinsokuAtom> kinsokuAtmoList;
+    QList<QSharedPointer<PST_KinsokuAtom> > kinsokuAtmoList;
 };
 
 #endif // PST_SRKINSOKU_H

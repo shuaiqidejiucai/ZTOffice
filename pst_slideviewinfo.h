@@ -14,8 +14,8 @@ class PST_SlideViewInfo : public PST_Base
 public:
     PST_SlideViewInfo(const QByteArray& srcData);
 
-    QList<PST_SlideViewInfoAtom> slideViewInfoAtomList;
-    QList<PST_ViewInfoAtom> viewInfoAtomList;
+    QList<QSharedPointer<PST_SlideViewInfoAtom> > slideViewInfoAtomList;
+    QList<QSharedPointer<PST_ViewInfoAtom> > viewInfoAtomList;
 };
 
 #endif // PST_SLIDEVIEWINFO_H

@@ -14,13 +14,13 @@ class PST_ShapeContainer : public PST_Base
 public:
     PST_ShapeContainer(const QByteArray& srcData);
 
-    PST_OfficeArtFSPGR officeArtFSPGR;
-    PST_OfficeArtFSP officeArtFSP;
-    PST_MSOfbtOPT msoFbtOPT;
-    PST_MSOfbtTertiaryOPT msoTertiaryOPT;
-    OfficeArtSpContainer officeArtSpCon;
-    QList<PST_ShapeClientContainer> shapeClientContainer;
-    QList<PST_ClientTextBox> clientTxtBox;
+    QSharedPointer<PST_OfficeArtFSPGR> officeArtFSPGRPtr;
+    QSharedPointer<PST_OfficeArtFSP> officeArtFSPPtr;
+    QSharedPointer<PST_MSOfbtOPT> msoFbtOPTPtr;
+    QSharedPointer<PST_MSOfbtTertiaryOPT> msoTertiaryOPTPtr;
+    QSharedPointer<OfficeArtSpContainer> officeArtSpConPtr;
+    QList<QSharedPointer<PST_ShapeClientContainer> > shapeClientContainer;
+    QList<QSharedPointer<PST_ClientTextBox> > clientTxtBox;
 };
 
 #endif // PST_SHAPECONTAINER_H

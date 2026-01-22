@@ -4,7 +4,7 @@
 class PST_Base
 {
 public:
-    PST_Base();
+    PST_Base(const QByteArray& srcData);
 
 protected:
     ST_Variable m_STVar;

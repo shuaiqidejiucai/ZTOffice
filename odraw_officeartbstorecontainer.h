@@ -9,7 +9,7 @@ public:
     ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData);
 
 
-    QList<PST_MSOfbtBSE> msoBtBseList;
+    QList<QSharedPointer<PST_MSOfbtBSE> > msoBtBsePtrList;
 };
 
 #endif // ODRAW_OFFICEARTBSTORECONTAINER_H

@@ -8,8 +8,8 @@ class PST_ExObjList : public PST_Base
 public:
     PST_ExObjList(const QByteArray& srcData);
 
-    QList<PST_ExternalObjectListAtom> exObjListAtomList;
-    QList<PST_ExEmbed> exembedList;
+    QList<QSharedPointer<PST_ExternalObjectListAtom> > exObjListAtomList;
+    QList<QSharedPointer<PST_ExEmbed> > exembedList;
 };
 
 #endif // PST_EXOBJLIST_H

@@ -16,10 +16,10 @@ class PST_DrawingGroupContainer : public PST_Base
 public:
     PST_DrawingGroupContainer(const QByteArray& srcData);
 
-    PST_DrawingGroupAtom dwGroupAtom;
-    ODRAW_OfficeArtBStoreContainer odrawOABSContainer;
-    PST_MSOfbtOPT msofbtOPT;
-    ODRAW_OfficeArtSplitMenuColorContainer oasColorContainter;
+    QSharedPointer<PST_DrawingGroupAtom> dwGroupAtom;
+    QSharedPointer<ODRAW_OfficeArtBStoreContainer> odrawOABSContainer;
+    QSharedPointer<PST_MSOfbtOPT> msofbtOPT;
+    QSharedPointer<ODRAW_OfficeArtSplitMenuColorContainer> oasColorContainter;
 };
 
 #endif // PST_DRAWINGGROUPCONTAINER_H

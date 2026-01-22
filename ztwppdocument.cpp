@@ -69,12 +69,12 @@ bool ZTWPPDocument::physicalStruct(quint32 pos, ST_Variable& stVar)
 {
 	if (pos + 8 < m_srcData.size())
 	{
-		ST_HA(stVar) = GetFlagData<quint16>(m_srcData.constData(), pos);
+		quint16 head = GetFlagData<quint16>(m_srcData.constData(), pos);
 		ST_TP(stVar) = GetFlagData<quint16>(m_srcData.constData(), pos);
 		ST_SZ(stVar) = GetFlagData<quint32>(m_srcData.constData(), pos);
 		
-		ST_RV(stVar) = ST_HA(stVar) & 0xF;
-		ST_RI(stVar) = ST_HA(stVar) >> 4;
+		ST_RV(stVar) = head & 0xF;
+		ST_RI(stVar) = head >> 4;
 		if (pos + ST_SZ(stVar) < m_srcData.size())
 		{
 			ST_SP(stVar) = pos;

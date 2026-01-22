@@ -1,3 +1,3 @@
 #include "pst_shapecontainer.h"
 
-PST_ShapeContainer::PST_ShapeContainer(const QByteArray& srcData):m_srcData(srcData) {}
+PST_ShapeContainer::PST_ShapeContainer(const QByteArray& srcData):PST_Base(srcData) {}

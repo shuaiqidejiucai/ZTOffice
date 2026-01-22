@@ -17,14 +17,14 @@ class PowerPointBinaryDocument : public PST_Base
 public:
     PowerPointBinaryDocument(const QByteArray& srcData);
 
-    PST_CurrentUserAtom currentUserAtom;
-    PST_UserEditAtom userEditAtom;
-    PST_PersistDirectoryAtom persistDirectoryAtom;
-    PST_Document document;
-    QList<PST_MainMaster> mainMasterList;
-    QList<PST_Notes> notesList;
-    QList<PST_Slide> slideList;
-    QList<PST_ExternaloleObjectStg> exOleObjStringList;
+    QSharedPointer<PST_CurrentUserAtom> currentUserAtom;
+    QSharedPointer<PST_UserEditAtom> userEditAtom;
+    QSharedPointer<PST_PersistDirectoryAtom> persistDirectoryAtom;
+    QSharedPointer<PST_Document> document;
+    QList<QSharedPointer<PST_MainMaster> > mainMasterList;
+    QList<QSharedPointer<PST_Notes> > notesList;
+    QList<QSharedPointer<PST_Slide> > slideList;
+    QList<QSharedPointer<PST_ExternaloleObjectStg> > exOleObjStringList;
 };
 
 #endif // POWERPOINTBINARYDOCUMENT_H

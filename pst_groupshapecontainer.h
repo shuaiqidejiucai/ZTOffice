@@ -9,7 +9,7 @@ class PST_GroupShapeContainer : public PST_Base
 public:
     PST_GroupShapeContainer(const QByteArray& srcData);
 
-    QList<PST_ShapeContainer> shapeContainerList;
+    QList<QSharedPointer<PST_ShapeContainer> > shapeContainerList;
 };
 
 #endif // PST_GROUPSHAPECONTAINER_H

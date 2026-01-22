@@ -1,6 +1,6 @@
 #include "pst_txmasterstyleatom.h"
 
-PST_TxMasterStyleAtom::PST_TxMasterStyleAtom(const QByteArray& srcData):m_srcData(srcData)
+PST_TxMasterStyleAtom::PST_TxMasterStyleAtom(const QByteArray& srcData):PST_Base(srcData)
 {
 
 }

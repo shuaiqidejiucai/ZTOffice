@@ -9,8 +9,8 @@ class PST_MSOfbtTertiaryOPT : public PST_Base
 public:
     PST_MSOfbtTertiaryOPT(const QByteArray& srcData);
 
-    QList<Fopte> fopteList;
-    QList<FOPTEComplex> fopteComplexList;
+    QList<QSharedPointer<Fopte> > fopteList;
+    QList<QSharedPointer<FOPTEComplex> > fopteComplexList;
 };
 
 #endif // PST_MSOFBTTERTIARYOPT_H

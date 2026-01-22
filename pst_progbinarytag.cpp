@@ -1,3 +1,3 @@
 #include "pst_progbinarytag.h"
 
-PST_ProgBinaryTag::PST_ProgBinaryTag(const QByteArray& srcData):m_srcData(srcData) {}
+PST_ProgBinaryTag::PST_ProgBinaryTag(const QByteArray& srcData):PST_Base(srcData) {}

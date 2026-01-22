@@ -24,7 +24,7 @@ public:
     quint8 fBid : 1;
     quint8 fComplex : 1;
     quint32 op;
-    Owner oner;
+    QSharedPointer<Owner> ownerPtr;
 };
 
 #endif // FOPTE_H

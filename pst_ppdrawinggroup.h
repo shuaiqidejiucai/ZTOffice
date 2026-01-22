@@ -9,7 +9,7 @@ class PST_PPDrawingGroup : public PST_Base
 public:
     PST_PPDrawingGroup(const QByteArray& srcData);
 
-    QList<PST_DrawingGroupContainer> dwGroupContainterList;
+    QList<QSharedPointer<PST_DrawingGroupContainer> > dwGroupContainterList;
 };
 
 #endif // PST_PPDRAWINGGROUP_H

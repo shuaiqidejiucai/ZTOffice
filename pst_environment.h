@@ -14,12 +14,12 @@ class PST_Environment : public PST_Base
 public:
     PST_Environment(const QByteArray& srcData);
 
-    QList<PST_SrKinsoku> srKinSoKuList;
-    QList<PST_FontCollection> fontCollectionList;
-    QList<PST_TextCharFormatExceptionAtom> textFormatExAtomList;
-    QList<PST_TextParagraphFormatExceptionAtom> textParagraphFormatExAtomList;
-    QList<PST_TextSpecialInfoDefaultAtom> textSpecialInfoDefaultAtomList;
-    QList<PST_TxMasterStyleAtom> txMasterStyleAtomList;
+    QList<QSharedPointer<PST_SrKinsoku> > srKinSoKuList;
+    QList<QSharedPointer<PST_FontCollection> > fontCollectionList;
+    QList<QSharedPointer<PST_TextCharFormatExceptionAtom> > textFormatExAtomList;
+    QList<QSharedPointer<PST_TextParagraphFormatExceptionAtom> > textParagraphFormatExAtomList;
+    QList<QSharedPointer<PST_TextSpecialInfoDefaultAtom> > textSpecialInfoDefaultAtomList;
+    QList<QSharedPointer<PST_TxMasterStyleAtom> > txMasterStyleAtomList;
 };
 
 #endif // PST_ENVIRONMENT_H

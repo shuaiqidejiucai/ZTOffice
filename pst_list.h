@@ -12,10 +12,10 @@ class PST_List : public PST_Base
 public:
     PST_List(const QByteArray& srcData);
 
-    QList<PST_NormalViewSetInfo> normalViewSetInfo;
-    QList<PST_NotesTextViewInfo> notesTxtViewInfo;
-    QList<PST_SlideViewInfo> slideViewInfo;
-    QList<PST_ProgTags> progTags;
+    QList<QSharedPointer<PST_NormalViewSetInfo> > normalViewSetInfo;
+    QList<QSharedPointer<PST_NotesTextViewInfo> > notesTxtViewInfo;
+    QList<QSharedPointer<PST_SlideViewInfo> > slideViewInfo;
+    QList<QSharedPointer<PST_ProgTags> > progTags;
 };
 
 #endif // PST_LIST_H

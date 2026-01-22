@@ -9,7 +9,7 @@ class PST_ProgTags : public PST_Base
 public:
     PST_ProgTags(const QByteArray& srcData);
 
-    QList<PST_ProgBinaryTag> progBinTagList;
+    QList<QSharedPointer<PST_ProgBinaryTag> > progBinTagList;
 };
 
 #endif // PST_PROGTAGS_H

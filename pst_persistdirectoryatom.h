@@ -10,7 +10,7 @@ public:
 
 
 public:
-    QList<PersistDirectoryEntry> rgPersistDirEntryArray;
+    QList<QSharedPointer<PersistDirectoryEntry> > rgPersistDirEntryArray;
 
 };
 

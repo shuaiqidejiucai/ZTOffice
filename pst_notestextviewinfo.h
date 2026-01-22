@@ -9,7 +9,7 @@ class PST_NotesTextViewInfo : public PST_Base
 public:
     PST_NotesTextViewInfo(const QByteArray& srcData);
 
-    QList<PST_ViewInfoAtom> viewInfoAtomList;
+    QList<QSharedPointer<PST_ViewInfoAtom> > viewInfoAtomList;
 };
 
 #endif // PST_NOTESTEXTVIEWINFO_H

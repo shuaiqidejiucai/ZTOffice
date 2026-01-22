@@ -8,7 +8,7 @@ class PST_SlideListWithText : public PST_Base
 public:
     PST_SlideListWithText(const QByteArray& srcData);
 
-    QList<PST_SlidePersistAtom> slidePerAtomList;
+    QList<QSharedPointer<PST_SlidePersistAtom> > slidePerAtomList;
 };
 
 #endif // PST_SLIDELISTWITHTEXT_H

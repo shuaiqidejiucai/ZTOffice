@@ -16,15 +16,15 @@ class PST_Document : public PST_Base
 public:
     PST_Document(const QByteArray& srcData);
 
-    PST_DocumentAtom documentAtom;
-    QList<PST_ExObjList> exObjListObjList;
-    QList<PST_Environment> envmentList;
-    QList<PST_PPDrawingGroup> ppdwGroupList;
-    QList<PST_SlideListWithText> slideListWithTxtList;
-    QList<PST_List> PSTList;
-    QList<PST_HeadersFooters> headersFootersList;
-    QList<PST_RoundTripCustomTableStyles12> roundTripTableStyleList;
-    PST_EndDocumentAtom endDocumentAtom;
+    QSharedPointer<PST_DocumentAtom> documentAtom;
+    QList<QSharedPointer<PST_ExObjList> > exObjListObjList;
+    QList<QSharedPointer<PST_Environment> > envmentList;
+    QList<QSharedPointer<PST_PPDrawingGroup> > ppdwGroupList;
+    QList<QSharedPointer<PST_SlideListWithText> > slideListWithTxtList;
+    QList<QSharedPointer<PST_List> > PSTList;
+    QList<QSharedPointer<PST_HeadersFooters> > headersFootersList;
+    QList<QSharedPointer<PST_RoundTripCustomTableStyles12> > roundTripTableStyleList;
+    QSharedPointer<PST_EndDocumentAtom> endDocumentAtom;
 };
 
 #endif // PST_DOCUMENT_H

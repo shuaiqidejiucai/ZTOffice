@@ -12,11 +12,11 @@ class PST_Slide : public PST_Base
 public:
     PST_Slide(const QByteArray& srcData);
 
-    PST_SlideAtom slideAtom;
-    PST_PPDrawing ppdwing;
-    PST_ColorSchemeAtom colorSchemeAtom;
-    PST_ProgTags proTags;
-    PST_RoundTripContentMasterId12Atom roundTripContentMasterId12Atom;
+    QSharedPointer<PST_SlideAtom> slideAtomPtr;
+    QSharedPointer<PST_PPDrawing> ppdwingPtr;
+    QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtomPtr;
+    QSharedPointer<PST_ProgTags> proTagsPtr;
+    QSharedPointer<PST_RoundTripContentMasterId12Atom> roundTripContentMasterId12AtomPtr;
 };
 
 #endif // PST_SLIDE_H

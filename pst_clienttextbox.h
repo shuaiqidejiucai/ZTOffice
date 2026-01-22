@@ -13,11 +13,11 @@ class PST_ClientTextBox : public PST_Base
 public:
     PST_ClientTextBox(const QByteArray& srcData);
 
-    PST_TextHeaderAtom txtHeaderAtom;
-    PST_TextCharsAtom txtCharsAtom;
-    PST_TextSpecialInfoAtom txtSpecialInfoAtom;
-    PST_TextRulerAtom txtRulerAtom;
-    PST_SlideNumberMetaCharAtom slideNumMCAtom;
+    QSharedPointer<PST_TextHeaderAtom> txtHeaderAtom;
+    QSharedPointer<PST_TextCharsAtom> txtCharsAtom;
+    QSharedPointer<PST_TextSpecialInfoAtom> txtSpecialInfoAtom;
+    QSharedPointer<PST_TextRulerAtom> txtRulerAtom;
+    QSharedPointer<PST_SlideNumberMetaCharAtom> slideNumMCAtom;
 
 };
 

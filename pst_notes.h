@@ -11,10 +11,10 @@ class PST_Notes : public PST_Base
 public:
     PST_Notes(const QByteArray& srcData);
 
-    PST_NotesAtom notesAtom;
-    PST_PPDrawing ppdrwing;
-    PST_ColorSchemeAtom colorSchemeAtom;
-    PST_ProgTags protages;
+    QSharedPointer<PST_NotesAtom> notesAtomPtr;
+    QSharedPointer<PST_PPDrawing> ppdrwingPtr;
+    QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtomPtr;
+    QSharedPointer<PST_ProgTags> protagesPtr;
 };
 
 #endif // PST_NOTES_H

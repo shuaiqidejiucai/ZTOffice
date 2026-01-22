@@ -9,7 +9,7 @@ class PST_PPDrawing : public PST_Base
 public:
     PST_PPDrawing(const QByteArray& srcData);
 
-    PST_DrawingContainer dwingContiner;
+    QSharedPointer<PST_DrawingContainer> dwingContiner;
 };
 
 #endif // PST_PPDRAWING_H

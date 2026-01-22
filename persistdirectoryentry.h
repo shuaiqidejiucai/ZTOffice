@@ -11,7 +11,7 @@ public:
 public:
     quint32 persistId : 20;
     quint32 cPersist : 12;
-    QList<PersistOffsetEntry> rgPersistOffset_Array;
+    QList<QSharedPointer<PersistOffsetEntry> > rgPersistOffsetPtr_Array;
 };
 
 #endif // PERSISTDIRECTORYENTRY_H

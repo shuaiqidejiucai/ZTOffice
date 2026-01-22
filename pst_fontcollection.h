@@ -13,7 +13,7 @@ class PST_FontCollection : public PST_Base
 {
 public:
     PST_FontCollection(const QByteArray& srcData);
-    QList<PST_FontEntityAtom> fontEntityAtomList;
+    QList<QSharedPointer<PST_FontEntityAtom> > fontEntityAtomList;
 };
 
 #endif // PST_FONTCOLLECTION_H
