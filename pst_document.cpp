@@ -31,48 +31,57 @@ int PST_Document::parser()
 
 		}
 			break;
+		case RT_Environment:
+		{
+			QSharedPointer<PST_Environment> envPtr(new PST_Environment(m_srcData));
+			envPtr->setSTVar(stVar);
+			envmentList.append(envPtr);
+		}
+			break;
+		case RT_DrawingGroup:
+		{
+			QSharedPointer<PST_PPDrawingGroup> dwingGroupPtr(new PST_PPDrawingGroup(m_srcData));
+			dwingGroupPtr->setSTVar(stVar);
+			ppdwGroupList.append(dwingGroupPtr);
+		}
+			break;
+		case RT_SlideListWithText:
+		{
+			QSharedPointer<PST_SlideListWithText> slideListWithTextPtr(new PST_SlideListWithText(m_srcData));
+			slideListWithTextPtr->setSTVar(stVar);
+			slideListWithTxtList.append(slideListWithTextPtr);
+		}
+		break;
+		case RT_List:
+		{
+			QSharedPointer<PST_List> pstListPtr(new PST_List(m_srcData));
+			pstListPtr->setSTVar(stVar);
+			PSTList.append(pstListPtr);
+		}
+		break;
+		case RT_HeadersFooters:
+		{
+			QSharedPointer<PST_HeadersFooters> headersFootersPtr(new PST_HeadersFooters(m_srcData));
+			headersFootersPtr->setSTVar(stVar);
+			headersFootersList.append(headersFootersPtr);
+		}
+		case RT_RoundTripCustomTableStyles12Atom:
+		{
+			QSharedPointer<PST_RoundTripCustomTableStyles12> roundTripTableStylePtr(new PST_RoundTripCustomTableStyles12(m_srcData));
+			roundTripTableStylePtr->setSTVar(stVar);
+			roundTripTableStyleList.append(roundTripTableStylePtr);
+		}
+			break;
+		case RT_EndDocumentAtom:
+		{
+			endDocumentAtom = QSharedPointer<PST_EndDocumentAtom>::create(m_srcData);
+			endDocumentAtom->setSTVar(stVar);
+		}
+			break;
 		default:
 			break;
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-		
-
-	if (isFind)
-	{
-		quint32 startPos = ST_SP(stVar);
-		qint32 slideSizeX = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 4;
-		qint32 slideSizeY = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 4;
-		qint32 notesSizeX = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 4;
-		qint32 notesSizeY = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 4;
-		qint32 numer = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));//分子
-		startPos += 4;
-		qint32 denom = qFromLittleEndian<qint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));//分母
-		startPos += 4;
-		quint32 notesMasterPersistIdRef = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 4;
-		quint32 handoutMasterPersistIdRef = qFromLittleEndian<quint32>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 4;
-		quint16 firstSlideNumber = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 2;
-		quint16 slideSizeType = qFromLittleEndian<quint16>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 2;
-		quint8 fSaveWithFonts = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));//是否为嵌入式字体
-		startPos += 1;
-		//标题幻灯片上的“占位符形状”是否不显示
-		quint8 fOmitTitlePlace = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 1;
-		//是否为从右向左的文档
-		quint8 fRightToLeft = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 1;
-		//是否显示批注评论
-		quint8 fShowComments = qFromLittleEndian<quint8>(reinterpret_cast<const uchar*>(m_srcData.constData() + startPos));
-		startPos += 1;
-		return ST_EP(stVar);
-	}
 	return 0;
 }

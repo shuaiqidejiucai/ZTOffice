@@ -8,6 +8,8 @@ class PST_MSOfbtBSE : public PST_Base
 public:
     PST_MSOfbtBSE(const QByteArray& srcData);
 
+    virtual int parser()override;
+
     quint8 btWin32;
     quint8 btMacOS;
     QByteArray rgUid;

@@ -14,6 +14,8 @@ class PST_HeadersFooters : public PST_Base
 public:
     PST_HeadersFooters(const QByteArray& srcData);
 
+    virtual int parser() override;
+
     QSharedPointer<PST_HeadsFootersAtom> headersFootersAtmo;
 
 

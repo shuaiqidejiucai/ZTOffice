@@ -8,6 +8,7 @@ class ODRAW_OfficeArtBStoreContainer : public PST_Base
 public:
     ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData);
 
+    virtual int parser()override;
 
     QList<QSharedPointer<PST_MSOfbtBSE> > msoBtBsePtrList;
 };

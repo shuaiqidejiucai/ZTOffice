@@ -8,6 +8,8 @@ class PST_SlideListWithText : public PST_Base
 public:
     PST_SlideListWithText(const QByteArray& srcData);
 
+    virtual int parser() override; 
+
     QList<QSharedPointer<PST_SlidePersistAtom> > slidePerAtomList;
 };
 

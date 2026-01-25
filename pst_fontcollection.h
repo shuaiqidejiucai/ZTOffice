@@ -7,12 +7,17 @@ class PST_FontEntityAtom : public PST_Base
 {
 public:
     PST_FontEntityAtom(const QByteArray& srcData);
+
+    virtual int parser()override;
 };
 
 class PST_FontCollection : public PST_Base
 {
 public:
     PST_FontCollection(const QByteArray& srcData);
+
+    virtual int parser()override;
+
     QList<QSharedPointer<PST_FontEntityAtom> > fontEntityAtomList;
 };
 

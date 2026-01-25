@@ -4,3 +4,8 @@ PST_TxMasterStyleAtom::PST_TxMasterStyleAtom(const QByteArray& srcData):PST_Base
 {
 
 }
+
+int PST_TxMasterStyleAtom::parser()
+{
+    return 0;
+}

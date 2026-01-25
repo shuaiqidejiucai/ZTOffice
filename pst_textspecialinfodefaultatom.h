@@ -7,6 +7,8 @@ class PST_TextSpecialInfoDefaultAtom : public PST_Base
 {
 public:
     PST_TextSpecialInfoDefaultAtom(const QByteArray& srcData);
+
+    virtual int parser()override;
 };
 
 #endif // PST_TEXTSPECIALINFODEFAULTATOM_H

@@ -14,6 +14,8 @@ class PST_Environment : public PST_Base
 public:
     PST_Environment(const QByteArray& srcData);
 
+    virtual int parser() override;
+
     QList<QSharedPointer<PST_SrKinsoku> > srKinSoKuList;
     QList<QSharedPointer<PST_FontCollection> > fontCollectionList;
     QList<QSharedPointer<PST_TextCharFormatExceptionAtom> > textFormatExAtomList;

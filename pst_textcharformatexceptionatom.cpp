@@ -4,3 +4,8 @@ PST_TextCharFormatExceptionAtom::PST_TextCharFormatExceptionAtom(const QByteArra
 {
 
 }
+
+int PST_TextCharFormatExceptionAtom::parser()
+{
+    return 0;
+}

@@ -24,11 +24,17 @@ int PST_ExObjList::parser()
 			exObjListAtomPtr = QSharedPointer<PST_ExternalObjectListAtom>::create(m_srcData);
 			exObjListAtomPtr->setSTVar(stVar);
 		}
+		break;
+		case RT_ExternalOleEmbed:
+		{
+			QSharedPointer<PST_ExEmbed> exEmbed(new PST_ExEmbed(m_srcData));
+			exEmbed->setSTVar(stVar);
+			exembedList.append(exEmbed);
+		}
 			break;
 		default:
 			break;
 		}
-
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
 	return 0;

@@ -7,11 +7,12 @@ enum HeaderType
 {
     RT_Document = 0x03E8,
     RT_DocumentAtom = 0x03E9,
-
+    RT_EndDocumentAtom = 0x03EA,
     RT_SlideAtom = 0x03EF,
     RT_ExternalObjectList = 0x0409,
     RT_ExternalObjectListAtom = 0x040A,
     RT_Environment = 0x03F2,
+    RT_FontCollection = 0x07D5,
     RT_SoundCollection = 0x07E4,
     RT_DrawingGroup = 0x040B,
     RT_SlideListWithText = 0x0FF0,
@@ -23,7 +24,7 @@ enum HeaderType
     RT_DocRoutingSlipAtom = 0x0406,
     RT_PrintOptionsAtom = 0x1770,
     RT_Drawing = 0x040C,
-
+    RT_RoundTripCustomTableStyles12Atom = 0x0428,
 
     RT_ExternalAviMovie = 0x1006,
     RT_ExternalCdAudio = 0x100E,
@@ -37,14 +38,20 @@ enum HeaderType
     RT_ExternalWavAudioLink = 0x1010,
 
 
-
+    RT_Kinsoku = 0x0FC8,
     RT_ExternalOleEmbedAtom = 0x0FCD,
     RT_ExternalOleObjectAtom = 0x0FC3,
     RT_SlidePersistAtom = 0x03F3,
     RT_TextHeaderAtom = 0x0F9F,
     RT_TextCharsAtom = 0x0FA0,
+    RT_TextCharFormatExceptionAtom = 0x0FA4,
+    RT_TextParagraphFormatExceptionAtom = 0x0FA5,
     RT_TextBytesAtom = 0x0FA8,
+    RT_TextSpecialInfoDefaultAtom = 0x0FA9,
     RT_StyleTextPropAtom = 0x0FA1,
+    RT_TextMasterStyleAtom = 0x0FA3,
+    RT_FontEntityAtom = 0x0FB7,
+    RT_KinsokuAtom = 0x0FD2,
     RT_SlideNumberMetaCharAtom = 0x0FD8,
     RT_DateTimeMetaCharAtom = 0x0FF7,
     RT_GenericDateMetaCharAtom = 0x0FF8,
@@ -84,8 +91,16 @@ enum HeaderType
     RT_CString = 0x0FBA,
 
 
-    RT_PersistDirectoryAtom = 0x1772
+    RT_PersistDirectoryAtom = 0x1772,
 
+    //通用
+    COMMON_OfficeArtDggContainer = 0xF000,
+    COMMON_OfficeArtBStoreContainer = 0xF001,
+    COMMON_OfficeArtFDGGBlock = 0xF006,
+    COMMON_OfficeArtFBSE = 0xF007,
+    COMMON_OfficeArtFOPT = 0xF00B,
+    COMMON_OfficeArtSplitMenuColorContainer = 0xF11E
+    
 };
 
 namespace ZT_Libolecf {
@@ -168,5 +183,17 @@ inline bool physicalStruct(quint32 pos, const QByteArray& srcData, ST_Variable& 
         }
     }
     return false;
+}
+
+inline QString GetQString(const char* dataPtr, quint32 length)
+{
+    QTextDecoder* decoder = QTextCodec::codecForName("UTF-16LE")->makeDecoder();
+    QString qsContent = decoder->toUnicode(dataPtr, length);
+    delete decoder;
+    //移除终止符（如果有）
+    if (qsContent.endsWith(QChar::Null)) {
+        qsContent.chop(1);
+    }
+    return qsContent;
 }
 #endif // ZTTOOLS_H

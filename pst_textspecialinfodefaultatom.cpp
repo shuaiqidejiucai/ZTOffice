@@ -4,3 +4,8 @@ PST_TextSpecialInfoDefaultAtom::PST_TextSpecialInfoDefaultAtom(const QByteArray 
 {
 
 }
+
+int PST_TextSpecialInfoDefaultAtom::parser()
+{
+    return 0;
+}

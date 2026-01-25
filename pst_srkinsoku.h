@@ -5,14 +5,19 @@
 
 class PST_KinsokuAtom : public PST_Base
 {
+public:
     PST_KinsokuAtom(const QByteArray& srcData);
 
+    virtual int parser()override;
 };
 
 class PST_SrKinsoku : public PST_Base
 {
 public:
     PST_SrKinsoku(const QByteArray& srcData);
+
+    virtual int parser() override;
+
     QList<QSharedPointer<PST_KinsokuAtom> > kinsokuAtmoList;
 };
 

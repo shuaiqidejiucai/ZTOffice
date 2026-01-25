@@ -7,6 +7,9 @@ class PST_CString : public PST_Base
 {
 public:
     PST_CString(const QByteArray& srcData);
+
+
+    virtual int parser() override;
 };
 
 #endif // PST_CSTRING_H

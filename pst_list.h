@@ -12,6 +12,8 @@ class PST_List : public PST_Base
 public:
     PST_List(const QByteArray& srcData);
 
+    virtual int parser() override;
+
     QList<QSharedPointer<PST_NormalViewSetInfo> > normalViewSetInfo;
     QList<QSharedPointer<PST_NotesTextViewInfo> > notesTxtViewInfo;
     QList<QSharedPointer<PST_SlideViewInfo> > slideViewInfo;

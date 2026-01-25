@@ -9,8 +9,12 @@ class PST_ExEmbed : public PST_Base
 {
 public:
     PST_ExEmbed(const QByteArray& srcData);
-    QList<QSharedPointer<PST_ExternalOleEmbedAtom> > exOleEmbedAtomList;
-    QList<QSharedPointer<PST_ExternalOleObjectAtom> > exOleObjAtomList;
+
+    virtual int parser() override;
+
+
+    QSharedPointer<PST_ExternalOleEmbedAtom> exOleEmbedAtom;
+    QSharedPointer<PST_ExternalOleObjectAtom> exOleObjAtom;
     QList<QSharedPointer<PST_CString> > cstringList;
 };
 
