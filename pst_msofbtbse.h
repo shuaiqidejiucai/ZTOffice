@@ -10,17 +10,17 @@ public:
 
     virtual int parser()override;
 
-    quint8 btWin32;
-    quint8 btMacOS;
+    quint8 btWin32 = 0;
+    quint8 btMacOS = 0;
     QByteArray rgUid;
-    quint16 Tag;
-    quint32 Size;
-    quint32 cRefl;
-    quint32 foDelay;
-    quint8 Usage;
-    quint8 cbName;
-    quint8 Unused2;
-    quint8 Unused3;
+    quint16 Tag = 0;
+    quint32 Size = 0;
+    quint32 cRefl = 0;
+    quint32 foDelay = 0;
+    quint8 Usage = 0;
+    quint8 cbName = 0;
+    quint8 Unused2 = 0;
+    quint8 Unused3 = 0;
 };
 
 #endif // PST_MSOFBTBSE_H

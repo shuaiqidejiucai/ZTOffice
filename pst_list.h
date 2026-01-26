@@ -14,10 +14,10 @@ public:
 
     virtual int parser() override;
 
-    QList<QSharedPointer<PST_NormalViewSetInfo> > normalViewSetInfo;
-    QList<QSharedPointer<PST_NotesTextViewInfo> > notesTxtViewInfo;
-    QList<QSharedPointer<PST_SlideViewInfo> > slideViewInfo;
-    QList<QSharedPointer<PST_ProgTags> > progTags;
+    QList<QSharedPointer<PST_NormalViewSetInfo> > normalViewSetInfoList;
+    QList<QSharedPointer<PST_NotesTextViewInfo> > notesTxtViewInfoList;
+    QList<QSharedPointer<PST_SlideViewInfo> > slideViewInfoList;
+    QList<QSharedPointer<PST_ProgTags> > progTagsList;
 };
 
 #endif // PST_LIST_H

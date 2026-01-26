@@ -9,6 +9,8 @@ class PST_ProgBinaryTag : public PST_Base
 public:
     PST_ProgBinaryTag(const QByteArray& srcData);
 
+    virtual int parser()override;
+
     QSharedPointer<PST_CString> ctring;
     QSharedPointer<PST_BinaryTagData> binTagData;
 };

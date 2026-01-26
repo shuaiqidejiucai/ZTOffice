@@ -1,4 +1,4 @@
-﻿#ifndef ZTTOOLS_H
+#ifndef ZTTOOLS_H
 #define ZTTOOLS_H
 
 #include "global.h"
@@ -75,7 +75,11 @@ enum HeaderType
     RT_RoundTripContentMasterId12Atom = 0x0422,
 
     RT_ProgTags = 0x1388,
+    RT_BinaryTagDataBlob = 0x138B,
     RT_NormalViewSetInfo9 = 0x0414,
+    RT_NormalViewSetInfo9Atom = 0x0415,
+    RT_ViewInfoAtom = 0x03FD,
+    RT_SlideViewInfoAtom = 0x03FE,
     RT_NotesTextViewInfo9 = 0x0413,
     RT_OutlineViewInfo = 0x0407,
     RT_SlideViewInfo = 0x03FA,
@@ -134,7 +138,7 @@ namespace ZT_Libolecf {
 
     int ZT_libolecf_file_get_root_item(const QSharedPointer<libolecf_file_t>& file, QSharedPointer<libolecf_item_t>& pRootIem, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-};
+}
 
 class ZTTools
 {

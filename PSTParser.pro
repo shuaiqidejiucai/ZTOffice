@@ -12,11 +12,13 @@ include($$shareRoot/common/common.pri)
 
 SOURCES += \
     pptdocument.cpp \
+    pst_gridspacing10atom.cpp \
     zttools.cpp \
     ztwppdocument.cpp
 HEADERS += \
         global.h \
         pptdocument.h \
+        pst_gridspacing10atom.h \
         zttools.h \
         ztwppdocument.h
 

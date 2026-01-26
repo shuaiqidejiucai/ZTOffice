@@ -7,12 +7,16 @@ class PST_NormalViewSetInfo9Atom : public PST_Base
 {
 public:
     PST_NormalViewSetInfo9Atom(const QByteArray& srcData);
+
+    virtual int parser()override;
 };
 
 class PST_NormalViewSetInfo : public PST_Base
 {
 public:
     PST_NormalViewSetInfo(const QByteArray& srcData);
+
+    virtual int parser()override;
 
     QList<QSharedPointer<PST_NormalViewSetInfo9Atom> > normalViewSetInfo9AtomList;
 };

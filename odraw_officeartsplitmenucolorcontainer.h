@@ -7,6 +7,8 @@ class ODRAW_OfficeArtSplitMenuColorContainer : public PST_Base
 {
 public:
     ODRAW_OfficeArtSplitMenuColorContainer(const QByteArray& srcData);
+
+    virtual int parser() override;
 };
 
 #endif // ODRAW_OFFICEARTSPLITMENUCOLORCONTAINER_H
