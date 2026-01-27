@@ -1,5 +1,6 @@
 #include "pst_srkinsoku.h"
-PST_KinsokuAtom::PST_KinsokuAtom(const QByteArray& srcData) :PST_Base(srcData)
+PST_KinsokuAtom::PST_KinsokuAtom(const QByteArray& srcData, const ST_Variable& var) 
+	:PST_Base(srcData, var)
 {
 
 }
@@ -9,7 +10,8 @@ int PST_KinsokuAtom::parser()
 	return 0;
 }
 
-PST_SrKinsoku::PST_SrKinsoku(const QByteArray& srcData):PST_Base(srcData)
+PST_SrKinsoku::PST_SrKinsoku(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }
@@ -29,8 +31,7 @@ int PST_SrKinsoku::parser()
 		{
 		case RT_KinsokuAtom:
 		{
-			QSharedPointer<PST_KinsokuAtom> srKinsoKuAtomPtr(new PST_KinsokuAtom(m_srcData));
-			srKinsoKuAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_KinsokuAtom> srKinsoKuAtomPtr(new PST_KinsokuAtom(m_srcData, stVar));
 			kinsokuAtmoList.append(srKinsoKuAtomPtr);
 		}
 			break;

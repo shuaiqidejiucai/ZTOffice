@@ -1,6 +1,7 @@
 #include "pst_externalobjectlistatom.h"
 
-PST_ExternalObjectListAtom::PST_ExternalObjectListAtom(const QByteArray &srcData):PST_Base(srcData)
+PST_ExternalObjectListAtom::PST_ExternalObjectListAtom(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }

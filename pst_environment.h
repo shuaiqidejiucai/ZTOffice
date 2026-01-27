@@ -12,7 +12,7 @@
 class PST_Environment : public PST_Base
 {
 public:
-    PST_Environment(const QByteArray& srcData);
+    PST_Environment(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 

@@ -1,6 +1,6 @@
 #include "fopte.h"
 
-Fopte::Fopte(const QByteArray& srcData) : PST_Base(srcData) {}
+Fopte::Fopte(const QByteArray& srcData, const ST_Variable& var) : PST_Base(srcData, var) {}
 
 int Fopte::parser()
 {
@@ -13,7 +13,7 @@ int Fopte::parser()
     return 0;
 }
 
-FOPTEComplex::FOPTEComplex(const QByteArray& srcData): PST_Base(srcData)
+FOPTEComplex::FOPTEComplex(const QByteArray& srcData, const ST_Variable& var) : PST_Base(srcData, var)
 {
 
 }

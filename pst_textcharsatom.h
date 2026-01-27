@@ -6,7 +6,7 @@
 class PST_TextCharsAtom : public PST_Base
 {
 public:
-    PST_TextCharsAtom(const QByteArray& srcData);
+    PST_TextCharsAtom(const QByteArray& srcData, const ST_Variable& var);
 
 
 };

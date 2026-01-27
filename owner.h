@@ -6,7 +6,7 @@
 class Owner : public PST_Base
 {
 public:
-    Owner(const QByteArray& srcData);
+    Owner(const QByteArray& srcData, const ST_Variable& var);
 
     quint16 pid : 14;
     quint8 fBid : 1;

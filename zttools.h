@@ -24,7 +24,6 @@ enum HeaderType
     RT_DocRoutingSlipAtom = 0x0406,
     RT_PrintOptionsAtom = 0x1770,
     RT_Drawing = 0x040C,
-    RT_RoundTripCustomTableStyles12Atom = 0x0428,
 
     RT_ExternalAviMovie = 0x1006,
     RT_ExternalCdAudio = 0x100E,
@@ -75,6 +74,7 @@ enum HeaderType
     RT_RoundTripContentMasterId12Atom = 0x0422,
 
     RT_ProgTags = 0x1388,
+    RT_ProgBinaryTag = 0x138A,
     RT_BinaryTagDataBlob = 0x138B,
     RT_NormalViewSetInfo9 = 0x0414,
     RT_NormalViewSetInfo9Atom = 0x0415,
@@ -94,8 +94,13 @@ enum HeaderType
 
     RT_CString = 0x0FBA,
 
-
+    RT_HeadersFootersAtom = 0x0FDA,
     RT_PersistDirectoryAtom = 0x1772,
+    RT_GridSpacing10Atom = 0x040D,
+    RT_RoundTripCustomTableStyles12Atom = 0x0428,
+    RT_RoundTripHeaderFooterDefaults12Atom = 0x0424,
+    RT_RoundTripDocFlags12Atom = 0x0425,
+    RT_SlideTime10Atom = 0x2EEB,
 
     //通用
     COMMON_OfficeArtDggContainer = 0xF000,

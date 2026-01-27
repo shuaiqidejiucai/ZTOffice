@@ -14,7 +14,7 @@
 class PST_Document : public PST_Base
 {
 public:
-    PST_Document(const QByteArray& srcData);
+    PST_Document(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser();
 

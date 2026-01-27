@@ -10,7 +10,7 @@
 class PST_Slide : public PST_Base
 {
 public:
-    PST_Slide(const QByteArray& srcData);
+    PST_Slide(const QByteArray& srcData, const ST_Variable& var);
 
     QSharedPointer<PST_SlideAtom> slideAtomPtr;
     QSharedPointer<PST_PPDrawing> ppdwingPtr;

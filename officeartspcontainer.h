@@ -6,7 +6,7 @@
 class OfficeArtSpContainer : public PST_Base
 {
 public:
-    OfficeArtSpContainer(const QByteArray& srcData);
+    OfficeArtSpContainer(const QByteArray& srcData, const ST_Variable& var);
 
 
 };

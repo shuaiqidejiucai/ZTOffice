@@ -11,7 +11,7 @@
 class PST_ClientTextBox : public PST_Base
 {
 public:
-    PST_ClientTextBox(const QByteArray& srcData);
+    PST_ClientTextBox(const QByteArray& srcData, const ST_Variable& var);
 
     QSharedPointer<PST_TextHeaderAtom> txtHeaderAtom;
     QSharedPointer<PST_TextCharsAtom> txtCharsAtom;

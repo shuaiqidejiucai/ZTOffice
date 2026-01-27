@@ -1,6 +1,7 @@
 #include "pst_environment.h"
 
-PST_Environment::PST_Environment(const QByteArray &srcData):PST_Base(srcData)
+PST_Environment::PST_Environment(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData, var)
 {
 
 }
@@ -20,43 +21,37 @@ int PST_Environment::parser()
 		{
 		case RT_Kinsoku:
 		{
-			QSharedPointer<PST_SrKinsoku> srKinsoKuPtr(new PST_SrKinsoku(m_srcData));
-			srKinsoKuPtr->setSTVar(stVar);
+			QSharedPointer<PST_SrKinsoku> srKinsoKuPtr(new PST_SrKinsoku(m_srcData, stVar));
 			srKinSoKuList.append(srKinsoKuPtr);
 		}
 			break;
 		case RT_FontCollection:
 		{
-			QSharedPointer<PST_FontCollection> fontCollPtr(new PST_FontCollection(m_srcData));
-			fontCollPtr->setSTVar(stVar);
+			QSharedPointer<PST_FontCollection> fontCollPtr(new PST_FontCollection(m_srcData, stVar));
 			fontCollectionList.append(fontCollPtr);
 		}
 			break;
 		case RT_TextCharFormatExceptionAtom:
 		{
-			QSharedPointer<PST_TextCharFormatExceptionAtom> txtCharFormExAtomPtr(new PST_TextCharFormatExceptionAtom(m_srcData));
-			txtCharFormExAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_TextCharFormatExceptionAtom> txtCharFormExAtomPtr(new PST_TextCharFormatExceptionAtom(m_srcData,stVar));
 			textFormatExAtomList.append(txtCharFormExAtomPtr);
 		}
 			break;
 		case RT_TextParagraphFormatExceptionAtom:
 		{
-			QSharedPointer<PST_TextParagraphFormatExceptionAtom> txtParagraphExAtomPtr(new PST_TextParagraphFormatExceptionAtom(m_srcData));
-			txtParagraphExAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_TextParagraphFormatExceptionAtom> txtParagraphExAtomPtr(new PST_TextParagraphFormatExceptionAtom(m_srcData, stVar));
 			textParagraphFormatExAtomList.append(txtParagraphExAtomPtr);
 		}
 			break;
 		case RT_TextSpecialInfoDefaultAtom:
 		{
-			QSharedPointer<PST_TextSpecialInfoDefaultAtom> txtSpecialInfoDefAtomPtr(new PST_TextSpecialInfoDefaultAtom(m_srcData));
-			txtSpecialInfoDefAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_TextSpecialInfoDefaultAtom> txtSpecialInfoDefAtomPtr(new PST_TextSpecialInfoDefaultAtom(m_srcData, stVar));
 			textSpecialInfoDefaultAtomList.append(txtSpecialInfoDefAtomPtr);
 		}
 			break;
 		case RT_TextMasterStyleAtom:
 		{
-			QSharedPointer<PST_TxMasterStyleAtom> txtMasterStyAtomPtr(new PST_TxMasterStyleAtom(m_srcData));
-			txtMasterStyAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_TxMasterStyleAtom> txtMasterStyAtomPtr(new PST_TxMasterStyleAtom(m_srcData, stVar));
 			txMasterStyleAtomList.append(txtMasterStyAtomPtr);
 		}
 			break;

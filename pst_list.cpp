@@ -1,6 +1,6 @@
 #include "pst_list.h"
 
-PST_List::PST_List(const QByteArray &srcData):PST_Base(srcData) {}
+PST_List::PST_List(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData, var) {}
 
 int PST_List::parser()
 {
@@ -17,29 +17,25 @@ int PST_List::parser()
 		{
 		case RT_NormalViewSetInfo9:
 		{
-			QSharedPointer<PST_NormalViewSetInfo> normalViewSetInfo(new PST_NormalViewSetInfo(m_srcData));
-			normalViewSetInfo->setSTVar(stVar);
+			QSharedPointer<PST_NormalViewSetInfo> normalViewSetInfo(new PST_NormalViewSetInfo(m_srcData, stVar));
 			normalViewSetInfoList.append(normalViewSetInfo);
 		}
 			break;
 		case RT_NotesTextViewInfo9:
 		{
-			QSharedPointer<PST_NotesTextViewInfo> notesTextViewInfo (new PST_NotesTextViewInfo(m_srcData));
-			notesTextViewInfo->setSTVar(stVar);
+			QSharedPointer<PST_NotesTextViewInfo> notesTextViewInfo (new PST_NotesTextViewInfo(m_srcData, stVar));
 			notesTxtViewInfoList.append(notesTextViewInfo);
 		}
 			break;
 		case RT_SlideViewInfo:
 		{
-			QSharedPointer<PST_SlideViewInfo> slideViewInfo(new PST_SlideViewInfo(m_srcData));
-			slideViewInfo->setSTVar(stVar);
+			QSharedPointer<PST_SlideViewInfo> slideViewInfo(new PST_SlideViewInfo(m_srcData, stVar));
 			slideViewInfoList.append(slideViewInfo);
 		}
 			break;
 		case RT_ProgTags:
 		{
-			QSharedPointer<PST_ProgTags> progTagsPtr(new PST_ProgTags(m_srcData));
-			progTagsPtr->setSTVar(stVar);
+			QSharedPointer<PST_ProgTags> progTagsPtr(new PST_ProgTags(m_srcData, stVar));
 			progTagsList.append(progTagsPtr);
 		}
 			break;

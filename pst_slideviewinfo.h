@@ -6,7 +6,7 @@
 class PST_SlideViewInfoAtom : public PST_Base
 {
 public:
-    PST_SlideViewInfoAtom(const QByteArray& srcData);
+    PST_SlideViewInfoAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };
@@ -14,7 +14,7 @@ public:
 class PST_SlideViewInfo : public PST_Base
 {
 public:
-    PST_SlideViewInfo(const QByteArray& srcData);
+    PST_SlideViewInfo(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

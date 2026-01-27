@@ -6,7 +6,7 @@
 class PST_ExternalObjectRefAtom : public PST_Base
 {
 public:
-    PST_ExternalObjectRefAtom(const QByteArray& srcData);
+    PST_ExternalObjectRefAtom(const QByteArray& srcData, const ST_Variable& var);
 
 
 };

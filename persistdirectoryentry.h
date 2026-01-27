@@ -6,7 +6,7 @@ typedef quint32 PersistOffsetEntry;
 class PersistDirectoryEntry : public PST_Base
 {
 public:
-    PersistDirectoryEntry(const QByteArray& srcData);
+    PersistDirectoryEntry(const QByteArray& srcData, const ST_Variable& var);
 
 public:
     quint32 persistId : 20;

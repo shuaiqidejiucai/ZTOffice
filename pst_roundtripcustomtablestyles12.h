@@ -6,7 +6,7 @@
 class PST_RoundTripCustomTableStyles12 : public PST_Base
 {
 public:
-    PST_RoundTripCustomTableStyles12(const QByteArray& srcData);
+    PST_RoundTripCustomTableStyles12(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 };

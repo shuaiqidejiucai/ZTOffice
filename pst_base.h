@@ -5,13 +5,9 @@
 class PST_Base
 {
 public:
-    PST_Base(const QByteArray& srcData);
+    PST_Base(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() = 0;
-    void setSTVar(const ST_Variable& var) 
-    {
-        m_STVar = var;
-    }
 protected:
     ST_Variable m_STVar;
     const QByteArray& m_srcData;

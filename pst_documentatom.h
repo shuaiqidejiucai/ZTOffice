@@ -5,7 +5,7 @@
 class PST_DocumentAtom : public PST_Base
 {
 public:
-    PST_DocumentAtom(const QByteArray& srcData);
+    PST_DocumentAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser();
 public:

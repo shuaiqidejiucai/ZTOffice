@@ -7,7 +7,7 @@
 class PST_ProgTags : public PST_Base
 {
 public:
-    PST_ProgTags(const QByteArray& srcData);
+    PST_ProgTags(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

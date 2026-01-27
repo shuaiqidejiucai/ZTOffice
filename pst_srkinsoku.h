@@ -6,7 +6,7 @@
 class PST_KinsokuAtom : public PST_Base
 {
 public:
-    PST_KinsokuAtom(const QByteArray& srcData);
+    PST_KinsokuAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };
@@ -14,7 +14,7 @@ public:
 class PST_SrKinsoku : public PST_Base
 {
 public:
-    PST_SrKinsoku(const QByteArray& srcData);
+    PST_SrKinsoku(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 

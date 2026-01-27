@@ -1,6 +1,7 @@
 #include "pst_binarytagdata.h"
 
-PST_BinaryTagData::PST_BinaryTagData(const QByteArray &srcData):PST_Base(srcData) {}
+PST_BinaryTagData::PST_BinaryTagData(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var) {}
 
 int PST_BinaryTagData::parser()
 {
@@ -15,32 +16,28 @@ int PST_BinaryTagData::parser()
 		}
 		switch (ST_TP(stVar))
 		{
-		case RT_NormalViewSetInfo9:
+		case RT_RoundTripDocFlags12Atom:
 		{
-			QSharedPointer<PST_NormalViewSetInfo> normalViewSetInfo(new PST_NormalViewSetInfo(m_srcData));
-			normalViewSetInfo->setSTVar(stVar);
-			normalViewSetInfoList.append(normalViewSetInfo);
+			QSharedPointer<PST_RoundTripDocFlags12Atom> roundTripDocFlags12Atom (new PST_RoundTripDocFlags12Atom(m_srcData, stVar));
+			roundTripDocFlags12AtomList.append(roundTripDocFlags12Atom);
 		}
 		break;
-		case RT_NotesTextViewInfo9:
+		case RT_GridSpacing10Atom:
 		{
-			QSharedPointer<PST_NotesTextViewInfo> notesTextViewInfo(new PST_NotesTextViewInfo(m_srcData));
-			notesTextViewInfo->setSTVar(stVar);
-			notesTxtViewInfoList.append(notesTextViewInfo);
+			QSharedPointer<PST_GridSpacing10Atom> gridSpacing10Atom (new PST_GridSpacing10Atom(m_srcData, stVar));
+			gridSpacing10AtomList.append(gridSpacing10Atom);
 		}
 		break;
-		case RT_SlideViewInfo:
+		case RT_SlideTime10Atom:
 		{
-			QSharedPointer<PST_SlideViewInfo> slideViewInfo(new PST_SlideViewInfo(m_srcData));
-			slideViewInfo->setSTVar(stVar);
-			slideViewInfoList.append(slideViewInfo);
+			QSharedPointer<PST_SlideTime10Atom> slideTime10Atom (new PST_SlideTime10Atom(m_srcData, stVar));
+			slideTime10AtomList.append(slideTime10Atom);
 		}
 		break;
-		case RT_ProgTags:
+		case RT_RoundTripHeaderFooterDefaults12Atom:
 		{
-			QSharedPointer<PST_ProgTags> progTagsPtr(new PST_ProgTags(m_srcData));
-			progTagsPtr->setSTVar(stVar);
-			progTagsList.append(progTagsPtr);
+			QSharedPointer<PST_RoundTripHeaderFooterDefaults12Atom> roundTripHFDefaults12Atom (new PST_RoundTripHeaderFooterDefaults12Atom(m_srcData, stVar));
+			RTHFD12AtomList.append(roundTripHFDefaults12Atom);
 		}
 		break;
 		default:

@@ -1,6 +1,7 @@
 #include "pst_notestextviewinfo.h"
 
-PST_NotesTextViewInfo::PST_NotesTextViewInfo(const QByteArray &srcData):PST_Base(srcData) {}
+PST_NotesTextViewInfo::PST_NotesTextViewInfo(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var) {}
 
 int PST_NotesTextViewInfo::parser()
 {
@@ -17,8 +18,7 @@ int PST_NotesTextViewInfo::parser()
 		{
 		case RT_ViewInfoAtom:
 		{
-			QSharedPointer<PST_ViewInfoAtom> viewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData));
-			viewInfoAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_ViewInfoAtom> viewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData, stVar));
 			viewInfoAtomList.append(viewInfoAtomPtr);
 		}
 		break;

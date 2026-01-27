@@ -6,7 +6,7 @@
 class PST_MSOfbtBSE : public PST_Base
 {
 public:
-    PST_MSOfbtBSE(const QByteArray& srcData);
+    PST_MSOfbtBSE(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

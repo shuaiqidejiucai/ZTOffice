@@ -1,6 +1,7 @@
 #include "pst_externaloleembedatom.h"
 
-PST_ExternalOleEmbedAtom::PST_ExternalOleEmbedAtom(const QByteArray &srcData):PST_Base(srcData)
+PST_ExternalOleEmbedAtom::PST_ExternalOleEmbedAtom(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }

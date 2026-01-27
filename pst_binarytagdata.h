@@ -10,14 +10,14 @@
 class PST_BinaryTagData : public PST_Base
 {
 public:
-    PST_BinaryTagData(const QByteArray& srcData);
+    PST_BinaryTagData(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 
-    QList<QSharedPointer<PST_RoundTripDocFlags12Atom> > roundTripDocFlags12Atom;
-    QList<QSharedPointer<PST_GridSpacing10Atom> > roundTripDocFlags12Atom;
+    QList<QSharedPointer<PST_RoundTripDocFlags12Atom> > roundTripDocFlags12AtomList;
+    QList<QSharedPointer<PST_GridSpacing10Atom> > gridSpacing10AtomList;
     QList<QSharedPointer<PST_SlideTime10Atom> > slideTime10AtomList;
-    QList<QSharedPointer<PST_StyleTextProp9Atom> > styleTxtProp9AtomList;
+    //QList<QSharedPointer<PST_StyleTextProp9Atom> > styleTxtProp9AtomList;
     QList<QSharedPointer<PST_RoundTripHeaderFooterDefaults12Atom> > RTHFD12AtomList;
 };
 

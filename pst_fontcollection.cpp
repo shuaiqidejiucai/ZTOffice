@@ -1,5 +1,5 @@
 #include "pst_fontcollection.h"
-PST_FontEntityAtom::PST_FontEntityAtom(const QByteArray& srcData) :PST_Base(srcData)
+PST_FontEntityAtom::PST_FontEntityAtom(const QByteArray& srcData, const ST_Variable& var) :PST_Base(srcData, var)
 {
 
 }
@@ -9,7 +9,7 @@ int PST_FontEntityAtom::parser()
 	return 0;
 }
 
-PST_FontCollection::PST_FontCollection(const QByteArray& srcData):PST_Base(srcData)
+PST_FontCollection::PST_FontCollection(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 
 }
@@ -29,8 +29,7 @@ int PST_FontCollection::parser()
 		{
 		case RT_FontEntityAtom:
 		{
-			QSharedPointer<PST_FontEntityAtom> fontEntityAtomPtr(new PST_FontEntityAtom(m_srcData));
-			fontEntityAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_FontEntityAtom> fontEntityAtomPtr(new PST_FontEntityAtom(m_srcData, stVar));
 			fontEntityAtomList.append(fontEntityAtomPtr);
 		}
 		break;

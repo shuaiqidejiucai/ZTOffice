@@ -6,7 +6,7 @@
 class PST_RoundTripColorMapping12Atom : public PST_Base
 {
 public:
-    PST_RoundTripColorMapping12Atom(const QByteArray& srcData);
+    PST_RoundTripColorMapping12Atom(const QByteArray& srcData, const ST_Variable& var);
 };
 
 #endif // PST_ROUNDTRIPCOLORMAPPING12ATOM_H

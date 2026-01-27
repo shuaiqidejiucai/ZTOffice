@@ -6,7 +6,7 @@
 class PST_OEPlaceHolderAtom : public PST_Base
 {
 public:
-    PST_OEPlaceHolderAtom(const QByteArray& srcData);
+    PST_OEPlaceHolderAtom(const QByteArray& srcData, const ST_Variable& var);
 
     quint32 PlacementID;
     quint8 PlaceholderID;

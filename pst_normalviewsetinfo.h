@@ -6,7 +6,7 @@
 class PST_NormalViewSetInfo9Atom : public PST_Base
 {
 public:
-    PST_NormalViewSetInfo9Atom(const QByteArray& srcData);
+    PST_NormalViewSetInfo9Atom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };
@@ -14,7 +14,7 @@ public:
 class PST_NormalViewSetInfo : public PST_Base
 {
 public:
-    PST_NormalViewSetInfo(const QByteArray& srcData);
+    PST_NormalViewSetInfo(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

@@ -7,7 +7,7 @@
 class PST_DrawingContainer : public PST_Base
 {
 public:
-    PST_DrawingContainer(const QByteArray& srcData);
+    PST_DrawingContainer(const QByteArray& srcData, const ST_Variable& var);
 
     QSharedPointer<PST_OfficeArtFDG> officeArtFDG;
     QSharedPointer<PST_GroupShapeContainer> groupShapeContainer;

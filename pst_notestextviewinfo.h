@@ -7,7 +7,7 @@
 class PST_NotesTextViewInfo : public PST_Base
 {
 public:
-    PST_NotesTextViewInfo(const QByteArray& srcData);
+    PST_NotesTextViewInfo(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

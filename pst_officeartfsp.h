@@ -6,7 +6,7 @@
 class PST_OfficeArtFSP : public PST_Base
 {
 public:
-    PST_OfficeArtFSP(const QByteArray& srcData);
+    PST_OfficeArtFSP(const QByteArray& srcData, const ST_Variable& var);
 
     quint32 SPID;
     quint32 fGroup : 1;

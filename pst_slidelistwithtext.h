@@ -6,7 +6,7 @@
 class PST_SlideListWithText : public PST_Base
 {
 public:
-    PST_SlideListWithText(const QByteArray& srcData);
+    PST_SlideListWithText(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override; 
 

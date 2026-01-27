@@ -1,6 +1,6 @@
 #include "odraw_officeartbstorecontainer.h"
 
-ODRAW_OfficeArtBStoreContainer::ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData):PST_Base(srcData)
+ODRAW_OfficeArtBStoreContainer::ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 
 }
@@ -21,8 +21,7 @@ int ODRAW_OfficeArtBStoreContainer::parser()
 		{
 		case COMMON_OfficeArtFBSE:
 		{
-			QSharedPointer<PST_MSOfbtBSE> msoFbtBSE = QSharedPointer<PST_MSOfbtBSE>::create(m_srcData);
-			msoFbtBSE->setSTVar(stVar);
+			QSharedPointer<PST_MSOfbtBSE> msoFbtBSE = QSharedPointer<PST_MSOfbtBSE>::create(m_srcData, stVar);
 			msoBtBsePtrList.append(msoFbtBSE);
 		}
 		break;

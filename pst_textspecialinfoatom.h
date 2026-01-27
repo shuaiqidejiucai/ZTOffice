@@ -6,7 +6,7 @@
 class PST_TextSpecialInfoAtom : public PST_Base
 {
 public:
-    PST_TextSpecialInfoAtom(const QByteArray& srcData);
+    PST_TextSpecialInfoAtom(const QByteArray& srcData, const ST_Variable& var);
 
 
 };

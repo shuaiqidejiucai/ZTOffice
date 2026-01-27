@@ -4,7 +4,7 @@
 class PST_MainMaster : public PST_Base
 {
 public:
-    PST_MainMaster(const QByteArray& srcData);
+    PST_MainMaster(const QByteArray& srcData, const ST_Variable& var);
 
 };
 

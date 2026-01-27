@@ -6,7 +6,7 @@
 class PST_ExternalOleObjectAtom : public PST_Base
 {
 public:
-    PST_ExternalOleObjectAtom(const QByteArray& srcData);
+    PST_ExternalOleObjectAtom(const QByteArray& srcData, const ST_Variable& var);
 
 
 };

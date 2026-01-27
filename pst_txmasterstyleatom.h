@@ -6,7 +6,7 @@
 class PST_TxMasterStyleAtom : public PST_Base
 {
 public:
-    PST_TxMasterStyleAtom(const QByteArray& srcData);
+    PST_TxMasterStyleAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };

@@ -1,6 +1,7 @@
 #include "pst_progtags.h"
 
-PST_ProgTags::PST_ProgTags(const QByteArray &srcData):PST_Base(srcData) {}
+PST_ProgTags::PST_ProgTags(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData, var) {}
 
 int PST_ProgTags::parser()
 {
@@ -15,10 +16,9 @@ int PST_ProgTags::parser()
 		}
 		switch (ST_TP(stVar))
 		{
-		case RT_NormalViewSetInfo9:
+		case RT_ProgBinaryTag:
 		{
-			QSharedPointer<PST_ProgBinaryTag> progBinTagPtr (new PST_ProgBinaryTag(m_srcData));
-			progBinTagPtr->setSTVar(stVar);
+			QSharedPointer<PST_ProgBinaryTag> progBinTagPtr (new PST_ProgBinaryTag(m_srcData, stVar));
 			progBinTagList.append(progBinTagPtr);
 		}
 		break;

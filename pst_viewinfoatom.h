@@ -6,7 +6,7 @@
 class PST_ViewInfoAtom : public PST_Base
 {
 public:
-    PST_ViewInfoAtom(const QByteArray& srcData);
+    PST_ViewInfoAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };

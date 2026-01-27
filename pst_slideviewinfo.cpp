@@ -1,6 +1,7 @@
 #include "pst_slideviewinfo.h"
 
-PST_SlideViewInfo::PST_SlideViewInfo(const QByteArray &srcData):PST_Base(srcData) {}
+PST_SlideViewInfo::PST_SlideViewInfo(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var) {}
 
 int PST_SlideViewInfo::parser()
 {
@@ -17,15 +18,13 @@ int PST_SlideViewInfo::parser()
 		{
 		case RT_SlideViewInfoAtom:
 		{
-			QSharedPointer<PST_SlideViewInfoAtom> slideViewInfoAtomPtr(new PST_SlideViewInfoAtom(m_srcData));
-			slideViewInfoAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_SlideViewInfoAtom> slideViewInfoAtomPtr(new PST_SlideViewInfoAtom(m_srcData, stVar));
 			slideViewInfoAtomList.append(slideViewInfoAtomPtr);
 		}
 		break;
 		case RT_ViewInfoAtom:
 		{
-			QSharedPointer<PST_ViewInfoAtom> slideViewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData));
-			slideViewInfoAtomPtr->setSTVar(stVar);
+			QSharedPointer<PST_ViewInfoAtom> slideViewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData, stVar));
 			viewInfoAtomList.append(slideViewInfoAtomPtr);
 		}
 			break;
@@ -37,7 +36,8 @@ int PST_SlideViewInfo::parser()
 	return 0;
 }
 
-PST_SlideViewInfoAtom::PST_SlideViewInfoAtom(const QByteArray &srcData):PST_Base(srcData)
+PST_SlideViewInfoAtom::PST_SlideViewInfoAtom(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }

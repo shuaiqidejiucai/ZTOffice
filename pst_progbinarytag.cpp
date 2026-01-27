@@ -1,6 +1,7 @@
 #include "pst_progbinarytag.h"
 
-PST_ProgBinaryTag::PST_ProgBinaryTag(const QByteArray& srcData):PST_Base(srcData) {}
+PST_ProgBinaryTag::PST_ProgBinaryTag(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData, var) {}
 
 int PST_ProgBinaryTag::parser()
 {
@@ -17,14 +18,12 @@ int PST_ProgBinaryTag::parser()
 		{
 		case RT_CString:
 		{
-			ctring = QSharedPointer<PST_CString>::create(m_srcData);
-			ctring->setSTVar(stVar);
+			ctring = QSharedPointer<PST_CString>::create(m_srcData, stVar);
 		}
 		break;
 		case RT_BinaryTagDataBlob:
 		{
-			binTagData = QSharedPointer<PST_BinaryTagData>::create(m_srcData);
-			binTagData->setSTVar(stVar);
+			binTagData = QSharedPointer<PST_BinaryTagData>::create(m_srcData, stVar);
 		}
 		break;
 		default:

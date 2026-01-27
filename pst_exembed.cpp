@@ -1,6 +1,7 @@
 #include "pst_exembed.h"
 
-PST_ExEmbed::PST_ExEmbed(const QByteArray &srcData) : PST_Base(srcData)
+PST_ExEmbed::PST_ExEmbed(const QByteArray &srcData, const ST_Variable& var) 
+	: PST_Base(srcData,var)
 {
 	
 }
@@ -21,20 +22,17 @@ int PST_ExEmbed::parser()
 		{
 		case RT_ExternalOleEmbedAtom:
 		{
-			exOleEmbedAtom = QSharedPointer<PST_ExternalOleEmbedAtom>::create(m_srcData);
-			exOleEmbedAtom->setSTVar(m_STVar);
+			exOleEmbedAtom = QSharedPointer<PST_ExternalOleEmbedAtom>::create(m_srcData, stVar);
 		}
 		break;
 		case RT_ExternalOleObjectAtom:
 		{
-			exOleObjAtom = QSharedPointer<PST_ExternalOleObjectAtom>::create(m_srcData);
-			exOleObjAtom->setSTVar(m_STVar);
+			exOleObjAtom = QSharedPointer<PST_ExternalOleObjectAtom>::create(m_srcData, stVar);
 		}
 		break;
 		case RT_CString:
 		{
-			QSharedPointer<PST_CString> cString(new PST_CString(m_srcData));
-			cString->setSTVar(m_STVar);
+			QSharedPointer<PST_CString> cString(new PST_CString(m_srcData, stVar));
 			cstringList.append(cString);
 		}
 		break;

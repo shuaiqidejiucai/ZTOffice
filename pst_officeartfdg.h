@@ -6,7 +6,7 @@
 class PST_OfficeArtFDG : public PST_Base
 {
 public:
-    PST_OfficeArtFDG(const QByteArray& srcData);
+    PST_OfficeArtFDG(const QByteArray& srcData, const ST_Variable& var);
 };
 
 #endif // PST_OFFICEARTFDG_H

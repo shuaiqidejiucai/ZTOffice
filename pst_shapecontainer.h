@@ -12,7 +12,7 @@
 class PST_ShapeContainer : public PST_Base
 {
 public:
-    PST_ShapeContainer(const QByteArray& srcData);
+    PST_ShapeContainer(const QByteArray& srcData, const ST_Variable& var);
 
     QSharedPointer<PST_OfficeArtFSPGR> officeArtFSPGRPtr;
     QSharedPointer<PST_OfficeArtFSP> officeArtFSPPtr;

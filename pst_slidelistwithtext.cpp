@@ -1,6 +1,7 @@
 #include "pst_slidelistwithtext.h"
 
-PST_SlideListWithText::PST_SlideListWithText(const QByteArray& srcData):PST_Base(srcData) {}
+PST_SlideListWithText::PST_SlideListWithText(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData, var) {}
 
 int PST_SlideListWithText::parser()
 {
@@ -16,8 +17,7 @@ int PST_SlideListWithText::parser()
 
 		if (ST_TP(stVar) == RT_SlidePersistAtom)
 		{
-			QSharedPointer<PST_SlidePersistAtom> slidePersistAtom (new PST_SlidePersistAtom(m_srcData));
-			slidePersistAtom->setSTVar(stVar);
+			QSharedPointer<PST_SlidePersistAtom> slidePersistAtom (new PST_SlidePersistAtom(m_srcData,stVar));
 			slidePerAtomList.append(slidePersistAtom);
 		}
 		pos = ST_EP(stVar);

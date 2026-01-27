@@ -7,7 +7,7 @@
 class PST_ProgBinaryTag : public PST_Base
 {
 public:
-    PST_ProgBinaryTag(const QByteArray& srcData);
+    PST_ProgBinaryTag(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

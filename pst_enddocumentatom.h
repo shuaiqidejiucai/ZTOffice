@@ -6,7 +6,8 @@
 class PST_EndDocumentAtom : public PST_Base
 {
 public:
-    PST_EndDocumentAtom(const QByteArray& srcData);
+    PST_EndDocumentAtom(const QByteArray& srcData, const ST_Variable& var);
+    virtual int parser()override;
 };
 
 #endif // PST_ENDDOCUMENTATOM_H

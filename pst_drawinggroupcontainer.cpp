@@ -1,11 +1,13 @@
 #include "pst_drawinggroupcontainer.h"
 
-PST_DrawingGroupContainer::PST_DrawingGroupContainer(const QByteArray &srcData):PST_Base(srcData)
+PST_DrawingGroupContainer::PST_DrawingGroupContainer(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData, var)
 {
 
 }
 
-PST_DrawingGroupAtom::PST_DrawingGroupAtom(const QByteArray& srcData) :PST_Base(srcData)
+PST_DrawingGroupAtom::PST_DrawingGroupAtom(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }
@@ -31,26 +33,22 @@ int PST_DrawingGroupContainer::parser()
 		{
 		case COMMON_OfficeArtFDGGBlock:
 		{
-			dwGroupAtom = QSharedPointer<PST_DrawingGroupAtom>::create(m_srcData);
-			dwGroupAtom->setSTVar(stVar);
+			dwGroupAtom = QSharedPointer<PST_DrawingGroupAtom>::create(m_srcData, stVar);
 		}
 		break;
 		case COMMON_OfficeArtBStoreContainer:
 		{
-			odrawOABSContainer = QSharedPointer<ODRAW_OfficeArtBStoreContainer>::create(m_srcData);
-			odrawOABSContainer->setSTVar(stVar);
+			odrawOABSContainer = QSharedPointer<ODRAW_OfficeArtBStoreContainer>::create(m_srcData, stVar);
 		}
 			break;
 		case COMMON_OfficeArtFOPT:
 		{
-			msofbtOPT = QSharedPointer<PST_MSOfbtOPT>::create(m_srcData);
-			msofbtOPT->setSTVar(stVar);
+			msofbtOPT = QSharedPointer<PST_MSOfbtOPT>::create(m_srcData, stVar);
 		}
 			break;
 		case COMMON_OfficeArtSplitMenuColorContainer:
 		{
-			oasColorContainter = QSharedPointer<ODRAW_OfficeArtSplitMenuColorContainer>::create(m_srcData);
-			oasColorContainter->setSTVar(stVar);
+			oasColorContainter = QSharedPointer<ODRAW_OfficeArtSplitMenuColorContainer>::create(m_srcData, stVar);
 		}
 			break;
 		default:

@@ -8,7 +8,7 @@
 class PST_DrawingGroupAtom : public PST_Base
 {
 public:
-    PST_DrawingGroupAtom(const QByteArray& srcData);
+    PST_DrawingGroupAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };
@@ -16,7 +16,7 @@ public:
 class PST_DrawingGroupContainer : public PST_Base
 {
 public:
-    PST_DrawingGroupContainer(const QByteArray& srcData);
+    PST_DrawingGroupContainer(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 

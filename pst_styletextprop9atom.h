@@ -6,7 +6,7 @@
 class PST_StyleTextProp9Atom : public PST_Base
 {
 public:
-    PST_StyleTextProp9Atom(const QByteArray& srcData);
+    PST_StyleTextProp9Atom(const QByteArray& srcData, const ST_Variable& var);
 };
 
 #endif // PST_STYLETEXTPROP9ATOM_H

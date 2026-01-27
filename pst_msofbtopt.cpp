@@ -1,6 +1,7 @@
 #include "pst_msofbtopt.h"
 
-PST_MSOfbtOPT::PST_MSOfbtOPT(const QByteArray& srcData):PST_Base(srcData)
+PST_MSOfbtOPT::PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }
@@ -19,8 +20,7 @@ int PST_MSOfbtOPT::parser()
 		ST_SP(stVar) = pos;
 		pos += 6;
 		ST_EP(stVar) = pos;
-		QSharedPointer<Fopte> foptePtr(new Fopte(m_srcData));
-		foptePtr->setSTVar(stVar);
+		QSharedPointer<Fopte> foptePtr(new Fopte(m_srcData, stVar));
 		foptePtr->parser();
 		if (foptePtr->fComplex == 1)
 		{
@@ -40,8 +40,7 @@ int PST_MSOfbtOPT::parser()
 		ST_SP(stVar2) = pos;
 		pos += opSize;
 		ST_EP(stVar2) = pos;
-		QSharedPointer<FOPTEComplex> foptePtr(new FOPTEComplex(m_srcData));
-		foptePtr->setSTVar(stVar2);
+		QSharedPointer<FOPTEComplex> foptePtr(new FOPTEComplex(m_srcData,stVar));
 		fopteComList.append(foptePtr);
 	}
 	return 0;

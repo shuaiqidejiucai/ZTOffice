@@ -1,6 +1,7 @@
 #include "pst_normalviewsetinfo.h"
 
-PST_NormalViewSetInfo::PST_NormalViewSetInfo(const QByteArray& srcData):PST_Base(srcData) {}
+PST_NormalViewSetInfo::PST_NormalViewSetInfo(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData,var) {}
 
 int PST_NormalViewSetInfo::parser()
 {
@@ -17,8 +18,7 @@ int PST_NormalViewSetInfo::parser()
 		{
 		case RT_NormalViewSetInfo9Atom:
 		{
-			QSharedPointer<PST_NormalViewSetInfo9Atom> normalViewSetInfoAtom(new PST_NormalViewSetInfo9Atom(m_srcData));
-			normalViewSetInfoAtom->setSTVar(stVar);
+			QSharedPointer<PST_NormalViewSetInfo9Atom> normalViewSetInfoAtom(new PST_NormalViewSetInfo9Atom(m_srcData, stVar));
 			normalViewSetInfo9AtomList.append(normalViewSetInfoAtom);
 		}
 		break;
@@ -31,7 +31,8 @@ int PST_NormalViewSetInfo::parser()
     return 0;
 }
 
-PST_NormalViewSetInfo9Atom::PST_NormalViewSetInfo9Atom(const QByteArray &srcData):PST_Base(srcData)
+PST_NormalViewSetInfo9Atom::PST_NormalViewSetInfo9Atom(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }

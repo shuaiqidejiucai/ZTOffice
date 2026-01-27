@@ -1,6 +1,6 @@
 #include "pst_cstring.h"
 
-PST_CString::PST_CString(const QByteArray &srcData):PST_Base(srcData)
+PST_CString::PST_CString(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData, var)
 {
 
 }

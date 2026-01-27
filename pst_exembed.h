@@ -8,7 +8,7 @@
 class PST_ExEmbed : public PST_Base
 {
 public:
-    PST_ExEmbed(const QByteArray& srcData);
+    PST_ExEmbed(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 

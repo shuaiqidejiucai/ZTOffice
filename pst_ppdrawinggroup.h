@@ -7,7 +7,7 @@
 class PST_PPDrawingGroup : public PST_Base
 {
 public:
-    PST_PPDrawingGroup(const QByteArray& srcData);
+    PST_PPDrawingGroup(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 

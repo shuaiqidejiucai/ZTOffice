@@ -5,7 +5,7 @@
 class PST_CurrentUserAtom : public PST_Base
 {
 public:
-    PST_CurrentUserAtom(const QByteArray& byteArry);
+    PST_CurrentUserAtom(const QByteArray& byteArry, const ST_Variable& var);
 
 };
 

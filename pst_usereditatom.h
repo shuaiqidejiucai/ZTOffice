@@ -6,7 +6,7 @@
 class PST_UserEditAtom : public PST_Base
 {
 public:
-    PST_UserEditAtom(const QByteArray& srcData);
+    PST_UserEditAtom(const QByteArray& srcData, const ST_Variable& var);
 };
 
 #endif // PST_USEREDITATOM_H

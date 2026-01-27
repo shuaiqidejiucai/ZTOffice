@@ -1,6 +1,7 @@
 #include "pst_ppdrawinggroup.h"
 
-PST_PPDrawingGroup::PST_PPDrawingGroup(const QByteArray& srcData):PST_Base(srcData)
+PST_PPDrawingGroup::PST_PPDrawingGroup(const QByteArray& srcData, const ST_Variable& var)
+	:PST_Base(srcData,var)
 {
 
 }
@@ -19,8 +20,7 @@ int PST_PPDrawingGroup::parser()
 
 		if (ST_TP(stVar) == COMMON_OfficeArtDggContainer)
 		{
-			QSharedPointer<PST_DrawingGroupContainer> dwingGroupContainer(new PST_DrawingGroupContainer(m_srcData));
-			dwingGroupContainer->setSTVar(stVar);
+			QSharedPointer<PST_DrawingGroupContainer> dwingGroupContainer(new PST_DrawingGroupContainer(m_srcData, stVar));
 			dwGroupContainterList.append(dwingGroupContainer);
 		}
 		

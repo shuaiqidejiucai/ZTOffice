@@ -6,7 +6,7 @@
 class PST_SlideNumberMetaCharAtom : public PST_Base
 {
 public:
-    PST_SlideNumberMetaCharAtom(const QByteArray& srcData);
+    PST_SlideNumberMetaCharAtom(const QByteArray& srcData, const ST_Variable& var);
 };
 
 #endif // PST_SLIDENUMBERMETACHARATOM_H

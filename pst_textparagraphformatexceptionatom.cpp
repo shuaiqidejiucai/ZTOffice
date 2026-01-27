@@ -1,6 +1,7 @@
 #include "pst_textparagraphformatexceptionatom.h"
 
-PST_TextParagraphFormatExceptionAtom::PST_TextParagraphFormatExceptionAtom(const QByteArray &srcData):PST_Base(srcData)
+PST_TextParagraphFormatExceptionAtom::PST_TextParagraphFormatExceptionAtom(const QByteArray &srcData, const ST_Variable& var)
+    :PST_Base(srcData, var)
 {
 
 }

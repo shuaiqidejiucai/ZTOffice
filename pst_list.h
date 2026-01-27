@@ -10,7 +10,7 @@
 class PST_List : public PST_Base
 {
 public:
-    PST_List(const QByteArray& srcData);
+    PST_List(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
 

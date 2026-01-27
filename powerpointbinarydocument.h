@@ -15,7 +15,7 @@
 class PowerPointBinaryDocument : public PST_Base
 {
 public:
-    PowerPointBinaryDocument(const QByteArray& srcData);
+    PowerPointBinaryDocument(const QByteArray& srcData, const ST_Variable& var);
 
     QSharedPointer<PST_CurrentUserAtom> currentUserAtom;
     QSharedPointer<PST_UserEditAtom> userEditAtom;

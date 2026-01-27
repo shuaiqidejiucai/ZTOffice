@@ -9,7 +9,7 @@
 class PST_Handout : public PST_Base
 {
 public:
-    PST_Handout(const QByteArray& srcData);
+    PST_Handout(const QByteArray& srcData, const ST_Variable& var);
 
     QSharedPointer<PST_PPDrawing> ppDwingPtr;
     QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtomPtr;

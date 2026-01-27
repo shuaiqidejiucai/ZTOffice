@@ -6,7 +6,7 @@
 class PST_FontEntityAtom : public PST_Base
 {
 public:
-    PST_FontEntityAtom(const QByteArray& srcData);
+    PST_FontEntityAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 };
@@ -14,7 +14,7 @@ public:
 class PST_FontCollection : public PST_Base
 {
 public:
-    PST_FontCollection(const QByteArray& srcData);
+    PST_FontCollection(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

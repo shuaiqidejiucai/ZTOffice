@@ -1,3 +1,4 @@
 #include "officeartspcontainer.h"
 
-OfficeArtSpContainer::OfficeArtSpContainer(const QByteArray &srcData):PST_Base(srcData) {}
+OfficeArtSpContainer::OfficeArtSpContainer(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData, var) {}

@@ -1,6 +1,7 @@
 #include "pst_viewinfoatom.h"
 
-PST_ViewInfoAtom::PST_ViewInfoAtom(const QByteArray &srcData):PST_Base(srcData)
+PST_ViewInfoAtom::PST_ViewInfoAtom(const QByteArray &srcData, const ST_Variable& var)
+    :PST_Base(srcData, var)
 {
 
 }

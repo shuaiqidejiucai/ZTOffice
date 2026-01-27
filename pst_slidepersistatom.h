@@ -6,7 +6,7 @@
 class PST_SlidePersistAtom : public PST_Base
 {
 public:
-    PST_SlidePersistAtom(const QByteArray& srcData);
+    PST_SlidePersistAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
 

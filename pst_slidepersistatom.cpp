@@ -1,6 +1,7 @@
 #include "pst_slidepersistatom.h"
 
-PST_SlidePersistAtom::PST_SlidePersistAtom(const QByteArray &srcData):PST_Base(srcData) {}
+PST_SlidePersistAtom::PST_SlidePersistAtom(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData,var) {}
 
 int PST_SlidePersistAtom::parser()
 {
