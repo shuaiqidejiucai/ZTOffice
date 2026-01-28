@@ -9,7 +9,7 @@ public:
 
     virtual int parser() = 0;
 protected:
-    ST_Variable m_STVar;
+    const ST_Variable m_STVar;
     const QByteArray& m_srcData;
     bool m_isParser;
 };

@@ -12,6 +12,8 @@ class PST_Slide : public PST_Base
 public:
     PST_Slide(const QByteArray& srcData, const ST_Variable& var);
 
+    virtual int parser()override;
+
     QSharedPointer<PST_SlideAtom> slideAtomPtr;
     QSharedPointer<PST_PPDrawing> ppdwingPtr;
     QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtomPtr;

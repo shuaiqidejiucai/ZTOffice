@@ -16,6 +16,7 @@ enum HeaderType
     RT_SoundCollection = 0x07E4,
     RT_DrawingGroup = 0x040B,
     RT_SlideListWithText = 0x0FF0,
+    RT_UserEditAtom = 0x0FF5,
     RT_List = 0x07D0,
     RT_HeadersFooters = 0x0FD9,
     RT_SlideShowDocInfoAtom = 0x0401,

@@ -5,3 +5,8 @@ PST_Notes::PST_Notes(const QByteArray& srcData, const ST_Variable& var)
 {
 
 }
+
+int PST_Notes::parser()
+{
+	return 0;
+}

@@ -119,7 +119,7 @@ QString getCompObjCLSID(libolecf_item_t* pComObjItem)
 //    return tmpList;
 //}
 #include "pst_document.h"
-
+#include "powerpointbinarydocument.h"
 int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
@@ -131,9 +131,11 @@ int main(int argc, char* argv[])
     wk.openWPPFile(qsPPTFilePath);
     wk.readPPTData();
     const QByteArray& srcData = wk.GetSrcData();
-    QSharedPointer<PST_Document> documentPtr(new PST_Document(srcData));
-    documentPtr->parser();
-
+    ST_Variable stVar;
+    ST_EP(stVar) = srcData.size();
+    QSharedPointer<PowerPointBinaryDocument> powerPointBinDocPtr(new PowerPointBinaryDocument(srcData, stVar));
+    powerPointBinDocPtr->parser();
+    
     //wk.parserData();
 
 

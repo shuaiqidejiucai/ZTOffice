@@ -59,6 +59,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_HeadersFooters> headersFootersPtr(new PST_HeadersFooters(m_srcData, stVar));
 			headersFootersList.append(headersFootersPtr);
 		}
+		break;
 		case RT_RoundTripCustomTableStyles12Atom:
 		{
 			QSharedPointer<PST_RoundTripCustomTableStyles12> roundTripTableStylePtr(new PST_RoundTripCustomTableStyles12(m_srcData, stVar));

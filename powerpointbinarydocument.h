@@ -17,12 +17,15 @@ class PowerPointBinaryDocument : public PST_Base
 public:
     PowerPointBinaryDocument(const QByteArray& srcData, const ST_Variable& var);
 
+    virtual int parser()override;
     QSharedPointer<PST_CurrentUserAtom> currentUserAtom;
-    QSharedPointer<PST_UserEditAtom> userEditAtom;
-    QSharedPointer<PST_PersistDirectoryAtom> persistDirectoryAtom;
-    QSharedPointer<PST_Document> document;
+
+    QSharedPointer<PST_UserEditAtom> userEditAtomPtr;
+    QSharedPointer<PST_PersistDirectoryAtom> persistDirectoryAtomPtr;
+    QSharedPointer<PST_Document> documentPtr;
     QList<QSharedPointer<PST_MainMaster> > mainMasterList;
     QList<QSharedPointer<PST_Notes> > notesList;
+    QList<QSharedPointer<PST_Handout> > handoutList;
     QList<QSharedPointer<PST_Slide> > slideList;
     QList<QSharedPointer<PST_ExternaloleObjectStg> > exOleObjStringList;
 };

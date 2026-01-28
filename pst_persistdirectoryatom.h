@@ -8,7 +8,7 @@ class PST_PersistDirectoryAtom : public PST_Base
 public:
     PST_PersistDirectoryAtom(const QByteArray& srcData, const ST_Variable& var);
 
-
+    virtual int parser()override;
 public:
     QList<QSharedPointer<PersistDirectoryEntry> > rgPersistDirEntryArray;
 

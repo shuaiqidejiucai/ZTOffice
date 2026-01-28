@@ -13,12 +13,18 @@ include($$shareRoot/common/common.pri)
 SOURCES += \
     pptdocument.cpp \
     pst_gridspacing10atom.cpp \
+    pst_roundtripcontentmasterinfo12atom.cpp \
+    pst_roundtripoarttextstyles12atom.cpp \
+    pst_roundtriporiginalmainmasterid12atom.cpp \
     zttools.cpp \
     ztwppdocument.cpp
 HEADERS += \
         global.h \
         pptdocument.h \
         pst_gridspacing10atom.h \
+        pst_roundtripcontentmasterinfo12atom.h \
+        pst_roundtripoarttextstyles12atom.h \
+        pst_roundtriporiginalmainmasterid12atom.h \
         zttools.h \
         ztwppdocument.h
 
@@ -75,7 +81,6 @@ SOURCES += \
     pst_progbinarytag.cpp \
     pst_progtags.cpp \
     pst_roundtripcolormapping12atom.cpp \
-    pst_roundtripcontentmasterid12atom.cpp \
     pst_roundtripcustomtablestyles12.cpp \
     pst_roundtripdocflags12atom.cpp \
     pst_roundtripheaderfooterdefaults12atom.cpp \
@@ -157,7 +162,6 @@ HEADERS += \
     pst_progbinarytag.h \
     pst_progtags.h \
     pst_roundtripcolormapping12atom.h \
-    pst_roundtripcontentmasterid12atom.h \
     pst_roundtripcustomtablestyles12.h \
     pst_roundtripdocflags12atom.h \
     pst_roundtripheaderfooterdefaults12atom.h \
