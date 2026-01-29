@@ -11,6 +11,7 @@ enum HeaderType
     RT_SlideAtom = 0x03EF,
     RT_ExternalObjectList = 0x0409,
     RT_ExternalObjectListAtom = 0x040A,
+    RT_NotesAtom = 0x03F1,
     RT_Environment = 0x03F2,
     RT_FontCollection = 0x07D5,
     RT_SoundCollection = 0x07E4,
@@ -44,6 +45,7 @@ enum HeaderType
     RT_SlidePersistAtom = 0x03F3,
     RT_TextHeaderAtom = 0x0F9F,
     RT_TextCharsAtom = 0x0FA0,
+    RT_MasterTextPropAtom = 0x0FA2,
     RT_TextCharFormatExceptionAtom = 0x0FA4,
     RT_TextParagraphFormatExceptionAtom = 0x0FA5,
     RT_TextBytesAtom = 0x0FA8,
@@ -58,6 +60,7 @@ enum HeaderType
     RT_HeaderMetaCharAtom = 0x0FF9,
     RT_FooterMetaCharAtom = 0x0FFA,
     RT_RtfDateTimeMetaCharAtom = 0x1015,
+    RT_TextRulerAtom = 0x0FA6,
     RT_TextBookmarkAtom = 0x0FA7,
     RT_TextSpecialInfoAtom = 0x0FAA,
     RT_InteractiveInfo = 0x0FF2,
@@ -68,11 +71,15 @@ enum HeaderType
     RT_ColorSchemeAtom = 0x07F0,
     RT_RoundTripTheme12Atom = 0x040E,
     RT_RoundTripColorMapping12Atom = 0x040F,
+    RT_RoundTripOriginalMainMasterId12Atom = 0x041C,
     RT_RoundTripCompositeMasterId12Atom = 0x041D,
     RT_RoundTripContentMasterInfo12Atom = 0x041E,
     RT_RoundTripAnimationHashAtom12Atom = 0x2B0D,
     RT_RoundTripAnimationAtom12Atom = 0x2B0B,
     RT_RoundTripContentMasterId12Atom = 0x0422,
+    RT_RoundTripOArtTextStyles12Atom = 0x0423,
+    RT_RoundTripNotesMasterTextStyles12Atom = 0x0427,
+    RT_PlaceholderAtom = 0x0BC3,
 
     RT_ProgTags = 0x1388,
     RT_ProgBinaryTag = 0x138A,
@@ -104,13 +111,22 @@ enum HeaderType
     RT_SlideTime10Atom = 0x2EEB,
 
     //通用
+    COMMON_OfficeArtDgContainer = 0xF002,
+    COMMON_OfficeArtSpgrContainer = 0xF003,
+    COMMON_OfficeArtSpContainer = 0xF004,
     COMMON_OfficeArtDggContainer = 0xF000,
     COMMON_OfficeArtBStoreContainer = 0xF001,
     COMMON_OfficeArtFDGGBlock = 0xF006,
+    COMMON_OfficeArtFDG = 0xF008,
+    COMMON_OfficeArtFSPGR = 0xF009,
+    COMMON_OfficeArtFSP = 0xF00A,
     COMMON_OfficeArtFBSE = 0xF007,
     COMMON_OfficeArtFOPT = 0xF00B,
-    COMMON_OfficeArtSplitMenuColorContainer = 0xF11E
-    
+    HeadRecord_OfficeArtClientTextbox = 0xF00D,
+    HeadRecord_OfficeArtClientAnchor = 0xF010,
+    HeadRecord_OfficeArtClientData = 0xF011,
+    COMMON_OfficeArtSplitMenuColorContainer = 0xF11E,
+    COMMON_OfficeArtTertiaryFOPT = 0xF122
 };
 
 namespace ZT_Libolecf {

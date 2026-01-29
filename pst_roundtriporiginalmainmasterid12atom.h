@@ -7,6 +7,8 @@ class PST_RoundTripOriginalMainMasterId12Atom : public PST_Base
 {
 public:
     PST_RoundTripOriginalMainMasterId12Atom(const QByteArray& srcData, const ST_Variable& var);
+
+    virtual int parser()override;
 };
 
 #endif // PST_ROUNDTRIPORIGINALMAINMASTERID12ATOM_H

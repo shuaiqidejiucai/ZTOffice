@@ -1,0 +1,14 @@
+#ifndef OFFICEARTCLIENTDATA_H
+#define OFFICEARTCLIENTDATA_H
+
+#include "pst_base.h"
+
+class OfficeArtClientData : public PST_Base
+{
+public:
+    OfficeArtClientData(const QByteArray& srcData, const ST_Variable& var);
+
+    virtual int parser()override;
+};
+
+#endif // OFFICEARTCLIENTDATA_H

@@ -5,3 +5,8 @@ PST_RoundTripContentMasterInfo12Atom::PST_RoundTripContentMasterInfo12Atom(const
 	:PST_Base(srcData, var)
 {
 }
+
+int PST_RoundTripContentMasterInfo12Atom::parser()
+{
+	return 0;
+}

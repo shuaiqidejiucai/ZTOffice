@@ -8,7 +8,7 @@ class OfficeArtSpContainer : public PST_Base
 public:
     OfficeArtSpContainer(const QByteArray& srcData, const ST_Variable& var);
 
-
+    virtual int parser()override;
 };
 
 #endif // OFFICEARTSPCONTAINER_H

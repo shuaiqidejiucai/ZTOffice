@@ -9,10 +9,12 @@ PST_MSOfbtOPT::PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var)
 int PST_MSOfbtOPT::parser()
 {
 	m_isParser = true;
+	ST_Variable stVarA;
+	quint32 pos = ST_OP(m_STVar);
+	physicalStruct(pos, m_srcData, stVarA);
+	pos = ST_SP(stVarA);
+	quint16 num = ST_RI(stVarA);
 	ST_Variable stVar;
-	quint32 pos = ST_SP(m_STVar);
-	quint16 num = ST_RI(m_STVar);
-
 	QList<quint32> sizeList;
 	//Fopte
 	for (quint16 i = 0; i < num; ++i)

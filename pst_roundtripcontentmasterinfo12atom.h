@@ -7,6 +7,8 @@ class PST_RoundTripContentMasterInfo12Atom : public PST_Base
 {
 public:
     PST_RoundTripContentMasterInfo12Atom(const QByteArray& srcData, const ST_Variable& var);
+
+    virtual int parser()override;
 };
 
 #endif // PST_ROUNDTRIPCONTENTMASTERINFO12ATOM_H

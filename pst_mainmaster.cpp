@@ -36,10 +36,56 @@ int PST_MainMaster::parser()
 			txMasterStyleAtomPtrList.append(txMasterStyleAtomPtr);
 		}
 			break;
+		case RT_RoundTripOArtTextStyles12Atom:
+		{
+			roundTripOArtTxtStyles12Atom = QSharedPointer<PST_RoundTripOArtTextStyles12Atom>::create(m_srcData, stVar);
+		}
+		break;
+		case RT_Drawing:
+		{
+			ppdDwingPtr = QSharedPointer<PST_PPDrawing>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_ProgTags:
+		{
+			progTagsPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_RoundTripTheme12Atom:
+		{
+			QSharedPointer<PST_RoundTripTheme12Atom> roundTripTheme12AtomPtr(new PST_RoundTripTheme12Atom(m_srcData, stVar));
+			roundTripTheme12AtomPtrList.append(roundTripTheme12AtomPtr);
+		}
+			break;
+		case RT_RoundTripColorMapping12Atom:
+		{
+			QSharedPointer<PST_RoundTripColorMapping12Atom> roundTripColoeMapping12AtomPtr (new PST_RoundTripColorMapping12Atom(m_srcData, stVar));
+			roundTripColorMapping12AtomPtrList.append(roundTripColoeMapping12AtomPtr);
+		}
+			break;
+		case RT_RoundTripContentMasterInfo12Atom:
+		{
+			QSharedPointer<PST_RoundTripContentMasterInfo12Atom> roundTripContentMaster12AtomPtr(new PST_RoundTripContentMasterInfo12Atom(m_srcData, stVar));
+			roundTripContentMasterInfo12AtomPtrList.append(roundTripContentMaster12AtomPtr);
+		}
+			break;
+		case RT_RoundTripOriginalMainMasterId12Atom:
+		{
+			QSharedPointer<PST_RoundTripOriginalMainMasterId12Atom>roundTripOriginalMainMasterId12AtomPtr(new PST_RoundTripOriginalMainMasterId12Atom(m_srcData, stVar));
+			roundTripContentMasterId12AtomPtrList.append(roundTripOriginalMainMasterId12AtomPtr);
+		}
+			break;
+		case RT_CString:
+		{
+			QSharedPointer<PST_CString> cstring(new PST_CString(m_srcData, stVar));
+			cstringPtrList.append(cstring);
+		}
+			break;
 		default:
 			break;
-			pos = ST_EP(stVar);
+			
 		}
+		pos = ST_EP(stVar);
 	} while (pos < ST_EP(stVar));
 	return 0;
 }

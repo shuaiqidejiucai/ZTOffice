@@ -9,8 +9,11 @@ class PST_DrawingContainer : public PST_Base
 public:
     PST_DrawingContainer(const QByteArray& srcData, const ST_Variable& var);
 
+    virtual int parser()override;
+
     QSharedPointer<PST_OfficeArtFDG> officeArtFDG;
     QSharedPointer<PST_GroupShapeContainer> groupShapeContainer;
+    QSharedPointer<PST_ShapeContainer> shapeContainer;
 };
 
 #endif // PST_DRAWINGCONTAINER_H

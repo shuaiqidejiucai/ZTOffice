@@ -8,6 +8,7 @@ class PST_OfficeArtFSP : public PST_Base
 public:
     PST_OfficeArtFSP(const QByteArray& srcData, const ST_Variable& var);
 
+    virtual int parser()override;
     quint32 SPID;
     quint32 fGroup : 1;
     quint32 fChild : 1;
@@ -20,7 +21,7 @@ public:
     quint32 fConnector : 1;
     quint32 fHaveAnchor : 1;
     quint32 fBackground : 1;
-    quint32 fHaveSpe : 1;
+    quint32 fHaveSpt : 1;
     quint32 unused : 20;
 
 };

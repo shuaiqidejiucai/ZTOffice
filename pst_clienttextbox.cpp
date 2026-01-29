@@ -2,3 +2,65 @@
 
 PST_ClientTextBox::PST_ClientTextBox(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
+
+int PST_ClientTextBox::parser()
+{
+	m_isParser = true;
+	ST_Variable stVar;
+	quint32 pos = ST_SP(m_STVar);
+
+	do
+	{
+		if (!physicalStruct(pos, m_srcData, stVar))
+		{
+			return -1;
+		}
+		switch (ST_TP(stVar))
+		{
+		case RT_TextHeaderAtom:
+		{
+			txtHeaderAtom = QSharedPointer<PST_TextHeaderAtom>::create(m_srcData, stVar);
+		}
+		break;
+		case RT_TextCharsAtom:
+		{
+			txtCharsAtom = QSharedPointer<PST_TextCharsAtom>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_MasterTextPropAtom:
+		{
+			masterTextPropAtom = QSharedPointer<PST_MasterTextPropAtom>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_TextSpecialInfoAtom:
+		{
+			txtSpecialInfoAtom = QSharedPointer<PST_TextSpecialInfoAtom>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_StyleTextPropAtom:
+		{
+			styleTextPropAtom = QSharedPointer<PST_StyleTextPropAtom>::create(m_srcData, stVar);
+		}
+		break;
+		case RT_GenericDateMetaCharAtom:
+		{
+			genericDateMetaCharAtom = QSharedPointer<PST_GenericDateMetaCharAtom>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_TextRulerAtom:
+		{
+			txtRulerAtom = QSharedPointer<PST_TextRulerAtom>::create(m_srcData, stVar);
+		}
+			break;
+		case RT_SlideNumberMetaCharAtom:
+		{
+			slideNumMCAtom = QSharedPointer<PST_SlideNumberMetaCharAtom>::create(m_srcData, stVar);
+		}
+			break;
+		default:
+			break;
+		}
+		pos = ST_EP(stVar);
+	} while (pos < ST_EP(m_STVar));
+	return 0;
+}

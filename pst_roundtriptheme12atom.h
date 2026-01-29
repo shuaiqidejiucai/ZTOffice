@@ -7,6 +7,8 @@ class PST_RoundTripTheme12Atom : public PST_Base
 {
 public:
     PST_RoundTripTheme12Atom(const QByteArray& srcData, const ST_Variable& var);
+
+    virtual int parser()override;
 };
 
 #endif // PST_ROUNDTRIPTHEME12ATOM_H

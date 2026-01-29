@@ -7,6 +7,8 @@ class PST_RoundTripOArtTextStyles12Atom : public PST_Base
 {
 public:
     PST_RoundTripOArtTextStyles12Atom();
+
+    virtual int parser()override;
 };
 
 #endif // PST_ROUNDTRIPOARTTEXTSTYLES12ATOM_H

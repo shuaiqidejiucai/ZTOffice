@@ -11,18 +11,28 @@ include($$shareRoot/common/common.pri)
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    officeartclientanchor.cpp \
+    officeartclientdata.cpp \
     pptdocument.cpp \
+    pst_genericdatemetacharatom.cpp \
     pst_gridspacing10atom.cpp \
+    pst_mastertextpropatom.cpp \
     pst_roundtripcontentmasterinfo12atom.cpp \
+    pst_roundtripnotesmastertextstyles12atom.cpp \
     pst_roundtripoarttextstyles12atom.cpp \
     pst_roundtriporiginalmainmasterid12atom.cpp \
     zttools.cpp \
     ztwppdocument.cpp
 HEADERS += \
         global.h \
+        officeartclientanchor.h \
+        officeartclientdata.h \
         pptdocument.h \
+        pst_genericdatemetacharatom.h \
         pst_gridspacing10atom.h \
+        pst_mastertextpropatom.h \
         pst_roundtripcontentmasterinfo12atom.h \
+        pst_roundtripnotesmastertextstyles12atom.h \
         pst_roundtripoarttextstyles12atom.h \
         pst_roundtriporiginalmainmasterid12atom.h \
         zttools.h \

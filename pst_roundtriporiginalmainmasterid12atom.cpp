@@ -4,3 +4,8 @@ PST_RoundTripOriginalMainMasterId12Atom::PST_RoundTripOriginalMainMasterId12Atom
 	:PST_Base(srcData, var)
 {
 }
+
+int PST_RoundTripOriginalMainMasterId12Atom::parser()
+{
+	return 0;
+}
