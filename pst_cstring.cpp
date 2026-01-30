@@ -10,5 +10,10 @@ int PST_CString::parser()
 	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
-	return 0;
+	return Error_BinType;
+}
+
+void PST_CString::clearParserData()
+{
+	m_isParser = false;
 }

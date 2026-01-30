@@ -8,6 +8,10 @@ PowerPointBinaryDocument::PowerPointBinaryDocument(const QByteArray &srcData, co
 
 int PowerPointBinaryDocument::parser()
 {
+    if (m_isParser)
+    {
+        clearParserData();
+    }
     m_isParser = true;
     ST_Variable stVar;
     quint32 pos = ST_SP(stVar);
@@ -15,7 +19,7 @@ int PowerPointBinaryDocument::parser()
     {
         if (!physicalStruct(pos, m_srcData, stVar))
         {
-            return -1;
+            return Error_FailedType;
         }
         switch (ST_TP(stVar))
         {
@@ -67,5 +71,19 @@ int PowerPointBinaryDocument::parser()
         }
         pos = ST_EP(stVar);
     } while (pos < ST_EP(stVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PowerPointBinaryDocument::clearParserData()
+{
+    m_isParser = false;
+    currentUserAtom.clear();
+    userEditAtomPtr.clear();
+    persistDirectoryAtomPtr.clear();
+    documentPtr.clear();
+    mainMasterList.clear();
+    notesList.clear();
+    handoutList.clear();
+    slideList.clear();
+    exOleObjStringList.clear();
 }

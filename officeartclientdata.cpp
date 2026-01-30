@@ -6,5 +6,10 @@ OfficeArtClientData::OfficeArtClientData(const QByteArray& srcData, const ST_Var
 
 int OfficeArtClientData::parser()
 {
+    //TODO:事件相关
     return 0;
+}
+
+void OfficeArtClientData::clearParserData()
+{
 }

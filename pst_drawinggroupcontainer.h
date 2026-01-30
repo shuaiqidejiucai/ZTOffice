@@ -11,6 +11,7 @@ public:
     PST_DrawingGroupAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+    virtual void clearParserData()override;
 };
 
 class PST_DrawingGroupContainer : public PST_Base
@@ -19,7 +20,7 @@ public:
     PST_DrawingGroupContainer(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_DrawingGroupAtom> dwGroupAtom;
     QSharedPointer<ODRAW_OfficeArtBStoreContainer> odrawOABSContainer;
     QSharedPointer<PST_MSOfbtOPT> msofbtOPT;

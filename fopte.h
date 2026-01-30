@@ -10,7 +10,7 @@ public:
     Fopte(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
-
+    virtual void clearParserData() override;
     quint16 pid : 14;
     quint8 fBid : 1;
     quint8 fComplex : 1;
@@ -22,11 +22,7 @@ class FOPTEComplex : public PST_Base
 public:
     FOPTEComplex(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser() override;
-    quint16 pid : 14;
-    quint8 fBid : 1;
-    quint8 fComplex : 1;
-    quint32 op;
-    QSharedPointer<Owner> ownerPtr;
+    virtual void clearParserData() override;
 };
 
 #endif // FOPTE_H

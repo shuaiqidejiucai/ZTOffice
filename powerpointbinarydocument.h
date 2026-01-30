@@ -18,8 +18,9 @@ public:
     PowerPointBinaryDocument(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-    QSharedPointer<PST_CurrentUserAtom> currentUserAtom;
+    virtual void clearParserData() override;
 
+    QSharedPointer<PST_CurrentUserAtom> currentUserAtom;
     QSharedPointer<PST_UserEditAtom> userEditAtomPtr;
     QSharedPointer<PST_PersistDirectoryAtom> persistDirectoryAtomPtr;
     QSharedPointer<PST_Document> documentPtr;

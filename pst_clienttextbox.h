@@ -16,7 +16,7 @@ public:
     PST_ClientTextBox(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_TextHeaderAtom> txtHeaderAtom;
     QSharedPointer<PST_TextCharsAtom> txtCharsAtom;
     QSharedPointer<PST_MasterTextPropAtom> masterTextPropAtom;

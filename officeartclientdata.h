@@ -9,6 +9,8 @@ public:
     OfficeArtClientData(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+
+    virtual void clearParserData() override;
 };
 
 #endif // OFFICEARTCLIENTDATA_H

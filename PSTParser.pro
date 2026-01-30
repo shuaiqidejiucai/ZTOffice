@@ -17,6 +17,7 @@ SOURCES += \
     pst_genericdatemetacharatom.cpp \
     pst_gridspacing10atom.cpp \
     pst_mastertextpropatom.cpp \
+    pst_roundtripcontentmasterid12atom.cpp \
     pst_roundtripcontentmasterinfo12atom.cpp \
     pst_roundtripnotesmastertextstyles12atom.cpp \
     pst_roundtripoarttextstyles12atom.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
         pst_genericdatemetacharatom.h \
         pst_gridspacing10atom.h \
         pst_mastertextpropatom.h \
+        pst_roundtripcontentmasterid12atom.h \
         pst_roundtripcontentmasterinfo12atom.h \
         pst_roundtripnotesmastertextstyles12atom.h \
         pst_roundtripoarttextstyles12atom.h \
@@ -45,7 +47,6 @@ SOURCES += \
     odraw_officeartbstorecontainer.cpp \
     odraw_officeartsplitmenucolorcontainer.cpp \
     officeartspcontainer.cpp \
-    owner.cpp \
     persistdirectoryentry.cpp \
     powerpointbinarydocument.cpp \
     pst_base.cpp \
@@ -126,7 +127,6 @@ HEADERS += \
     odraw_officeartbstorecontainer.h \
     odraw_officeartsplitmenucolorcontainer.h \
     officeartspcontainer.h \
-    owner.h \
     persistdirectoryentry.h \
     powerpointbinarydocument.h \
     pst_base.h \

@@ -7,7 +7,13 @@ class PST_Base
 public:
     PST_Base(const QByteArray& srcData, const ST_Variable& var);
 
+    int parserData();
+
+    void clearData();
+protected:
     virtual int parser() = 0;
+
+    virtual void clearParserData() = 0;
 protected:
     const ST_Variable m_STVar;
     const QByteArray& m_srcData;

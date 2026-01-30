@@ -6,3 +6,15 @@ PST_CurrentUserAtom::PST_CurrentUserAtom(const QByteArray &byteArry, const ST_Va
 {
 
 }
+
+int PST_CurrentUserAtom::parser()
+{
+	//TODO:用户数据暂时无用不解
+	m_isParser = false;
+	return Error_SuccessType;
+}
+
+void PST_CurrentUserAtom::clearParserData()
+{
+	m_isParser = true;
+}

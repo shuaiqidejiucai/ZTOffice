@@ -8,6 +8,10 @@ PST_Document::PST_Document(const QByteArray &srcData, const ST_Variable& var)
 
 int PST_Document::parser()
 {
+	if (m_isParser)
+	{
+		clearParserData();
+	}
 	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -15,7 +19,7 @@ int PST_Document::parser()
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -76,5 +80,18 @@ int PST_Document::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_Document::clearParserData()
+{
+	documentAtomPtr.clear();
+	exObjListObjList.clear();
+	envmentList.clear();
+	ppdwGroupList.clear();
+	slideListWithTxtList.clear();
+	PSTList.clear();
+	headersFootersList.clear();
+	roundTripTableStyleList.clear();
+	endDocumentAtom.clear();
 }

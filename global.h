@@ -14,6 +14,16 @@
 #include <qtextcodec.h>
 #include <qbytearray.h>
 #include <QString>
+
+enum EU_ErrorCodeType
+{
+    Error_FailedType = -1,
+    Error_SuccessType,
+    Error_ExternalParserType,//因无识别头所以由构造者解析出数据
+    Error_BinType,//无特别成员数据，纯二进制流，如：附件流、文字流、图片流等，无需解析有位置即可，位置是判断类型时，构造者赋予的
+
+};
+
 enum EU_DocumentType
 {
     EU_NoType,
@@ -41,6 +51,17 @@ struct ST_VarantFile
 
 struct ST_Variable
 {
+    ST_Variable() 
+        :startPos(0)
+        , endPos(0)
+        , originPos(0)
+        , ftSize(0)
+        , ftType(0)
+        , recVer(0)
+        , recInstance(0)
+    {
+
+    }
     quint32 startPos = 0;
     quint32 endPos = 0;
     quint32 originPos = 0;
@@ -49,6 +70,18 @@ struct ST_Variable
     
     quint16 recVer : 4;
     quint16 recInstance : 12;
+
+    void initStruct()
+    {
+        startPos = 0;
+        endPos = 0;
+        originPos = 0;
+        ftSize = 0;
+        ftType = 0;
+
+        recVer = 0;
+        recInstance = 0;
+    }
     //bool isValid;
 };
 

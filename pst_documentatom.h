@@ -8,6 +8,7 @@ public:
     PST_DocumentAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser();
+    virtual void clearParserData()override;
 public:
     PointStruct SlideSize;
     PointStruct NotesSize;

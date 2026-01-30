@@ -8,6 +8,11 @@ PST_DocumentAtom::PST_DocumentAtom(const QByteArray &srcData, const ST_Variable&
 
 int PST_DocumentAtom::parser()
 {
+	if (m_isParser)
+	{
+		clearParserData();
+	}
+	m_isParser = true;
 	quint32 pos = m_STVar.startPos;
 	SlideSize.x = GetFlagData<qint32>(m_srcData, pos);
 	SlideSize.y = GetFlagData<qint32>(m_srcData, pos);
@@ -27,5 +32,10 @@ int PST_DocumentAtom::parser()
 	fRightToLeft = GetFlagData<quint8>(m_srcData, pos);
 	//是否显示批注评论
 	fShowComments = GetFlagData<quint8>(m_srcData, pos);
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_DocumentAtom::clearParserData()
+{
+	m_isParser = false;
 }

@@ -16,8 +16,8 @@ class PST_Document : public PST_Base
 public:
     PST_Document(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser();
-
+    virtual int parser() override;
+    virtual void clearParserData()override;
     QSharedPointer<PST_DocumentAtom> documentAtomPtr;
     QList<QSharedPointer<PST_ExObjList> > exObjListObjList;
     QList<QSharedPointer<PST_Environment> > envmentList;

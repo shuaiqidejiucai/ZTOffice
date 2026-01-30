@@ -5,5 +5,10 @@ OfficeArtSpContainer::OfficeArtSpContainer(const QByteArray &srcData, const ST_V
 
 int OfficeArtSpContainer::parser()
 {
+	//TODO:测试简单文档没碰到
 	return 0;
+}
+
+void OfficeArtSpContainer::clearParserData()
+{
 }

@@ -1,16 +1,39 @@
 #include "fopte.h"
 
-Fopte::Fopte(const QByteArray& srcData, const ST_Variable& var) : PST_Base(srcData, var) {}
+Fopte::Fopte(const QByteArray& srcData, const ST_Variable& var) 
+    : PST_Base(srcData, var), pid(0),fBid(0), fComplex(0),op(0)
+{
+
+}
 
 int Fopte::parser()
 {
+    if (m_isParser)
+    {
+        clearParserData();
+    }
+    
+    m_isParser = true;
     quint32 pos = ST_SP(m_STVar);
     quint16 value = GetFlagData<quint16>(m_srcData, pos);
     pid = value & 0x3FFF;
     fBid = (value >> 14) & 0x1;
     fComplex = (value >> 15) & 0x1;
     op = GetFlagData<quint32>(m_srcData, pos);
-    return 0;
+    if (pos == ST_EP(m_STVar))
+    {
+        return Error_SuccessType;
+    }
+    return Error_FailedType;
+}
+
+void Fopte::clearParserData()
+{
+    m_isParser = false;
+    pid = 0;
+    fBid = 0;
+    fComplex = 0;
+    op = 0;
 }
 
 FOPTEComplex::FOPTEComplex(const QByteArray& srcData, const ST_Variable& var) : PST_Base(srcData, var)
@@ -20,5 +43,11 @@ FOPTEComplex::FOPTEComplex(const QByteArray& srcData, const ST_Variable& var) : 
 
 int FOPTEComplex::parser()
 {
-    return 0;
+    m_isParser = true;
+    return Error_BinType;
+}
+
+void FOPTEComplex::clearParserData()
+{
+    m_isParser = false;
 }

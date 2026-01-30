@@ -7,5 +7,46 @@ PST_Handout::PST_Handout(const QByteArray& srcData, const ST_Variable& var):PST_
 
 int PST_Handout::parser()
 {
+    m_isParser = true;
+    ST_Variable stVar;
+    quint32 pos = ST_SP(stVar);
+    do
+    {
+        if (!physicalStruct(pos, m_srcData, stVar))
+        {
+            return -1;
+        }
+        switch (ST_TP(stVar))
+        {
+        case RT_Drawing:
+        {
+            ppDwingPtr = QSharedPointer<PST_PPDrawing>::create(m_srcData, stVar);
+        }
+        break;
+        case RT_ColorSchemeAtom:
+        {
+            colorSchemeAtomPtr = QSharedPointer<PST_ColorSchemeAtom>::create(m_srcData, stVar);
+        }
+            break;
+        case RT_ProgTags:
+        {
+            proTagesPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
+        }
+        break;
+        case RT_RoundTripTheme12Atom:
+        {
+            RTT12AtomPtr = QSharedPointer<PST_RoundTripTheme12Atom>::create(m_srcData, stVar);
+        }
+        break;
+        case RT_RoundTripColorMapping12Atom:
+        {
+            RTCMappingAtomPtr = QSharedPointer<PST_RoundTripColorMapping12Atom>::create(m_srcData, stVar);
+        }
+        break;
+        default:
+            break;
+        }
+        pos = ST_EP(stVar);
+    } while (pos < ST_EP(stVar));
     return 0;
 }

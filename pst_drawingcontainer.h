@@ -10,7 +10,7 @@ public:
     PST_DrawingContainer(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_OfficeArtFDG> officeArtFDG;
     QSharedPointer<PST_GroupShapeContainer> groupShapeContainer;
     QSharedPointer<PST_ShapeContainer> shapeContainer;
