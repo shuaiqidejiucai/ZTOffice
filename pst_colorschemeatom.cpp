@@ -6,11 +6,9 @@ PST_ColorSchemeAtom::PST_ColorSchemeAtom(const QByteArray& srcData, const ST_Var
 int PST_ColorSchemeAtom::parser()
 {
 	//TODO:ÑÕÉ«½âÎö
-	m_isParser = true;
-	return Error_BinType;
+	return Error_TODO;
 }
 
 void PST_ColorSchemeAtom::clearParserData()
 {
-	m_isParser = false;
 }

@@ -9,6 +9,8 @@ public:
     PST_RoundTripHeaderFooterDefaults12Atom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+
+    virtual void clearParserData()override;
 };
 
 #endif // PST_ROUNDTRIPHEADERFOOTERDEFAULTS12ATOM_H

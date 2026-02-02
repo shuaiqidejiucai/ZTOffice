@@ -5,11 +5,9 @@ ODRAW_OfficeArtSplitMenuColorContainer::ODRAW_OfficeArtSplitMenuColorContainer(c
 
 int ODRAW_OfficeArtSplitMenuColorContainer::parser()
 {
-    m_isParser = true;
     return Error_BinType;
 }
 
 void ODRAW_OfficeArtSplitMenuColorContainer::clearParserData()
 {
-    m_isParser = false;
 }

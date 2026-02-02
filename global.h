@@ -21,7 +21,7 @@ enum EU_ErrorCodeType
     Error_SuccessType,
     Error_ExternalParserType,//因无识别头所以由构造者解析出数据
     Error_BinType,//无特别成员数据，纯二进制流，如：附件流、文字流、图片流等，无需解析有位置即可，位置是判断类型时，构造者赋予的
-
+    Error_TODO //待完成
 };
 
 enum EU_DocumentType
@@ -62,14 +62,14 @@ struct ST_Variable
     {
 
     }
-    quint32 startPos = 0;
-    quint32 endPos = 0;
-    quint32 originPos = 0;
-    quint32 ftSize = 0;
-    quint16 ftType = 0;
+    quint32 startPos;
+    quint32 endPos;
+    quint32 originPos;
+    quint32 ftSize;
+    quint16 ftType;
     
-    quint16 recVer : 4;
-    quint16 recInstance : 12;
+    quint16 recVer;
+    quint16 recInstance;
 
     void initStruct()
     {

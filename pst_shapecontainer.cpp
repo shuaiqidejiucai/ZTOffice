@@ -5,7 +5,6 @@ PST_ShapeContainer::PST_ShapeContainer(const QByteArray& srcData, const ST_Varia
 
 int PST_ShapeContainer::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 
@@ -13,7 +12,7 @@ int PST_ShapeContainer::parser()
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -62,5 +61,19 @@ int PST_ShapeContainer::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_ShapeContainer::clearParserData()
+{
+	officeArtFSPGRPtr.clear();
+	officeArtFSPPtr.clear();
+	msoFbtOPTPtr.clear();
+	officeArtClientAnchorPtr.clear();
+	shapeClientContainerPtr.clear();
+
+	msoTertiaryOPTPtr.clear();
+	officeArtSpConPtr.clear();
+
+	clientTxtBoxPtr.clear();
 }

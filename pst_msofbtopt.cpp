@@ -8,7 +8,6 @@ PST_MSOfbtOPT::PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var)
 
 int PST_MSOfbtOPT::parser()
 {
-	m_isParser = true;
 	ST_Variable stVarA;
 	quint32 pos = ST_OP(m_STVar);
 	physicalStruct(pos, m_srcData, stVarA);
@@ -45,5 +44,11 @@ int PST_MSOfbtOPT::parser()
 		QSharedPointer<FOPTEComplex> foptePtr(new FOPTEComplex(m_srcData,stVar));
 		fopteComList.append(foptePtr);
 	}
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_MSOfbtOPT::clearParserData()
+{
+	fopteList.clear();
+	fopteComList.clear();
 }

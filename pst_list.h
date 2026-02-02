@@ -13,7 +13,7 @@ public:
     PST_List(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
-
+    virtual void clearParserData()override;
     QList<QSharedPointer<PST_NormalViewSetInfo> > normalViewSetInfoList;
     QList<QSharedPointer<PST_NotesTextViewInfo> > notesTxtViewInfoList;
     QList<QSharedPointer<PST_SlideViewInfo> > slideViewInfoList;

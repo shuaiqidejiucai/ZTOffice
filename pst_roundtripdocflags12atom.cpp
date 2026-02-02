@@ -8,5 +8,9 @@ PST_RoundTripDocFlags12Atom::PST_RoundTripDocFlags12Atom(const QByteArray &srcDa
 
 int PST_RoundTripDocFlags12Atom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_RoundTripDocFlags12Atom::clearParserData()
+{
 }

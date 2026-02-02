@@ -5,14 +5,13 @@ PST_ProgBinaryTag::PST_ProgBinaryTag(const QByteArray& srcData, const ST_Variabl
 
 int PST_ProgBinaryTag::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -31,5 +30,11 @@ int PST_ProgBinaryTag::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_ProgBinaryTag::clearParserData()
+{
+	ctring.clear();
+	binTagData.clear();
 }

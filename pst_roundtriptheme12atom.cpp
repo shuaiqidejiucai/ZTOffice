@@ -5,5 +5,9 @@ PST_RoundTripTheme12Atom::PST_RoundTripTheme12Atom(const QByteArray &srcData, co
 
 int PST_RoundTripTheme12Atom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_RoundTripTheme12Atom::clearParserData()
+{
 }

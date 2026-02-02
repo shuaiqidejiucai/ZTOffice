@@ -10,8 +10,8 @@ public:
     PST_PPDrawing(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
-    QSharedPointer<PST_DrawingContainer> dwingContiner;
+    virtual void clearParserData()override;
+    QSharedPointer<PST_DrawingContainer> dwingContinerPtr;
 };
 
 #endif // PST_PPDRAWING_H

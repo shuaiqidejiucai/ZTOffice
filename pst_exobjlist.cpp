@@ -8,7 +8,6 @@ PST_ExObjList::PST_ExObjList(const QByteArray &srcData, const ST_Variable& var)
 
 int PST_ExObjList::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	
@@ -16,7 +15,7 @@ int PST_ExObjList::parser()
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -36,5 +35,11 @@ int PST_ExObjList::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_ExObjList::clearParserData()
+{
+	exObjListAtomPtr.clear();
+	exembedList.clear();
 }

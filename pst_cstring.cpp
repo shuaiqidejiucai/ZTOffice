@@ -7,7 +7,6 @@ PST_CString::PST_CString(const QByteArray &srcData, const ST_Variable& var):PST_
 
 int PST_CString::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	return Error_BinType;
@@ -15,5 +14,4 @@ int PST_CString::parser()
 
 void PST_CString::clearParserData()
 {
-	m_isParser = false;
 }

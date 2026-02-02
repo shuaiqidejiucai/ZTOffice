@@ -8,5 +8,9 @@ PST_TextParagraphFormatExceptionAtom::PST_TextParagraphFormatExceptionAtom(const
 
 int PST_TextParagraphFormatExceptionAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_TextParagraphFormatExceptionAtom::clearParserData()
+{
 }

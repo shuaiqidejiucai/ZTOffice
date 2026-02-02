@@ -9,6 +9,8 @@ public:
     PST_PersistDirectoryAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+
+    virtual void clearParserData()override;
 public:
     QList<QSharedPointer<PersistDirectoryEntry> > rgPersistDirEntryArray;
 

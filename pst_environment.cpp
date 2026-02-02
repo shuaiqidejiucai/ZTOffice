@@ -8,7 +8,6 @@ PST_Environment::PST_Environment(const QByteArray &srcData, const ST_Variable& v
 
 int PST_Environment::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
@@ -60,5 +59,15 @@ int PST_Environment::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-    return 0;
+    return Error_SuccessType;
+}
+
+void PST_Environment::clearParserData()
+{
+	srKinSoKuList.clear();
+	fontCollectionList.clear();
+	textFormatExAtomList.clear();
+	textParagraphFormatExAtomList.clear();
+	textSpecialInfoDefaultAtomList.clear();
+	txMasterStyleAtomList.clear();
 }

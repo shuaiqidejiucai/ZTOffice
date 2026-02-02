@@ -7,6 +7,10 @@ class PST_RoundTripShapeld12Atom : public PST_Base
 {
 public:
     PST_RoundTripShapeld12Atom(const QByteArray& srcData, const ST_Variable& var);
+
+    virtual int parser()override;
+
+    virtual void clearParserData()override;
 };
 
 #endif // PST_ROUNDTRIPSHAPELD12ATOM_H

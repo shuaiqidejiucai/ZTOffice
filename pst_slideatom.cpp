@@ -5,5 +5,9 @@ PST_SlideAtom::PST_SlideAtom(const QByteArray &srcData, const ST_Variable& var)
 
 int PST_SlideAtom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_SlideAtom::clearParserData()
+{
 }

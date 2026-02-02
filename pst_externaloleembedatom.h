@@ -9,6 +9,7 @@ public:
     PST_ExternalOleEmbedAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
+    virtual void clearParserData()override;
 };
 
 #endif // PST_EXTERNALOLEEMBEDATOM_H

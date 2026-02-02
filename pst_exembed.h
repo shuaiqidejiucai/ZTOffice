@@ -11,7 +11,7 @@ public:
     PST_ExEmbed(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
-
+    virtual void clearParserData()override;
 
     QSharedPointer<PST_ExternalOleEmbedAtom> exOleEmbedAtom;
     QSharedPointer<PST_ExternalOleObjectAtom> exOleObjAtom;

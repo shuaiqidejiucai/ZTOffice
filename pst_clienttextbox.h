@@ -17,6 +17,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+
     QSharedPointer<PST_TextHeaderAtom> txtHeaderAtom;
     QSharedPointer<PST_TextCharsAtom> txtCharsAtom;
     QSharedPointer<PST_MasterTextPropAtom> masterTextPropAtom;

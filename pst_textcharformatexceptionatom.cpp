@@ -8,5 +8,9 @@ PST_TextCharFormatExceptionAtom::PST_TextCharFormatExceptionAtom(const QByteArra
 
 int PST_TextCharFormatExceptionAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_TextCharFormatExceptionAtom::clearParserData()
+{
 }

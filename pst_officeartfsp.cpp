@@ -1,11 +1,15 @@
 #include "pst_officeartfsp.h"
 
 PST_OfficeArtFSP::PST_OfficeArtFSP(const QByteArray& srcData, const ST_Variable& var)
-	:PST_Base(srcData, var) {}
+	:PST_Base(srcData, var), SPID(0),fGroup(0),fChild(0),fPatriarch(0),fDeleted(0),
+	fOleShape(0),fHaveMaster(0),fFlipH(0),fFlipV(0),fConnector(0),fHaveAnchor(0),
+	fBackground(0),fHaveSpt(0),unused(0)
+{
+	
+}
 
 int PST_OfficeArtFSP::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(stVar);
 	SPID = GetFlagData<quint32>(m_srcData, pos);
@@ -23,5 +27,23 @@ int PST_OfficeArtFSP::parser()
 	fBackground = (artFSPFlag) >> 10 & 0x1;
 	fHaveSpt = (artFSPFlag) >> 11 & 0x1;
 	unused = (artFSPFlag) >> 12 & 0xFFFFF;
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_OfficeArtFSP::clearParserData()
+{
+	SPID = 0;
+	fGroup = 0;
+	fChild = 0;
+	fPatriarch = 0;
+	fDeleted = 0;
+	fOleShape = 0;
+	fHaveMaster = 0;
+	fFlipH = 0;
+	fFlipV = 0;
+	fConnector = 0;
+	fHaveAnchor = 0;
+	fBackground = 0;
+	fHaveSpt = 0;
+	unused = 0;
 }

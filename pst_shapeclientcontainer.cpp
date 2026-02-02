@@ -5,7 +5,6 @@ PST_ShapeClientContainer::PST_ShapeClientContainer(const QByteArray &srcData, co
 
 int PST_ShapeClientContainer::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 
@@ -13,7 +12,7 @@ int PST_ShapeClientContainer::parser()
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -32,5 +31,13 @@ int PST_ShapeClientContainer::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_ShapeClientContainer::clearParserData()
+{
+	oePlaceHolderAtom.clear();
+	//QSharedPointer<PST_RoundTripHFPlaceholder12Atom> roundTripHF12Atom;
+	//QSharedPointer<PST_ExternalObjectRefAtom> exObjRefAtom;
+	progTagsPtr.clear();
 }

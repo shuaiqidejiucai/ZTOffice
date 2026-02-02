@@ -7,7 +7,7 @@ OfficeArtClientData::OfficeArtClientData(const QByteArray& srcData, const ST_Var
 int OfficeArtClientData::parser()
 {
     //TODO:事件相关
-    return 0;
+    return Error_TODO;
 }
 
 void OfficeArtClientData::clearParserData()

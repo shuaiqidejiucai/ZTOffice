@@ -9,6 +9,8 @@ public:
     PST_RoundTripTheme12Atom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+
+    virtual void clearParserData()override;
 };
 
 #endif // PST_ROUNDTRIPTHEME12ATOM_H

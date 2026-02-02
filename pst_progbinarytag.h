@@ -10,7 +10,7 @@ public:
     PST_ProgBinaryTag(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_CString> ctring;
     QSharedPointer<PST_BinaryTagData> binTagData;
 };

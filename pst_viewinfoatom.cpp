@@ -8,5 +8,9 @@ PST_ViewInfoAtom::PST_ViewInfoAtom(const QByteArray &srcData, const ST_Variable&
 
 int PST_ViewInfoAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_ViewInfoAtom::clearParserData()
+{
 }

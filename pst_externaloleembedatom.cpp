@@ -8,8 +8,11 @@ PST_ExternalOleEmbedAtom::PST_ExternalOleEmbedAtom(const QByteArray &srcData, co
 
 int PST_ExternalOleEmbedAtom::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_ExternalOleEmbedAtom::clearParserData()
+{
 }

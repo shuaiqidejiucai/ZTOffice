@@ -15,7 +15,7 @@ public:
     PST_Environment(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
-
+    virtual void clearParserData()override;
     QList<QSharedPointer<PST_SrKinsoku> > srKinSoKuList;
     QList<QSharedPointer<PST_FontCollection> > fontCollectionList;
     QList<QSharedPointer<PST_TextCharFormatExceptionAtom> > textFormatExAtomList;

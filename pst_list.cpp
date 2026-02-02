@@ -4,14 +4,13 @@ PST_List::PST_List(const QByteArray &srcData, const ST_Variable& var):PST_Base(s
 
 int PST_List::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -44,5 +43,13 @@ int PST_List::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_List::clearParserData()
+{
+	normalViewSetInfoList.clear();
+	notesTxtViewInfoList.clear();
+	slideViewInfoList.clear();
+	progTagsList.clear();
 }

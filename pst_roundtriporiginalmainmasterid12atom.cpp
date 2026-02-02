@@ -7,5 +7,9 @@ PST_RoundTripOriginalMainMasterId12Atom::PST_RoundTripOriginalMainMasterId12Atom
 
 int PST_RoundTripOriginalMainMasterId12Atom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_RoundTripOriginalMainMasterId12Atom::clearParserData()
+{
 }

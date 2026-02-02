@@ -7,13 +7,7 @@ Fopte::Fopte(const QByteArray& srcData, const ST_Variable& var)
 }
 
 int Fopte::parser()
-{
-    if (m_isParser)
-    {
-        clearParserData();
-    }
-    
-    m_isParser = true;
+{ 
     quint32 pos = ST_SP(m_STVar);
     quint16 value = GetFlagData<quint16>(m_srcData, pos);
     pid = value & 0x3FFF;
@@ -29,7 +23,6 @@ int Fopte::parser()
 
 void Fopte::clearParserData()
 {
-    m_isParser = false;
     pid = 0;
     fBid = 0;
     fComplex = 0;
@@ -43,11 +36,10 @@ FOPTEComplex::FOPTEComplex(const QByteArray& srcData, const ST_Variable& var) : 
 
 int FOPTEComplex::parser()
 {
-    m_isParser = true;
     return Error_BinType;
 }
 
 void FOPTEComplex::clearParserData()
 {
-    m_isParser = false;
+
 }

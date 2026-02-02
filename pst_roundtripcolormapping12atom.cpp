@@ -5,5 +5,9 @@ PST_RoundTripColorMapping12Atom::PST_RoundTripColorMapping12Atom(const QByteArra
 
 int PST_RoundTripColorMapping12Atom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_RoundTripColorMapping12Atom::clearParserData()
+{
 }

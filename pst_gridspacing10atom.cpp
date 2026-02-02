@@ -7,5 +7,9 @@ PST_GridSpacing10Atom::PST_GridSpacing10Atom(const QByteArray& srcData, const ST
 
 int PST_GridSpacing10Atom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_GridSpacing10Atom::clearParserData()
+{
 }

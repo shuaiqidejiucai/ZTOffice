@@ -8,5 +8,9 @@ PST_TxMasterStyleAtom::PST_TxMasterStyleAtom(const QByteArray& srcData, const ST
 
 int PST_TxMasterStyleAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_TxMasterStyleAtom::clearParserData()
+{
 }

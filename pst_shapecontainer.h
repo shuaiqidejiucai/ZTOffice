@@ -16,7 +16,7 @@ public:
     PST_ShapeContainer(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_OfficeArtFSPGR> officeArtFSPGRPtr;
     QSharedPointer<PST_OfficeArtFSP> officeArtFSPPtr;
     QSharedPointer<PST_MSOfbtOPT> msoFbtOPTPtr;

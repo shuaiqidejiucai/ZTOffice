@@ -8,7 +8,8 @@ class PST_UserEditAtom : public PST_Base
 public:
     PST_UserEditAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser() override;
+    virtual void clearParserData()override;
 
     quint32 lastSlideIdRef = 0;
     /*quint32 version : 16;

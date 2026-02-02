@@ -5,11 +5,6 @@ PST_BinaryTagData::PST_BinaryTagData(const QByteArray &srcData, const ST_Variabl
 
 int PST_BinaryTagData::parser()
 {
-	if (m_isParser)
-	{
-		clearParserData();
-	}
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
@@ -54,7 +49,6 @@ int PST_BinaryTagData::parser()
 
 void PST_BinaryTagData::clearParserData()
 {
-	m_isParser = false;
 	roundTripDocFlags12AtomList.clear();
 	gridSpacing10AtomList.clear();
 	slideTime10AtomList.clear();

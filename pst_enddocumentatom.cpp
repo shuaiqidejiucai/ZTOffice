@@ -7,5 +7,9 @@ PST_EndDocumentAtom::PST_EndDocumentAtom(const QByteArray& srcData, const ST_Var
 
 int PST_EndDocumentAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_EndDocumentAtom::clearParserData()
+{
 }

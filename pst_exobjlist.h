@@ -8,10 +8,10 @@ class PST_ExObjList : public PST_Base
 public:
     PST_ExObjList(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser() override;
+    virtual void clearParserData()override;
 public:
     QSharedPointer<PST_ExternalObjectListAtom> exObjListAtomPtr;
     QList<QSharedPointer<PST_ExEmbed> > exembedList;
-    //TODO:其他类型的数据
 };
 
 #endif // PST_EXOBJLIST_H

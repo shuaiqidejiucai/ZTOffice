@@ -5,14 +5,13 @@ PST_SlideListWithText::PST_SlideListWithText(const QByteArray& srcData, const ST
 
 int PST_SlideListWithText::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 
 		if (ST_TP(stVar) == RT_SlidePersistAtom)
@@ -22,5 +21,10 @@ int PST_SlideListWithText::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_SlideListWithText::clearParserData()
+{
+	slidePerAtomList.clear();
 }

@@ -9,7 +9,7 @@ public:
     PST_SlidePersistAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     quint32 PSRReference = 0;
     quint32 Flags = 0;
     qint32 NumberTexts = 0;

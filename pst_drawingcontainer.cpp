@@ -5,11 +5,6 @@ PST_DrawingContainer::PST_DrawingContainer(const QByteArray &srcData, const ST_V
 
 int PST_DrawingContainer::parser()
 {
-	if (m_isParser)
-	{
-		clearParserData();
-	}
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 

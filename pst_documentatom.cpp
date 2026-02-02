@@ -8,11 +8,6 @@ PST_DocumentAtom::PST_DocumentAtom(const QByteArray &srcData, const ST_Variable&
 
 int PST_DocumentAtom::parser()
 {
-	if (m_isParser)
-	{
-		clearParserData();
-	}
-	m_isParser = true;
 	quint32 pos = m_STVar.startPos;
 	SlideSize.x = GetFlagData<qint32>(m_srcData, pos);
 	SlideSize.y = GetFlagData<qint32>(m_srcData, pos);
@@ -37,5 +32,19 @@ int PST_DocumentAtom::parser()
 
 void PST_DocumentAtom::clearParserData()
 {
-	m_isParser = false;
+	SlideSize.x = 0;
+	SlideSize.y = 0;
+	NotesSize.x = 0;
+	NotesSize.y = 0;
+	ServerZoom.denom = 0;
+	ServerZoom.numer = 0;
+
+	notesMasterPersistIdRef = 0;
+	handoutsMasterPersistIdRef = 0;
+	firstSlideNumber = 0;
+	slideSizeType = 0;
+	fSaveWithFonts = 0;
+	fOmitTitlePlace = 0;
+	fRightToLeft = 0;
+	fShowComments = 0;
 }

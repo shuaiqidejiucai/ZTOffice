@@ -9,8 +9,8 @@ public:
     PersistDirectoryEntry();
 
 public:
-    quint32 persistId : 20;
-    quint32 cPersist : 12;
+    quint32 persistId;
+    quint32 cPersist;
     QList<PersistOffsetEntry> rgPersistOffsetPtr_Array;
 };
 

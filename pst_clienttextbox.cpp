@@ -5,11 +5,6 @@ PST_ClientTextBox::PST_ClientTextBox(const QByteArray &srcData, const ST_Variabl
 
 int PST_ClientTextBox::parser()
 {
-	if (m_isParser)
-	{
-		clearParserData();
-	}
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
@@ -70,7 +65,6 @@ int PST_ClientTextBox::parser()
 
 void PST_ClientTextBox::clearParserData()
 {
-	m_isParser = false;
 	txtHeaderAtom.clear();
 	txtCharsAtom.clear();
 	masterTextPropAtom.clear();

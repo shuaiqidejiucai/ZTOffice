@@ -5,14 +5,13 @@ PST_SlideViewInfo::PST_SlideViewInfo(const QByteArray &srcData, const ST_Variabl
 
 int PST_SlideViewInfo::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -33,7 +32,13 @@ int PST_SlideViewInfo::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_SlideViewInfo::clearParserData()
+{
+	slideViewInfoAtomList.clear();
+	viewInfoAtomList.clear();
 }
 
 PST_SlideViewInfoAtom::PST_SlideViewInfoAtom(const QByteArray &srcData, const ST_Variable& var)
@@ -44,5 +49,9 @@ PST_SlideViewInfoAtom::PST_SlideViewInfoAtom(const QByteArray &srcData, const ST
 
 int PST_SlideViewInfoAtom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_SlideViewInfoAtom::clearParserData()
+{
 }

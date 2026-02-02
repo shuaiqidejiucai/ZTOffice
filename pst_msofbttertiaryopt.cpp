@@ -5,7 +5,6 @@ PST_MSOfbtTertiaryOPT::PST_MSOfbtTertiaryOPT(const QByteArray& srcData, const ST
 
 int PST_MSOfbtTertiaryOPT::parser()
 {
-	m_isParser = true;
 	ST_Variable stVarA;
 	quint32 pos = ST_OP(m_STVar);
 	physicalStruct(pos, m_srcData, stVarA);
@@ -42,6 +41,12 @@ int PST_MSOfbtTertiaryOPT::parser()
 		QSharedPointer<FOPTEComplex> foptePtr(new FOPTEComplex(m_srcData, stVar));
 		fopteComplexList.append(foptePtr);
 	}
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_MSOfbtTertiaryOPT::clearParserData()
+{
+	fopteList.clear();
+	fopteComplexList.clear();
 }
 

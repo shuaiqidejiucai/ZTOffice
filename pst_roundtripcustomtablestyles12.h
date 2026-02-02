@@ -9,6 +9,7 @@ public:
     PST_RoundTripCustomTableStyles12(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
+    virtual void clearParserData()override;
 };
 
 #endif // PST_ROUNDTRIPCUSTOMTABLESTYLES12_H

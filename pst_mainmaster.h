@@ -18,7 +18,7 @@ public:
     PST_MainMaster(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_SlideAtom> slideAtomPtr;
     QList<QSharedPointer<PST_ColorSchemeAtom> > colorSchemeAtomPtrList;
     QList<QSharedPointer<PST_TxMasterStyleAtom> > txMasterStyleAtomPtrList;

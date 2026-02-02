@@ -5,12 +5,6 @@ OfficeArtClientAnchor::OfficeArtClientAnchor(const QByteArray& srcData, const ST
 
 int OfficeArtClientAnchor::parser()
 {
-    if (m_isParser)
-    {
-        clearParserData();
-    }
-    
-    m_isParser = true;
     quint32 pos = ST_SP(m_STVar);
     
     if (ST_SZ(m_STVar) == 0x8)
@@ -38,6 +32,5 @@ int OfficeArtClientAnchor::parser()
 
 void OfficeArtClientAnchor::clearParserData()
 {
-    m_isParser = false;
     stRectStructPtr.clear();
 }

@@ -5,5 +5,10 @@ PST_ExternaloleObjectStg::PST_ExternaloleObjectStg(const QByteArray &srcData, co
 
 int PST_ExternaloleObjectStg::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_ExternaloleObjectStg::clearParserData()
+{
+
 }

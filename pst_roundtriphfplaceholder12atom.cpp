@@ -2,3 +2,13 @@
 
 PST_RoundTripHFPlaceholder12Atom::PST_RoundTripHFPlaceholder12Atom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
+
+int PST_RoundTripHFPlaceholder12Atom::parser()
+{
+	return Error_TODO;
+}
+
+void PST_RoundTripHFPlaceholder12Atom::clearParserData()
+{
+
+}

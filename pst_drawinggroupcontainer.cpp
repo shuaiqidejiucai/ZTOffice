@@ -14,7 +14,7 @@ PST_DrawingGroupAtom::PST_DrawingGroupAtom(const QByteArray& srcData, const ST_V
 
 int PST_DrawingGroupAtom::parser()
 {
-	return 0;
+	return Error_TODO;
 }
 
 void PST_DrawingGroupAtom::clearParserData()
@@ -23,11 +23,6 @@ void PST_DrawingGroupAtom::clearParserData()
 
 int PST_DrawingGroupContainer::parser()
 {
-	if (m_isParser)
-	{
-		clearParserData();
-	}
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
@@ -71,7 +66,10 @@ int PST_DrawingGroupContainer::parser()
 
 void PST_DrawingGroupContainer::clearParserData()
 {
-	m_isParser = false();
+	dwGroupAtom.clear();
+	odrawOABSContainer.clear();
+	msofbtOPT.clear();
+	oasColorContainter.clear();
 }
 
 

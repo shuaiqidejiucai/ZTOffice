@@ -9,6 +9,7 @@ public:
     PST_OEPlaceHolderAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+    virtual void clearParserData()override;
 
     quint32 PlacementID = 0;
     quint8 PlaceholderID = 0;

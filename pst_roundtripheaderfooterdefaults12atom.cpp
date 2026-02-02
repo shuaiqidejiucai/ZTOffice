@@ -5,5 +5,9 @@ PST_RoundTripHeaderFooterDefaults12Atom::PST_RoundTripHeaderFooterDefaults12Atom
 
 int PST_RoundTripHeaderFooterDefaults12Atom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_RoundTripHeaderFooterDefaults12Atom::clearParserData()
+{
 }

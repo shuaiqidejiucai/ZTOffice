@@ -7,14 +7,13 @@ PST_Slide::PST_Slide(const QByteArray& srcData, const ST_Variable& var):PST_Base
 
 int PST_Slide::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -49,5 +48,14 @@ int PST_Slide::parser()
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
 
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_Slide::clearParserData()
+{
+	slideAtomPtr.clear();
+	ppdwingPtr.clear();
+	colorSchemeAtomPtr.clear();
+	proTagsPtr.clear();
+	roundTripContentMasterId12AtomPtr.clear();
 }

@@ -5,5 +5,9 @@ PST_GenericDateMetaCharAtom::PST_GenericDateMetaCharAtom(const QByteArray& srcDa
 
 int PST_GenericDateMetaCharAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_GenericDateMetaCharAtom::clearParserData()
+{
 }

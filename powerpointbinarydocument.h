@@ -29,6 +29,9 @@ public:
     QList<QSharedPointer<PST_Handout> > handoutList;
     QList<QSharedPointer<PST_Slide> > slideList;
     QList<QSharedPointer<PST_ExternaloleObjectStg> > exOleObjStringList;
+
+private:
+
 };
 
 #endif // POWERPOINTBINARYDOCUMENT_H

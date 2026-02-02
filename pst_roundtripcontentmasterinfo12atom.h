@@ -9,6 +9,8 @@ public:
     PST_RoundTripContentMasterInfo12Atom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+
+    virtual void clearParserData()override;
 };
 
 #endif // PST_ROUNDTRIPCONTENTMASTERINFO12ATOM_H

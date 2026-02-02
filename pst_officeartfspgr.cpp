@@ -5,5 +5,9 @@ PST_OfficeArtFSPGR::PST_OfficeArtFSPGR(const QByteArray &srcData, const ST_Varia
 
 int PST_OfficeArtFSPGR::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_OfficeArtFSPGR::clearParserData()
+{
 }

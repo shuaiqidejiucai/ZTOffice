@@ -15,7 +15,7 @@ public:
     PST_Notes(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QSharedPointer<PST_NotesAtom> notesAtomPtr;
     QSharedPointer<PST_PPDrawing> ppdrwingPtr;
     QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtomPtr;

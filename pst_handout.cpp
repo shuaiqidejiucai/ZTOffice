@@ -7,14 +7,13 @@ PST_Handout::PST_Handout(const QByteArray& srcData, const ST_Variable& var):PST_
 
 int PST_Handout::parser()
 {
-    m_isParser = true;
     ST_Variable stVar;
     quint32 pos = ST_SP(stVar);
     do
     {
         if (!physicalStruct(pos, m_srcData, stVar))
         {
-            return -1;
+            return Error_FailedType;
         }
         switch (ST_TP(stVar))
         {
@@ -48,5 +47,14 @@ int PST_Handout::parser()
         }
         pos = ST_EP(stVar);
     } while (pos < ST_EP(stVar));
-    return 0;
+    return Error_SuccessType;
+}
+
+void PST_Handout::clearParserData()
+{
+    ppDwingPtr.clear();
+    colorSchemeAtomPtr.clear();
+    proTagesPtr.clear();
+    RTT12AtomPtr.clear();
+    RTCMappingAtomPtr.clear();
 }

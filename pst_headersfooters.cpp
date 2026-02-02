@@ -32,12 +32,22 @@ int PST_HeadersFooters::parser()
 	return 0;
 }
 
-PST_HeadsFootersAtom::PST_HeadsFootersAtom(const QByteArray &srcData):PST_Base(srcData)
+void PST_HeadersFooters::clearParserData()
+{
+	headersFootersAtom.clear();
+}
+
+PST_HeadsFootersAtom::PST_HeadsFootersAtom(const QByteArray &srcData, const ST_Variable& var)
+	:PST_Base(srcData, var)
 {
 
 }
 
 int PST_HeadsFootersAtom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_HeadsFootersAtom::clearParserData()
+{
 }

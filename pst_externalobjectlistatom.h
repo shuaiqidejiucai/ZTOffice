@@ -7,6 +7,7 @@ public:
     PST_ExternalObjectListAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser();
+    virtual void clearParserData()override;
 };
 
 #endif // PST_EXTERNALOBJECTLISTATOM_H

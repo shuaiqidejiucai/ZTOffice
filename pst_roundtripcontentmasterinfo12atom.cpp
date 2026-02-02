@@ -8,5 +8,9 @@ PST_RoundTripContentMasterInfo12Atom::PST_RoundTripContentMasterInfo12Atom(const
 
 int PST_RoundTripContentMasterInfo12Atom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_RoundTripContentMasterInfo12Atom::clearParserData()
+{
 }

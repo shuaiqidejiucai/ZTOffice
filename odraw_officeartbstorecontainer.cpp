@@ -7,12 +7,6 @@ ODRAW_OfficeArtBStoreContainer::ODRAW_OfficeArtBStoreContainer(const QByteArray&
 
 int ODRAW_OfficeArtBStoreContainer::parser()
 {
-	if (m_isParser)
-	{
-		clearParserData();
-	}
-	
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	do
@@ -40,6 +34,5 @@ int ODRAW_OfficeArtBStoreContainer::parser()
 
 void ODRAW_OfficeArtBStoreContainer::clearParserData()
 {
-	m_isParser = false;
 	msoBtBsePtrList.clear();
 }

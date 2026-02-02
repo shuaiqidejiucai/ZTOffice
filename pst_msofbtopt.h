@@ -9,7 +9,7 @@ public:
     PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QList<QSharedPointer<Fopte> > fopteList;
     QList<QSharedPointer<FOPTEComplex> > fopteComList;
 };

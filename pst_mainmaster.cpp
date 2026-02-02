@@ -8,14 +8,13 @@ PST_MainMaster::PST_MainMaster(const QByteArray& srcData, const ST_Variable& var
 
 int PST_MainMaster::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(stVar);
 	do
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -87,5 +86,20 @@ int PST_MainMaster::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(stVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_MainMaster::clearParserData()
+{
+	slideAtomPtr.clear();
+	colorSchemeAtomPtrList.clear();
+	txMasterStyleAtomPtrList.clear();
+	roundTripOArtTxtStyles12Atom.clear();
+	ppdDwingPtr.clear();
+	progTagsPtr.clear();
+	roundTripTheme12AtomPtrList.clear();
+	roundTripColorMapping12AtomPtrList.clear();
+	roundTripContentMasterInfo12AtomPtrList.clear();
+	roundTripContentMasterId12AtomPtrList.clear();
+	cstringPtrList.clear();
 }

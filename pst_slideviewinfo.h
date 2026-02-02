@@ -9,6 +9,8 @@ public:
     PST_SlideViewInfoAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+
+    virtual void clearParserData()override;
 };
 
 class PST_SlideViewInfo : public PST_Base
@@ -17,7 +19,7 @@ public:
     PST_SlideViewInfo(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     QList<QSharedPointer<PST_SlideViewInfoAtom> > slideViewInfoAtomList;
     QList<QSharedPointer<PST_ViewInfoAtom> > viewInfoAtomList;
 };

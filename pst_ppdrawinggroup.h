@@ -11,6 +11,7 @@ public:
 
     virtual int parser() override;
 
+    virtual void clearParserData()override;
 
     QList<QSharedPointer<PST_DrawingGroupContainer> > dwGroupContainterList;
 };

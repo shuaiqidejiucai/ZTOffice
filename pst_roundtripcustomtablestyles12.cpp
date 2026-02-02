@@ -5,5 +5,9 @@ PST_RoundTripCustomTableStyles12::PST_RoundTripCustomTableStyles12(const QByteAr
 
 int PST_RoundTripCustomTableStyles12::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_RoundTripCustomTableStyles12::clearParserData()
+{
 }

@@ -5,3 +5,12 @@ PST_ExternalOleObjectAtom::PST_ExternalOleObjectAtom(const QByteArray &srcData, 
 {
 
 }
+
+int PST_ExternalOleObjectAtom::parser()
+{
+	return Error_TODO;
+}
+
+void PST_ExternalOleObjectAtom::clearParserData()
+{
+}

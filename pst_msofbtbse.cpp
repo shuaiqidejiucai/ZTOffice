@@ -8,7 +8,6 @@ PST_MSOfbtBSE::PST_MSOfbtBSE(const QByteArray &srcData, const ST_Variable& var)
 
 int PST_MSOfbtBSE::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 	quint8 btWin32 = GetFlagData<quint8>(m_srcData, pos);
@@ -23,5 +22,20 @@ int PST_MSOfbtBSE::parser()
 	quint8 cbName = GetFlagData<quint8>(m_srcData, pos);
 	quint8 Unused2 = GetFlagData<quint8>(m_srcData, pos);
 	quint8 Unused3 = GetFlagData<quint8>(m_srcData, pos);
-    return 0;
+    return Error_SuccessType;
+}
+
+void PST_MSOfbtBSE::clearParserData()
+{
+	btWin32 = 0;
+	btMacOS = 0;
+	rgUid.clear();
+	Tag = 0;
+	Size = 0;
+	cRefl = 0;
+	foDelay = 0;
+	Usage = 0;
+	cbName = 0;
+	Unused2 = 0;
+	Unused3 = 0;
 }

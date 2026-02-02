@@ -8,7 +8,9 @@ class PST_TextParagraphFormatExceptionAtom : public PST_Base
 public:
     PST_TextParagraphFormatExceptionAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser() override;
+    virtual void clearParserData()override;
+
 };
 
 #endif // PST_TEXTPARAGRAPHFORMATEXCEPTIONATOM_H

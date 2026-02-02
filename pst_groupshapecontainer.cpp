@@ -5,7 +5,6 @@ PST_GroupShapeContainer::PST_GroupShapeContainer(const QByteArray& srcData, cons
 
 int PST_GroupShapeContainer::parser()
 {
-	m_isParser = true;
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
 
@@ -13,7 +12,7 @@ int PST_GroupShapeContainer::parser()
 	{
 		if (!physicalStruct(pos, m_srcData, stVar))
 		{
-			return -1;
+			return Error_FailedType;
 		}
 		switch (ST_TP(stVar))
 		{
@@ -28,5 +27,10 @@ int PST_GroupShapeContainer::parser()
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));
-	return 0;
+	return Error_SuccessType;
+}
+
+void PST_GroupShapeContainer::clearParserData()
+{
+	shapeContainerList.clear();
 }

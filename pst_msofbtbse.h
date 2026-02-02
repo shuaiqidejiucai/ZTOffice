@@ -9,7 +9,7 @@ public:
     PST_MSOfbtBSE(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
-
+    virtual void clearParserData()override;
     quint8 btWin32 = 0;
     quint8 btMacOS = 0;
     QByteArray rgUid;

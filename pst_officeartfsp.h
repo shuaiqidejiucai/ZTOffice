@@ -9,20 +9,21 @@ public:
     PST_OfficeArtFSP(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser()override;
+    virtual void clearParserData()override;
     quint32 SPID;
-    quint32 fGroup : 1;
-    quint32 fChild : 1;
-    quint32 fPatriarch : 1;
-    quint32 fDeleted : 1;
-    quint32 fOleShape : 1;
-    quint32 fHaveMaster : 1;
-    quint32 fFlipH : 1;
-    quint32 fFlipV : 1;
-    quint32 fConnector : 1;
-    quint32 fHaveAnchor : 1;
-    quint32 fBackground : 1;
-    quint32 fHaveSpt : 1;
-    quint32 unused : 20;
+    quint32 fGroup;
+    quint32 fChild;
+    quint32 fPatriarch;
+    quint32 fDeleted;
+    quint32 fOleShape;
+    quint32 fHaveMaster;
+    quint32 fFlipH ;
+    quint32 fFlipV;
+    quint32 fConnector;
+    quint32 fHaveAnchor;
+    quint32 fBackground;
+    quint32 fHaveSpt;
+    quint32 unused;
 
 };
 

@@ -8,5 +8,9 @@ PST_TextSpecialInfoDefaultAtom::PST_TextSpecialInfoDefaultAtom(const QByteArray 
 
 int PST_TextSpecialInfoDefaultAtom::parser()
 {
-    return 0;
+    return Error_TODO;
+}
+
+void PST_TextSpecialInfoDefaultAtom::clearParserData()
+{
 }

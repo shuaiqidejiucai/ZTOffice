@@ -5,5 +5,9 @@ PST_SlideTime10Atom::PST_SlideTime10Atom(const QByteArray &srcData, const ST_Var
 
 int PST_SlideTime10Atom::parser()
 {
-	return 0;
+	return Error_TODO;
+}
+
+void PST_SlideTime10Atom::clearParserData()
+{
 }

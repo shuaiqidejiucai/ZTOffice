@@ -13,6 +13,7 @@ public:
 
     virtual int parser()override;
 
+    virtual void clearParserData()override;
     QSharedPointer<PST_OEPlaceHolderAtom> oePlaceHolderAtom;
     //QSharedPointer<PST_RoundTripHFPlaceholder12Atom> roundTripHF12Atom;
     //QSharedPointer<PST_ExternalObjectRefAtom> exObjRefAtom;

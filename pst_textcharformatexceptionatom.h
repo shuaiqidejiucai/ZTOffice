@@ -9,6 +9,8 @@ public:
     PST_TextCharFormatExceptionAtom(const QByteArray& srcData, const ST_Variable& var);
 
     virtual int parser() override;
+
+    virtual void clearParserData()override;
 };
 
 #endif // PST_TEXTCHARFORMATEXCEPTIONATOM_H

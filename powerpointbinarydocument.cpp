@@ -8,11 +8,6 @@ PowerPointBinaryDocument::PowerPointBinaryDocument(const QByteArray &srcData, co
 
 int PowerPointBinaryDocument::parser()
 {
-    if (m_isParser)
-    {
-        clearParserData();
-    }
-    m_isParser = true;
     ST_Variable stVar;
     quint32 pos = ST_SP(stVar);
     do
@@ -76,7 +71,6 @@ int PowerPointBinaryDocument::parser()
 
 void PowerPointBinaryDocument::clearParserData()
 {
-    m_isParser = false;
     currentUserAtom.clear();
     userEditAtomPtr.clear();
     persistDirectoryAtomPtr.clear();
