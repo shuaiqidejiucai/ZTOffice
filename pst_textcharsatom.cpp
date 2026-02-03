@@ -11,3 +11,8 @@ int PST_TextCharsAtom::parser()
 void PST_TextCharsAtom::clearParserData()
 {
 }
+
+int PST_TextCharsAtom::priority()
+{
+	return 0;
+}

@@ -14,6 +14,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QList<QSharedPointer<PST_NormalViewSetInfo> > normalViewSetInfoList;
     QList<QSharedPointer<PST_NotesTextViewInfo> > notesTxtViewInfoList;
     QList<QSharedPointer<PST_SlideViewInfo> > slideViewInfoList;

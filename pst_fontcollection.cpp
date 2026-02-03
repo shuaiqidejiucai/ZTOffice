@@ -13,6 +13,11 @@ void PST_FontEntityAtom::clearParserData()
 {
 }
 
+int PST_FontEntityAtom::priority()
+{
+	return 0;
+}
+
 PST_FontCollection::PST_FontCollection(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 
@@ -34,6 +39,7 @@ int PST_FontCollection::parser()
 		{
 			QSharedPointer<PST_FontEntityAtom> fontEntityAtomPtr(new PST_FontEntityAtom(m_srcData, stVar));
 			fontEntityAtomList.append(fontEntityAtomPtr);
+			addChildNodePtr(fontEntityAtomPtr);
 		}
 		break;
 		default:
@@ -47,6 +53,11 @@ int PST_FontCollection::parser()
 void PST_FontCollection::clearParserData()
 {
 	fontEntityAtomList.clear();
+}
+
+int PST_FontCollection::priority()
+{
+	return 0;
 }
 
 

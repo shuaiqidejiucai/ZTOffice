@@ -18,6 +18,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QSharedPointer<PST_DocumentAtom> documentAtomPtr;
     QList<QSharedPointer<PST_ExObjList> > exObjListObjList;
     QList<QSharedPointer<PST_Environment> > envmentList;

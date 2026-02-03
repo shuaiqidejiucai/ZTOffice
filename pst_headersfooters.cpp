@@ -22,6 +22,7 @@ int PST_HeadersFooters::parser()
 		case RT_HeadersFootersAtom:
 		{
 			headersFootersAtom = QSharedPointer<PST_HeadsFootersAtom>::create(m_srcData, stVar);
+			addChildNodePtr(headersFootersAtom);
 		}
 		break;
 		default:
@@ -37,6 +38,11 @@ void PST_HeadersFooters::clearParserData()
 	headersFootersAtom.clear();
 }
 
+int PST_HeadersFooters::priority()
+{
+	return 0;
+}
+
 PST_HeadsFootersAtom::PST_HeadsFootersAtom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var)
 {
@@ -50,4 +56,9 @@ int PST_HeadsFootersAtom::parser()
 
 void PST_HeadsFootersAtom::clearParserData()
 {
+}
+
+int PST_HeadsFootersAtom::priority()
+{
+	return 0;
 }

@@ -14,6 +14,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QList<QSharedPointer<PST_RoundTripDocFlags12Atom> > roundTripDocFlags12AtomList;
     QList<QSharedPointer<PST_GridSpacing10Atom> > gridSpacing10AtomList;
     QList<QSharedPointer<PST_SlideTime10Atom> > slideTime10AtomList;

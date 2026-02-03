@@ -14,3 +14,8 @@ int PST_RoundTripDocFlags12Atom::parser()
 void PST_RoundTripDocFlags12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripDocFlags12Atom::priority()
+{
+    return 0;
+}

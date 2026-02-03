@@ -11,3 +11,8 @@ int ODRAW_OfficeArtSplitMenuColorContainer::parser()
 void ODRAW_OfficeArtSplitMenuColorContainer::clearParserData()
 {
 }
+
+int ODRAW_OfficeArtSplitMenuColorContainer::priority()
+{
+    return 0;
+}

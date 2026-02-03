@@ -9,6 +9,7 @@ public:
 
     virtual int parser();
     virtual void clearParserData()override;
+    virtual int priority()override;
 public:
     PointStruct SlideSize;
     PointStruct NotesSize;

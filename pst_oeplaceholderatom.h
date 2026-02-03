@@ -10,6 +10,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
 
     quint32 PlacementID = 0;
     quint8 PlaceholderID = 0;

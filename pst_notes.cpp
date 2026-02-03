@@ -71,3 +71,8 @@ void PST_Notes::clearParserData()
 	roundTripMapping12AtomPtr.clear();
 	roundTripNotesMasterTextStyles12Atom.clear();
 }
+
+int PST_Notes::priority()
+{
+	return 0;
+}

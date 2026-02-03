@@ -11,3 +11,8 @@ int PST_RoundTripColorMapping12Atom::parser()
 void PST_RoundTripColorMapping12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripColorMapping12Atom::priority()
+{
+	return 0;
+}

@@ -29,6 +29,11 @@ void Fopte::clearParserData()
     op = 0;
 }
 
+int Fopte::priority()
+{
+    return 0;
+}
+
 FOPTEComplex::FOPTEComplex(const QByteArray& srcData, const ST_Variable& var) : PST_Base(srcData, var)
 {
 
@@ -42,4 +47,9 @@ int FOPTEComplex::parser()
 void FOPTEComplex::clearParserData()
 {
 
+}
+
+int FOPTEComplex::priority()
+{
+    return 0;
 }

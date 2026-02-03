@@ -14,3 +14,8 @@ int PST_TxMasterStyleAtom::parser()
 void PST_TxMasterStyleAtom::clearParserData()
 {
 }
+
+int PST_TxMasterStyleAtom::priority()
+{
+    return 0;
+}

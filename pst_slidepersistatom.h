@@ -10,6 +10,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     quint32 PSRReference = 0;
     quint32 Flags = 0;
     qint32 NumberTexts = 0;

@@ -11,6 +11,8 @@ public:
     virtual int parser()override;
 
     virtual void clearParserData()override;
+
+    virtual int priority()override;
 };
 
 #endif // PST_ROUNDTRIPTHEME12ATOM_H

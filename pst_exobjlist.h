@@ -9,6 +9,7 @@ public:
     PST_ExObjList(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser() override;
     virtual void clearParserData()override;
+    virtual int priority()override;
 public:
     QSharedPointer<PST_ExternalObjectListAtom> exObjListAtomPtr;
     QList<QSharedPointer<PST_ExEmbed> > exembedList;

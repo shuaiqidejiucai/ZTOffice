@@ -10,6 +10,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     quint8 btWin32 = 0;
     quint8 btMacOS = 0;
     QByteArray rgUid;

@@ -11,6 +11,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData() override;
+    virtual int priority()override;
     quint16 pid;
     quint8 fBid;
     quint8 fComplex;
@@ -23,6 +24,7 @@ public:
     FOPTEComplex(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser() override;
     virtual void clearParserData() override;
+    virtual int priority()override;
 };
 
 #endif // FOPTE_H

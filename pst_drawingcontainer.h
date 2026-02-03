@@ -11,6 +11,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QSharedPointer<PST_OfficeArtFDG> officeArtFDG;
     QSharedPointer<PST_GroupShapeContainer> groupShapeContainer;
     QSharedPointer<PST_ShapeContainer> shapeContainer;

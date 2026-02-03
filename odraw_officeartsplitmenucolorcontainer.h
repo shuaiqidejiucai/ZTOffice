@@ -11,6 +11,8 @@ public:
     virtual int parser() override;
 
     virtual void clearParserData() override;
+
+    virtual int priority()override;
 };
 
 #endif // ODRAW_OFFICEARTSPLITMENUCOLORCONTAINER_H

@@ -13,3 +13,8 @@ int OfficeArtClientData::parser()
 void OfficeArtClientData::clearParserData()
 {
 }
+
+int OfficeArtClientData::priority()
+{
+    return 0;
+}

@@ -11,3 +11,8 @@ int PST_RoundTripShapeld12Atom::parser()
 void PST_RoundTripShapeld12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripShapeld12Atom::priority()
+{
+	return 0;
+}

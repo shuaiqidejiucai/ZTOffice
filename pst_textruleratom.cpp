@@ -11,3 +11,8 @@ int PST_TextRulerAtom::parser()
 void PST_TextRulerAtom::clearParserData()
 {
 }
+
+int PST_TextRulerAtom::priority()
+{
+	return 0;
+}

@@ -41,6 +41,11 @@ void PST_SlideViewInfo::clearParserData()
 	viewInfoAtomList.clear();
 }
 
+int PST_SlideViewInfo::priority()
+{
+	return 0;
+}
+
 PST_SlideViewInfoAtom::PST_SlideViewInfoAtom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
@@ -54,4 +59,9 @@ int PST_SlideViewInfoAtom::parser()
 
 void PST_SlideViewInfoAtom::clearParserData()
 {
+}
+
+int PST_SlideViewInfoAtom::priority()
+{
+	return 0;
 }

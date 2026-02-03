@@ -50,6 +50,8 @@ public:
 
     virtual void clearParserData() override;
 
+    virtual int priority()override;
+
     QSharedPointer<ST_RectStruct> stRectStructPtr;
 };
 

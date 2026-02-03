@@ -9,6 +9,7 @@ public:
     PST_HeadsFootersAtom(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
 };
 
 class PST_HeadersFooters : public PST_Base
@@ -18,6 +19,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QSharedPointer<PST_HeadsFootersAtom> headersFootersAtom;
 
 

@@ -11,3 +11,8 @@ int PST_RoundTripHeaderFooterDefaults12Atom::parser()
 void PST_RoundTripHeaderFooterDefaults12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripHeaderFooterDefaults12Atom::priority()
+{
+    return 0;
+}

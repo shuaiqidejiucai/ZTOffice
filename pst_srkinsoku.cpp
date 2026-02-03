@@ -14,6 +14,11 @@ void PST_KinsokuAtom::clearParserData()
 {
 }
 
+int PST_KinsokuAtom::priority()
+{
+	return 0;
+}
+
 PST_SrKinsoku::PST_SrKinsoku(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
@@ -49,6 +54,11 @@ int PST_SrKinsoku::parser()
 void PST_SrKinsoku::clearParserData()
 {
 	kinsokuAtmoList.clear();
+}
+
+int PST_SrKinsoku::priority()
+{
+	return 0;
 }
 
 

@@ -12,3 +12,8 @@ void PST_TextHeaderAtom::clearParserData()
 {
 	textType = 0;
 }
+
+int PST_TextHeaderAtom::priority()
+{
+	return 0;
+}

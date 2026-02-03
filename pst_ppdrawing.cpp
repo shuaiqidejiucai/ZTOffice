@@ -32,3 +32,8 @@ void PST_PPDrawing::clearParserData()
 {
 	dwingContinerPtr.clear();
 }
+
+int PST_PPDrawing::priority()
+{
+	return 0;
+}

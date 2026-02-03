@@ -17,6 +17,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QSharedPointer<PST_OfficeArtFSPGR> officeArtFSPGRPtr;
     QSharedPointer<PST_OfficeArtFSP> officeArtFSPPtr;
     QSharedPointer<PST_MSOfbtOPT> msoFbtOPTPtr;

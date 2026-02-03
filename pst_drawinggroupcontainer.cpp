@@ -21,6 +21,11 @@ void PST_DrawingGroupAtom::clearParserData()
 {
 }
 
+int PST_DrawingGroupAtom::priority()
+{
+	return 0;
+}
+
 int PST_DrawingGroupContainer::parser()
 {
 	ST_Variable stVar;
@@ -37,21 +42,25 @@ int PST_DrawingGroupContainer::parser()
 		case COMMON_OfficeArtFDGGBlock:
 		{
 			dwGroupAtom = QSharedPointer<PST_DrawingGroupAtom>::create(m_srcData, stVar);
+			addChildNodePtr(dwGroupAtom);
 		}
 		break;
 		case COMMON_OfficeArtBStoreContainer:
 		{
 			odrawOABSContainer = QSharedPointer<ODRAW_OfficeArtBStoreContainer>::create(m_srcData, stVar);
+			addChildNodePtr(odrawOABSContainer);
 		}
 			break;
 		case COMMON_OfficeArtFOPT:
 		{
 			msofbtOPT = QSharedPointer<PST_MSOfbtOPT>::create(m_srcData, stVar);
+			addChildNodePtr(msofbtOPT);
 		}
 			break;
 		case COMMON_OfficeArtSplitMenuColorContainer:
 		{
 			oasColorContainter = QSharedPointer<ODRAW_OfficeArtSplitMenuColorContainer>::create(m_srcData, stVar);
+			addChildNodePtr(oasColorContainter);
 		}
 			break;
 		default:

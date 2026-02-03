@@ -18,41 +18,49 @@ int PST_ClientTextBox::parser()
 		case RT_TextHeaderAtom:
 		{
 			txtHeaderAtom = QSharedPointer<PST_TextHeaderAtom>::create(m_srcData, stVar);
+			addChildNodePtr(txtHeaderAtom);
 		}
 		break;
 		case RT_TextCharsAtom:
 		{
 			txtCharsAtom = QSharedPointer<PST_TextCharsAtom>::create(m_srcData, stVar);
+			addChildNodePtr(txtCharsAtom);
 		}
 			break;
 		case RT_MasterTextPropAtom:
 		{
 			masterTextPropAtom = QSharedPointer<PST_MasterTextPropAtom>::create(m_srcData, stVar);
+			addChildNodePtr(masterTextPropAtom);
 		}
 			break;
 		case RT_TextSpecialInfoAtom:
 		{
 			txtSpecialInfoAtom = QSharedPointer<PST_TextSpecialInfoAtom>::create(m_srcData, stVar);
+			addChildNodePtr(txtSpecialInfoAtom);
 		}
 			break;
 		case RT_StyleTextPropAtom:
 		{
 			styleTextPropAtom = QSharedPointer<PST_StyleTextPropAtom>::create(m_srcData, stVar);
+			addChildNodePtr(styleTextPropAtom);
 		}
 		break;
 		case RT_GenericDateMetaCharAtom:
 		{
 			genericDateMetaCharAtom = QSharedPointer<PST_GenericDateMetaCharAtom>::create(m_srcData, stVar);
+			addChildNodePtr(genericDateMetaCharAtom);
 		}
 			break;
 		case RT_TextRulerAtom:
 		{
 			txtRulerAtom = QSharedPointer<PST_TextRulerAtom>::create(m_srcData, stVar);
+			addChildNodePtr(txtRulerAtom);
 		}
 			break;
 		case RT_SlideNumberMetaCharAtom:
 		{
 			slideNumMCAtom = QSharedPointer<PST_SlideNumberMetaCharAtom>::create(m_srcData, stVar);
+			addChildNodePtr(slideNumMCAtom);
 		}
 			break;
 		default:
@@ -73,4 +81,9 @@ void PST_ClientTextBox::clearParserData()
 	genericDateMetaCharAtom.clear();
 	txtRulerAtom.clear();
 	slideNumMCAtom.clear();
+}
+
+int PST_ClientTextBox::priority()
+{
+	return 0;
 }

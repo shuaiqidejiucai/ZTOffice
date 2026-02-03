@@ -20,6 +20,7 @@ int PST_GroupShapeContainer::parser()
 		{
 			QSharedPointer<PST_ShapeContainer> shapContainerPtr(new PST_ShapeContainer(m_srcData, stVar));
 			shapeContainerList.append(shapContainerPtr);
+			addChildNodePtr(shapContainerPtr);
 		}
 		break;
 		default:
@@ -33,4 +34,9 @@ int PST_GroupShapeContainer::parser()
 void PST_GroupShapeContainer::clearParserData()
 {
 	shapeContainerList.clear();
+}
+
+int PST_GroupShapeContainer::priority()
+{
+	return 0;
 }

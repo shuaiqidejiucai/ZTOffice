@@ -14,3 +14,8 @@ int PST_RoundTripContentMasterInfo12Atom::parser()
 void PST_RoundTripContentMasterInfo12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripContentMasterInfo12Atom::priority()
+{
+	return 0;
+}

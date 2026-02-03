@@ -50,3 +50,8 @@ void PST_MSOfbtTertiaryOPT::clearParserData()
 	fopteComplexList.clear();
 }
 
+int PST_MSOfbtTertiaryOPT::priority()
+{
+	return 0;
+}
+

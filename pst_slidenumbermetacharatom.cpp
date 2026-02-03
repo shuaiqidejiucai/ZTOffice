@@ -12,3 +12,8 @@ void PST_SlideNumberMetaCharAtom::clearParserData()
 {
 
 }
+
+int PST_SlideNumberMetaCharAtom::priority()
+{
+	return 0;
+}

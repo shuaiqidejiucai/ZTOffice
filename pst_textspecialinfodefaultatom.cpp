@@ -14,3 +14,8 @@ int PST_TextSpecialInfoDefaultAtom::parser()
 void PST_TextSpecialInfoDefaultAtom::clearParserData()
 {
 }
+
+int PST_TextSpecialInfoDefaultAtom::priority()
+{
+    return 0;
+}

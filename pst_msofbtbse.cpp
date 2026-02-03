@@ -39,3 +39,8 @@ void PST_MSOfbtBSE::clearParserData()
 	Unused2 = 0;
 	Unused3 = 0;
 }
+
+int PST_MSOfbtBSE::priority()
+{
+	return 0;
+}

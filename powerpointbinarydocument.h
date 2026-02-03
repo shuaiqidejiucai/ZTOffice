@@ -19,7 +19,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData() override;
-
+    virtual int priority()override;
     QSharedPointer<PST_CurrentUserAtom> currentUserAtom;
     QSharedPointer<PST_UserEditAtom> userEditAtomPtr;
     QSharedPointer<PST_PersistDirectoryAtom> persistDirectoryAtomPtr;
@@ -31,7 +31,7 @@ public:
     QList<QSharedPointer<PST_ExternaloleObjectStg> > exOleObjStringList;
 
 private:
-
+    QHash<quint32, QWeakPointer<PST_Base> > m_HashPtrHash;
 };
 
 #endif // POWERPOINTBINARYDOCUMENT_H

@@ -12,7 +12,9 @@ public:
 
     virtual void clearParserData() override;
 
+    virtual int priority()override;
     QList<QSharedPointer<PST_MSOfbtBSE> > msoBtBsePtrList;
+
 };
 
 #endif // ODRAW_OFFICEARTBSTORECONTAINER_H

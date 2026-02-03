@@ -20,26 +20,31 @@ int PST_Handout::parser()
         case RT_Drawing:
         {
             ppDwingPtr = QSharedPointer<PST_PPDrawing>::create(m_srcData, stVar);
+            addChildNodePtr(ppDwingPtr);
         }
         break;
         case RT_ColorSchemeAtom:
         {
             colorSchemeAtomPtr = QSharedPointer<PST_ColorSchemeAtom>::create(m_srcData, stVar);
+            addChildNodePtr(colorSchemeAtomPtr);
         }
             break;
         case RT_ProgTags:
         {
             proTagesPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
+            addChildNodePtr(proTagesPtr);
         }
         break;
         case RT_RoundTripTheme12Atom:
         {
             RTT12AtomPtr = QSharedPointer<PST_RoundTripTheme12Atom>::create(m_srcData, stVar);
+            addChildNodePtr(RTT12AtomPtr);
         }
         break;
         case RT_RoundTripColorMapping12Atom:
         {
             RTCMappingAtomPtr = QSharedPointer<PST_RoundTripColorMapping12Atom>::create(m_srcData, stVar);
+            addChildNodePtr(RTCMappingAtomPtr);
         }
         break;
         default:
@@ -57,4 +62,9 @@ void PST_Handout::clearParserData()
     proTagesPtr.clear();
     RTT12AtomPtr.clear();
     RTCMappingAtomPtr.clear();
+}
+
+int PST_Handout::priority()
+{
+    return 0;
 }

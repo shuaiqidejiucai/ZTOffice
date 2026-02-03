@@ -11,3 +11,8 @@ int PST_StyleTextPropAtom::parser()
 void PST_StyleTextPropAtom::clearParserData()
 {
 }
+
+int PST_StyleTextPropAtom::priority()
+{
+	return 0;
+}

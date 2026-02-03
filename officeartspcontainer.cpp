@@ -12,3 +12,8 @@ int OfficeArtSpContainer::parser()
 void OfficeArtSpContainer::clearParserData()
 {
 }
+
+int OfficeArtSpContainer::priority()
+{
+	return 0;
+}

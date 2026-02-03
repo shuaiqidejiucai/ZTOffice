@@ -22,3 +22,8 @@ void PST_SlidePersistAtom::clearParserData()
 	SlideID = 0;
 	Unused = 0;
 }
+
+int PST_SlidePersistAtom::priority()
+{
+	return 0;
+}

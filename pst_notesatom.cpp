@@ -10,3 +10,8 @@ int PST_NotesAtom::parser()
 void PST_NotesAtom::clearParserData()
 {
 }
+
+int PST_NotesAtom::priority()
+{
+    return 0;
+}

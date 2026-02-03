@@ -10,7 +10,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData()override;
-
+    virtual int priority()override;
     quint32 lastSlideIdRef = 0;
     /*quint32 version : 16;
     quint32 minorVersion : 8;

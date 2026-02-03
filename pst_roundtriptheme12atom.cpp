@@ -11,3 +11,8 @@ int PST_RoundTripTheme12Atom::parser()
 void PST_RoundTripTheme12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripTheme12Atom::priority()
+{
+	return 0;
+}

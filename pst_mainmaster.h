@@ -19,6 +19,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QSharedPointer<PST_SlideAtom> slideAtomPtr;
     QList<QSharedPointer<PST_ColorSchemeAtom> > colorSchemeAtomPtrList;
     QList<QSharedPointer<PST_TxMasterStyleAtom> > txMasterStyleAtomPtrList;

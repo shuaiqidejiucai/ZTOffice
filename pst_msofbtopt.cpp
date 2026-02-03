@@ -52,3 +52,8 @@ void PST_MSOfbtOPT::clearParserData()
 	fopteList.clear();
 	fopteComList.clear();
 }
+
+int PST_MSOfbtOPT::priority()
+{
+	return 0;
+}

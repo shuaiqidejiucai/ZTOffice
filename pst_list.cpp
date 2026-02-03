@@ -18,24 +18,28 @@ int PST_List::parser()
 		{
 			QSharedPointer<PST_NormalViewSetInfo> normalViewSetInfo(new PST_NormalViewSetInfo(m_srcData, stVar));
 			normalViewSetInfoList.append(normalViewSetInfo);
+			addChildNodePtr(normalViewSetInfo);
 		}
 			break;
 		case RT_NotesTextViewInfo9:
 		{
 			QSharedPointer<PST_NotesTextViewInfo> notesTextViewInfo (new PST_NotesTextViewInfo(m_srcData, stVar));
 			notesTxtViewInfoList.append(notesTextViewInfo);
+			addChildNodePtr(notesTextViewInfo);
 		}
 			break;
 		case RT_SlideViewInfo:
 		{
 			QSharedPointer<PST_SlideViewInfo> slideViewInfo(new PST_SlideViewInfo(m_srcData, stVar));
 			slideViewInfoList.append(slideViewInfo);
+			addChildNodePtr(slideViewInfo);
 		}
 			break;
 		case RT_ProgTags:
 		{
 			QSharedPointer<PST_ProgTags> progTagsPtr(new PST_ProgTags(m_srcData, stVar));
 			progTagsList.append(progTagsPtr);
+			addChildNodePtr(progTagsPtr);
 		}
 			break;
 		default:
@@ -52,4 +56,9 @@ void PST_List::clearParserData()
 	notesTxtViewInfoList.clear();
 	slideViewInfoList.clear();
 	progTagsList.clear();
+}
+
+int PST_List::priority()
+{
+	return 0;
 }

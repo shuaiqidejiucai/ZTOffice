@@ -13,3 +13,8 @@ int PST_RoundTripOArtTextStyles12Atom::parser()
 void PST_RoundTripOArtTextStyles12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripOArtTextStyles12Atom::priority()
+{
+	return 0;
+}

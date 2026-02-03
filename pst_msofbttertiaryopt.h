@@ -10,6 +10,7 @@ public:
     PST_MSOfbtTertiaryOPT(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QList<QSharedPointer<Fopte> > fopteList;
     QList<QSharedPointer<FOPTEComplex> > fopteComplexList;
 };

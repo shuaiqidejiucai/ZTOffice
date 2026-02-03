@@ -22,12 +22,14 @@ int PST_ExObjList::parser()
 		case RT_ExternalObjectListAtom:
 		{
 			exObjListAtomPtr = QSharedPointer<PST_ExternalObjectListAtom>::create(m_srcData, stVar);
+			addChildNodePtr(exObjListAtomPtr);
 		}
 		break;
 		case RT_ExternalOleEmbed:
 		{
 			QSharedPointer<PST_ExEmbed> exEmbed(new PST_ExEmbed(m_srcData, stVar));
 			exembedList.append(exEmbed);
+			addChildNodePtr(exEmbed);
 		}
 			break;
 		default:
@@ -42,4 +44,9 @@ void PST_ExObjList::clearParserData()
 {
 	exObjListAtomPtr.clear();
 	exembedList.clear();
+}
+
+int PST_ExObjList::priority()
+{
+	return 0;
 }

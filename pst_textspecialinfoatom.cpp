@@ -11,3 +11,8 @@ int PST_TextSpecialInfoAtom::parser()
 void PST_TextSpecialInfoAtom::clearParserData()
 {
 }
+
+int PST_TextSpecialInfoAtom::priority()
+{
+	return 0;
+}

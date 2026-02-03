@@ -11,6 +11,8 @@ public:
     virtual int parser()override;
 
     virtual void clearParserData()override;
+
+    virtual int priority()override;
 };
 
 class PST_SlideViewInfo : public PST_Base
@@ -20,6 +22,8 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+
+    virtual int priority()override;
     QList<QSharedPointer<PST_SlideViewInfoAtom> > slideViewInfoAtomList;
     QList<QSharedPointer<PST_ViewInfoAtom> > viewInfoAtomList;
 };

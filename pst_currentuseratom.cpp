@@ -16,3 +16,8 @@ int PST_CurrentUserAtom::parser()
 void PST_CurrentUserAtom::clearParserData()
 {
 }
+
+int PST_CurrentUserAtom::priority()
+{
+	return 0;
+}

@@ -18,3 +18,8 @@ void PST_ExternalObjectListAtom::clearParserData()
 {
 
 }
+
+int PST_ExternalObjectListAtom::priority()
+{
+	return 0;
+}

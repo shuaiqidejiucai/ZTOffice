@@ -31,3 +31,8 @@ void PST_PersistDirectoryAtom::clearParserData()
 {
 	rgPersistDirEntryArray.clear();
 }
+
+int PST_PersistDirectoryAtom::priority()
+{
+	return 0;
+}

@@ -21,3 +21,8 @@ void PST_OEPlaceHolderAtom::clearParserData()
 	Size = 0;
 	Unused = 0;
 }
+
+int PST_OEPlaceHolderAtom::priority()
+{
+	return 0;
+}

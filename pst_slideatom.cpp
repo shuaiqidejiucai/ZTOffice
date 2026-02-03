@@ -11,3 +11,8 @@ int PST_SlideAtom::parser()
 void PST_SlideAtom::clearParserData()
 {
 }
+
+int PST_SlideAtom::priority()
+{
+	return 0;
+}

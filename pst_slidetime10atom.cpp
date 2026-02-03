@@ -11,3 +11,8 @@ int PST_SlideTime10Atom::parser()
 void PST_SlideTime10Atom::clearParserData()
 {
 }
+
+int PST_SlideTime10Atom::priority()
+{
+	return 0;
+}

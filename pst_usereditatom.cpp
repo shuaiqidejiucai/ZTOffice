@@ -44,3 +44,8 @@ void PST_UserEditAtom::clearParserData()
 	unused = 0;
 	encryptSessionPersistIdRef = 0;
 }
+
+int PST_UserEditAtom::priority()
+{
+	return 0;
+}

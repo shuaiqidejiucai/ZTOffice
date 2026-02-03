@@ -11,3 +11,8 @@ int PST_RoundTripCustomTableStyles12::parser()
 void PST_RoundTripCustomTableStyles12::clearParserData()
 {
 }
+
+int PST_RoundTripCustomTableStyles12::priority()
+{
+	return 0;
+}

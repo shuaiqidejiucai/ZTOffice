@@ -12,3 +12,8 @@ void PST_ExternaloleObjectStg::clearParserData()
 {
 
 }
+
+int PST_ExternaloleObjectStg::priority()
+{
+	return 0;
+}

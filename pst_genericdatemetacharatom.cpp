@@ -11,3 +11,8 @@ int PST_GenericDateMetaCharAtom::parser()
 void PST_GenericDateMetaCharAtom::clearParserData()
 {
 }
+
+int PST_GenericDateMetaCharAtom::priority()
+{
+    return 0;
+}

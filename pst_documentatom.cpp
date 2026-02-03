@@ -48,3 +48,8 @@ void PST_DocumentAtom::clearParserData()
 	fRightToLeft = 0;
 	fShowComments = 0;
 }
+
+int PST_DocumentAtom::priority()
+{
+	return 0;
+}

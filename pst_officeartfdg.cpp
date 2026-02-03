@@ -10,3 +10,8 @@ int PST_OfficeArtFDG::parser()
 void PST_OfficeArtFDG::clearParserData()
 {
 }
+
+int PST_OfficeArtFDG::priority()
+{
+    return 0;
+}

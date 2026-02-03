@@ -16,6 +16,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QList<QSharedPointer<PST_SrKinsoku> > srKinSoKuList;
     QList<QSharedPointer<PST_FontCollection> > fontCollectionList;
     QList<QSharedPointer<PST_TextCharFormatExceptionAtom> > textFormatExAtomList;

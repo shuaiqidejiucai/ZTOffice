@@ -59,3 +59,8 @@ void PST_Slide::clearParserData()
 	proTagsPtr.clear();
 	roundTripContentMasterId12AtomPtr.clear();
 }
+
+int PST_Slide::priority()
+{
+	return 0;
+}

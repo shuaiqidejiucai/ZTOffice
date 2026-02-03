@@ -12,3 +12,8 @@ int PST_ColorSchemeAtom::parser()
 void PST_ColorSchemeAtom::clearParserData()
 {
 }
+
+int PST_ColorSchemeAtom::priority()
+{
+	return 0;
+}

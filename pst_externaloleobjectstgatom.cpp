@@ -14,3 +14,8 @@ int PST_ExternalOleObjectStgAtom::parser()
 void PST_ExternalOleObjectStgAtom::clearParserData()
 {
 }
+
+int PST_ExternalOleObjectStgAtom::priority()
+{
+	return 0;
+}

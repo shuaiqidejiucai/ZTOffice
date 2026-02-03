@@ -14,3 +14,8 @@ int PST_ViewInfoAtom::parser()
 void PST_ViewInfoAtom::clearParserData()
 {
 }
+
+int PST_ViewInfoAtom::priority()
+{
+    return 0;
+}

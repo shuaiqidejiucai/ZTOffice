@@ -13,6 +13,8 @@ public:
 
     virtual void clearParserData()override;
 
+    virtual int priority()override;
+
     QList<QSharedPointer<PST_ProgBinaryTag> > progBinTagList;
 };
 

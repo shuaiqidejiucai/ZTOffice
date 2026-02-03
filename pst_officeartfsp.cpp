@@ -47,3 +47,8 @@ void PST_OfficeArtFSP::clearParserData()
 	fHaveSpt = 0;
 	unused = 0;
 }
+
+int PST_OfficeArtFSP::priority()
+{
+	return 0;
+}

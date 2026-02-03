@@ -12,3 +12,8 @@ void PST_RoundTripHFPlaceholder12Atom::clearParserData()
 {
 
 }
+
+int PST_RoundTripHFPlaceholder12Atom::priority()
+{
+	return 0;
+}

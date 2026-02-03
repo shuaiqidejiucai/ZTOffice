@@ -38,3 +38,8 @@ void PST_ProgBinaryTag::clearParserData()
 	ctring.clear();
 	binTagData.clear();
 }
+
+int PST_ProgBinaryTag::priority()
+{
+	return 0;
+}

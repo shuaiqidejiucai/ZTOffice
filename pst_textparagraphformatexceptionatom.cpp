@@ -14,3 +14,8 @@ int PST_TextParagraphFormatExceptionAtom::parser()
 void PST_TextParagraphFormatExceptionAtom::clearParserData()
 {
 }
+
+int PST_TextParagraphFormatExceptionAtom::priority()
+{
+    return 0;
+}

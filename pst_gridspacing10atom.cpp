@@ -13,3 +13,8 @@ int PST_GridSpacing10Atom::parser()
 void PST_GridSpacing10Atom::clearParserData()
 {
 }
+
+int PST_GridSpacing10Atom::priority()
+{
+    return 0;
+}

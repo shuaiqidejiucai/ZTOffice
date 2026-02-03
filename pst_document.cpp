@@ -21,53 +21,62 @@ int PST_Document::parser()
 		case RT_DocumentAtom:
 		{
 			documentAtomPtr = QSharedPointer<PST_DocumentAtom>::create(m_srcData, stVar);
+			addChildNodePtr(documentAtomPtr);
 		}
 			break;
 		case RT_ExternalObjectList:
 		{
 			QSharedPointer<PST_ExObjList> exObjPtr(new PST_ExObjList(m_srcData, stVar));
-
+			exObjListObjList.append(exObjPtr);
+			addChildNodePtr(exObjPtr);
 		}
 			break;
 		case RT_Environment:
 		{
 			QSharedPointer<PST_Environment> envPtr(new PST_Environment(m_srcData, stVar));
 			envmentList.append(envPtr);
+			addChildNodePtr(envPtr);
 		}
 			break;
 		case RT_DrawingGroup:
 		{
 			QSharedPointer<PST_PPDrawingGroup> dwingGroupPtr(new PST_PPDrawingGroup(m_srcData, stVar));
 			ppdwGroupList.append(dwingGroupPtr);
+			addChildNodePtr(dwingGroupPtr);
 		}
 			break;
 		case RT_SlideListWithText:
 		{
 			QSharedPointer<PST_SlideListWithText> slideListWithTextPtr(new PST_SlideListWithText(m_srcData, stVar));
 			slideListWithTxtList.append(slideListWithTextPtr);
+			addChildNodePtr(slideListWithTextPtr);
 		}
 		break;
 		case RT_List:
 		{
 			QSharedPointer<PST_List> pstListPtr(new PST_List(m_srcData, stVar));
 			PSTList.append(pstListPtr);
+			addChildNodePtr(pstListPtr);
 		}
 		break;
 		case RT_HeadersFooters:
 		{
 			QSharedPointer<PST_HeadersFooters> headersFootersPtr(new PST_HeadersFooters(m_srcData, stVar));
 			headersFootersList.append(headersFootersPtr);
+			addChildNodePtr(headersFootersPtr);
 		}
 		break;
 		case RT_RoundTripCustomTableStyles12Atom:
 		{
 			QSharedPointer<PST_RoundTripCustomTableStyles12> roundTripTableStylePtr(new PST_RoundTripCustomTableStyles12(m_srcData, stVar));
 			roundTripTableStyleList.append(roundTripTableStylePtr);
+			addChildNodePtr(roundTripTableStylePtr);
 		}
 			break;
 		case RT_EndDocumentAtom:
 		{
 			endDocumentAtom = QSharedPointer<PST_EndDocumentAtom>::create(m_srcData,stVar);
+			addChildNodePtr(endDocumentAtom);
 		}
 			break;
 		default:
@@ -89,4 +98,9 @@ void PST_Document::clearParserData()
 	headersFootersList.clear();
 	roundTripTableStyleList.clear();
 	endDocumentAtom.clear();
+}
+
+int PST_Document::priority()
+{
+	return 0;
 }

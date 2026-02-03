@@ -77,3 +77,8 @@ void PST_ShapeContainer::clearParserData()
 
 	clientTxtBoxPtr.clear();
 }
+
+int PST_ShapeContainer::priority()
+{
+	return 0;
+}

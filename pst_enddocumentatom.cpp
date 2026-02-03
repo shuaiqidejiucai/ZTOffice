@@ -13,3 +13,8 @@ int PST_EndDocumentAtom::parser()
 void PST_EndDocumentAtom::clearParserData()
 {
 }
+
+int PST_EndDocumentAtom::priority()
+{
+    return 0;
+}

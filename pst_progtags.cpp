@@ -33,3 +33,8 @@ void PST_ProgTags::clearParserData()
 {
 	progBinTagList.clear();
 }
+
+int PST_ProgTags::priority()
+{
+	return 0;
+}

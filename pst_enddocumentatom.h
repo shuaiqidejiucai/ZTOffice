@@ -9,6 +9,7 @@ public:
     PST_EndDocumentAtom(const QByteArray& srcData, const ST_Variable& var);
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
 };
 
 #endif // PST_ENDDOCUMENTATOM_H

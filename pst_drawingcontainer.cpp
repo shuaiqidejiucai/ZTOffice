@@ -19,16 +19,19 @@ int PST_DrawingContainer::parser()
 		case COMMON_OfficeArtFDG:
 		{
 			officeArtFDG = QSharedPointer<PST_OfficeArtFDG>::create(m_srcData, stVar);
+			addChildNodePtr(officeArtFDG);
 		}
 		break;
 		case COMMON_OfficeArtSpgrContainer:
 		{
 			groupShapeContainer = QSharedPointer<PST_GroupShapeContainer>::create(m_srcData, stVar);
+			addChildNodePtr(groupShapeContainer);
 		}
 			break;
 		case COMMON_OfficeArtSpContainer:
 		{
 			shapeContainer = QSharedPointer<PST_ShapeContainer>::create(m_srcData, stVar);
+			addChildNodePtr(shapeContainer);
 		}
 			break;
 		default:
@@ -44,4 +47,9 @@ void PST_DrawingContainer::clearParserData()
 	officeArtFDG.clear();
 	groupShapeContainer.clear();
 	shapeContainer.clear();
+}
+
+int PST_DrawingContainer::priority()
+{
+	return 0;
 }

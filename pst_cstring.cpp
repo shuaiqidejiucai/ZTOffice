@@ -15,3 +15,8 @@ int PST_CString::parser()
 void PST_CString::clearParserData()
 {
 }
+
+int PST_CString::priority()
+{
+	return 0;
+}

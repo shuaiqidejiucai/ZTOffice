@@ -28,3 +28,8 @@ void PST_SlideListWithText::clearParserData()
 {
 	slidePerAtomList.clear();
 }
+
+int PST_SlideListWithText::priority()
+{
+	return 0;
+}

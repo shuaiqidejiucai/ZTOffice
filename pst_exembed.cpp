@@ -22,17 +22,20 @@ int PST_ExEmbed::parser()
 		case RT_ExternalOleEmbedAtom:
 		{
 			exOleEmbedAtom = QSharedPointer<PST_ExternalOleEmbedAtom>::create(m_srcData, stVar);
+			addChildNodePtr(exOleEmbedAtom);
 		}
 		break;
 		case RT_ExternalOleObjectAtom:
 		{
 			exOleObjAtom = QSharedPointer<PST_ExternalOleObjectAtom>::create(m_srcData, stVar);
+			addChildNodePtr(exOleObjAtom);
 		}
 		break;
 		case RT_CString:
 		{
 			QSharedPointer<PST_CString> cString(new PST_CString(m_srcData, stVar));
 			cstringList.append(cString);
+			addChildNodePtr(cString);
 		}
 		break;
 		default:
@@ -48,4 +51,9 @@ void PST_ExEmbed::clearParserData()
 	exOleEmbedAtom.clear();
 	exOleObjAtom.clear();
 	cstringList.clear();
+}
+
+int PST_ExEmbed::priority()
+{
+	return 0;
 }

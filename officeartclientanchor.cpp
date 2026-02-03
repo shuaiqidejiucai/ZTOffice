@@ -34,3 +34,8 @@ void OfficeArtClientAnchor::clearParserData()
 {
     stRectStructPtr.clear();
 }
+
+int OfficeArtClientAnchor::priority()
+{
+    return 0;
+}

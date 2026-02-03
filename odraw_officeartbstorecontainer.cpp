@@ -22,6 +22,7 @@ int ODRAW_OfficeArtBStoreContainer::parser()
 		{
 			QSharedPointer<PST_MSOfbtBSE> msoFbtBSE = QSharedPointer<PST_MSOfbtBSE>::create(m_srcData, stVar);
 			msoBtBsePtrList.append(msoFbtBSE);
+			addChildNodePtr(msoFbtBSE);
 		}
 		break;
 		default:
@@ -35,4 +36,10 @@ int ODRAW_OfficeArtBStoreContainer::parser()
 void ODRAW_OfficeArtBStoreContainer::clearParserData()
 {
 	msoBtBsePtrList.clear();
+
+}
+
+int ODRAW_OfficeArtBStoreContainer::priority()
+{
+	return 0;
 }

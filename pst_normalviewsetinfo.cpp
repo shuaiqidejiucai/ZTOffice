@@ -35,6 +35,11 @@ void PST_NormalViewSetInfo::clearParserData()
 	normalViewSetInfo9AtomList.clear();
 }
 
+int PST_NormalViewSetInfo::priority()
+{
+	return 0;
+}
+
 PST_NormalViewSetInfo9Atom::PST_NormalViewSetInfo9Atom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
@@ -48,4 +53,9 @@ int PST_NormalViewSetInfo9Atom::parser()
 
 void PST_NormalViewSetInfo9Atom::clearParserData()
 {
+}
+
+int PST_NormalViewSetInfo9Atom::priority()
+{
+	return 0;
 }

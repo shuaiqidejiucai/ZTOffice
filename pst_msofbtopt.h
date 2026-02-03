@@ -10,6 +10,7 @@ public:
 
     virtual int parser()override;
     virtual void clearParserData()override;
+    virtual int priority()override;
     QList<QSharedPointer<Fopte> > fopteList;
     QList<QSharedPointer<FOPTEComplex> > fopteComList;
 };

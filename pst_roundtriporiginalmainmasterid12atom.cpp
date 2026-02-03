@@ -13,3 +13,8 @@ int PST_RoundTripOriginalMainMasterId12Atom::parser()
 void PST_RoundTripOriginalMainMasterId12Atom::clearParserData()
 {
 }
+
+int PST_RoundTripOriginalMainMasterId12Atom::priority()
+{
+	return 0;
+}

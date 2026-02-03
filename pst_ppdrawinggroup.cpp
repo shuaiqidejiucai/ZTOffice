@@ -32,3 +32,8 @@ void PST_PPDrawingGroup::clearParserData()
 {
 	dwGroupContainterList.clear();
 }
+
+int PST_PPDrawingGroup::priority()
+{
+	return 0;
+}

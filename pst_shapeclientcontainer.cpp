@@ -41,3 +41,8 @@ void PST_ShapeClientContainer::clearParserData()
 	//QSharedPointer<PST_ExternalObjectRefAtom> exObjRefAtom;
 	progTagsPtr.clear();
 }
+
+int PST_ShapeClientContainer::priority()
+{
+	return 0;
+}

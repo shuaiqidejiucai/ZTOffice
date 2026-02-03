@@ -12,7 +12,7 @@ public:
 
     virtual int parser() override;
     virtual void clearParserData()override;
-
+    virtual int priority()override;
     QSharedPointer<PST_ExternalOleEmbedAtom> exOleEmbedAtom;
     QSharedPointer<PST_ExternalOleObjectAtom> exOleObjAtom;
     QList<QSharedPointer<PST_CString> > cstringList;

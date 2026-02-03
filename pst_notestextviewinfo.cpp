@@ -34,4 +34,9 @@ void PST_NotesTextViewInfo::clearParserData()
 	viewInfoAtomList.clear();
 }
 
+int PST_NotesTextViewInfo::priority()
+{
+	return 0;
+}
+
 
