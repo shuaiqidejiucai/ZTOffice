@@ -9,7 +9,7 @@ class Fopte : public PST_Base
 public:
     Fopte(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser() override;
+    virtual int parser(PSTSearch * pSeaechPtr) override;
     virtual void clearParserData() override;
     virtual int priority()override;
     quint16 pid;
@@ -22,7 +22,7 @@ class FOPTEComplex : public PST_Base
 {
 public:
     FOPTEComplex(const QByteArray& srcData, const ST_Variable& var);
-    virtual int parser() override;
+    virtual int parser(PSTSearch* pSearchPtr) override;
     virtual void clearParserData() override;
     virtual int priority()override;
 };

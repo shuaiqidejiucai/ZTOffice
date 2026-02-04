@@ -3,7 +3,7 @@
 OfficeArtClientAnchor::OfficeArtClientAnchor(const QByteArray& srcData, const ST_Variable& var)
 :PST_Base(srcData, var){}
 
-int OfficeArtClientAnchor::parser()
+int OfficeArtClientAnchor::parser(PSTSearch* pSearchPtr)
 {
     quint32 pos = ST_SP(m_STVar);
     

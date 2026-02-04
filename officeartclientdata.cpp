@@ -4,7 +4,7 @@ OfficeArtClientData::OfficeArtClientData(const QByteArray& srcData, const ST_Var
     :PST_Base(srcData,var)
 {}
 
-int OfficeArtClientData::parser()
+int OfficeArtClientData::parser(PSTSearch* pSearchPtr)
 {
     //TODO:事件相关
     return Error_TODO;

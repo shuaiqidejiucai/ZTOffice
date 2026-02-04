@@ -1,12 +1,12 @@
 #include "pst_mainmaster.h"
-
+#include "pstsearch.h"
 PST_MainMaster::PST_MainMaster(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var)
 {
 
 }
 
-int PST_MainMaster::parser()
+int PST_MainMaster::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(stVar);
@@ -22,6 +22,7 @@ int PST_MainMaster::parser()
 		{
 			slideAtomPtr = QSharedPointer<PST_SlideAtom>::create(m_srcData, stVar);
 			addChildNodePtr(slideAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slideAtomPtr);
 		}
 		break;
 		case RT_ColorSchemeAtom:
@@ -29,6 +30,7 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_ColorSchemeAtom> colorSchemeAtom(new PST_ColorSchemeAtom(m_srcData, stVar));
 			colorSchemeAtomPtrList.append(colorSchemeAtom);
 			addChildNodePtr(colorSchemeAtom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, colorSchemeAtom);
 		}
 		break;
 		case RT_TextMasterStyleAtom:
@@ -36,24 +38,28 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_TxMasterStyleAtom> txMasterStyleAtomPtr(new PST_TxMasterStyleAtom(m_srcData, stVar));
 			txMasterStyleAtomPtrList.append(txMasterStyleAtomPtr);
 			addChildNodePtr(txMasterStyleAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, txMasterStyleAtomPtr);
 		}
 			break;
 		case RT_RoundTripOArtTextStyles12Atom:
 		{
 			roundTripOArtTxtStyles12Atom = QSharedPointer<PST_RoundTripOArtTextStyles12Atom>::create(m_srcData, stVar);
 			addChildNodePtr(roundTripOArtTxtStyles12Atom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripOArtTxtStyles12Atom);
 		}
 		break;
 		case RT_Drawing:
 		{
 			ppdDwingPtr = QSharedPointer<PST_PPDrawing>::create(m_srcData, stVar);
 			addChildNodePtr(ppdDwingPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, ppdDwingPtr);
 		}
 			break;
 		case RT_ProgTags:
 		{
 			progTagsPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
 			addChildNodePtr(progTagsPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, progTagsPtr);
 		}
 			break;
 		case RT_RoundTripTheme12Atom:
@@ -61,6 +67,7 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_RoundTripTheme12Atom> roundTripTheme12AtomPtr(new PST_RoundTripTheme12Atom(m_srcData, stVar));
 			roundTripTheme12AtomPtrList.append(roundTripTheme12AtomPtr);
 			addChildNodePtr(roundTripTheme12AtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripTheme12AtomPtr);
 		}
 			break;
 		case RT_RoundTripColorMapping12Atom:
@@ -68,6 +75,7 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_RoundTripColorMapping12Atom> roundTripColoeMapping12AtomPtr (new PST_RoundTripColorMapping12Atom(m_srcData, stVar));
 			roundTripColorMapping12AtomPtrList.append(roundTripColoeMapping12AtomPtr);
 			addChildNodePtr(roundTripColoeMapping12AtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripColoeMapping12AtomPtr);
 		}
 			break;
 		case RT_RoundTripContentMasterInfo12Atom:
@@ -75,6 +83,7 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_RoundTripContentMasterInfo12Atom> roundTripContentMaster12AtomPtr(new PST_RoundTripContentMasterInfo12Atom(m_srcData, stVar));
 			roundTripContentMasterInfo12AtomPtrList.append(roundTripContentMaster12AtomPtr);
 			addChildNodePtr(roundTripContentMaster12AtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripContentMaster12AtomPtr);
 		}
 			break;
 		case RT_RoundTripOriginalMainMasterId12Atom:
@@ -82,6 +91,7 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_RoundTripOriginalMainMasterId12Atom>roundTripOriginalMainMasterId12AtomPtr(new PST_RoundTripOriginalMainMasterId12Atom(m_srcData, stVar));
 			roundTripContentMasterId12AtomPtrList.append(roundTripOriginalMainMasterId12AtomPtr);
 			addChildNodePtr(roundTripOriginalMainMasterId12AtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripOriginalMainMasterId12AtomPtr);
 		}
 			break;
 		case RT_CString:
@@ -89,6 +99,7 @@ int PST_MainMaster::parser()
 			QSharedPointer<PST_CString> cstring(new PST_CString(m_srcData, stVar));
 			cstringPtrList.append(cstring);
 			addChildNodePtr(cstring);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, cstring);
 		}
 			break;
 		default:

@@ -1,9 +1,9 @@
 #include "pst_normalviewsetinfo.h"
-
+#include "pstsearch.h"
 PST_NormalViewSetInfo::PST_NormalViewSetInfo(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_NormalViewSetInfo::parser()
+int PST_NormalViewSetInfo::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -19,6 +19,8 @@ int PST_NormalViewSetInfo::parser()
 		{
 			QSharedPointer<PST_NormalViewSetInfo9Atom> normalViewSetInfoAtom(new PST_NormalViewSetInfo9Atom(m_srcData, stVar));
 			normalViewSetInfo9AtomList.append(normalViewSetInfoAtom);
+			addChildNodePtr(normalViewSetInfoAtom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, normalViewSetInfoAtom);
 		}
 		break;
 		default:
@@ -46,7 +48,7 @@ PST_NormalViewSetInfo9Atom::PST_NormalViewSetInfo9Atom(const QByteArray &srcData
 
 }
 
-int PST_NormalViewSetInfo9Atom::parser()
+int PST_NormalViewSetInfo9Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

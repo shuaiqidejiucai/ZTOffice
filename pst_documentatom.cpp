@@ -6,7 +6,7 @@ PST_DocumentAtom::PST_DocumentAtom(const QByteArray &srcData, const ST_Variable&
 
 }
 
-int PST_DocumentAtom::parser()
+int PST_DocumentAtom::parser(PSTSearch* pSearchPtr)
 {
 	quint32 pos = m_STVar.startPos;
 	SlideSize.x = GetFlagData<qint32>(m_srcData, pos);

@@ -5,7 +5,7 @@ PST_EndDocumentAtom::PST_EndDocumentAtom(const QByteArray& srcData, const ST_Var
 {
 }
 
-int PST_EndDocumentAtom::parser()
+int PST_EndDocumentAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

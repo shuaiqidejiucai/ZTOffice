@@ -7,7 +7,7 @@ PST_CurrentUserAtom::PST_CurrentUserAtom(const QByteArray &byteArry, const ST_Va
 
 }
 
-int PST_CurrentUserAtom::parser()
+int PST_CurrentUserAtom::parser(PSTSearch* pSearchPtr)
 {
 	//TODO:用户数据暂时无用不解
 	return Error_TODO;

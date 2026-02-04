@@ -3,7 +3,7 @@
 PST_TextHeaderAtom::PST_TextHeaderAtom(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var),textType(0) {}
 
-int PST_TextHeaderAtom::parser()
+int PST_TextHeaderAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

@@ -1,11 +1,11 @@
 #include "pst_handout.h"
-
+#include "pstsearch.h"
 PST_Handout::PST_Handout(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 
 }
 
-int PST_Handout::parser()
+int PST_Handout::parser(PSTSearch* pSearchPtr)
 {
     ST_Variable stVar;
     quint32 pos = ST_SP(stVar);
@@ -21,30 +21,35 @@ int PST_Handout::parser()
         {
             ppDwingPtr = QSharedPointer<PST_PPDrawing>::create(m_srcData, stVar);
             addChildNodePtr(ppDwingPtr);
+            if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, ppDwingPtr);
         }
         break;
         case RT_ColorSchemeAtom:
         {
             colorSchemeAtomPtr = QSharedPointer<PST_ColorSchemeAtom>::create(m_srcData, stVar);
             addChildNodePtr(colorSchemeAtomPtr);
+            if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, colorSchemeAtomPtr);
         }
             break;
         case RT_ProgTags:
         {
             proTagesPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
             addChildNodePtr(proTagesPtr);
+            if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, proTagesPtr);
         }
         break;
         case RT_RoundTripTheme12Atom:
         {
             RTT12AtomPtr = QSharedPointer<PST_RoundTripTheme12Atom>::create(m_srcData, stVar);
             addChildNodePtr(RTT12AtomPtr);
+            if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, RTT12AtomPtr);
         }
         break;
         case RT_RoundTripColorMapping12Atom:
         {
             RTCMappingAtomPtr = QSharedPointer<PST_RoundTripColorMapping12Atom>::create(m_srcData, stVar);
             addChildNodePtr(RTCMappingAtomPtr);
+            if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, RTCMappingAtomPtr);
         }
         break;
         default:

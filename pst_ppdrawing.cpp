@@ -1,8 +1,8 @@
 #include "pst_ppdrawing.h"
-
+#include "pstsearch.h"
 PST_PPDrawing::PST_PPDrawing(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData,var) {}
 
-int PST_PPDrawing::parser()
+int PST_PPDrawing::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(stVar);
@@ -17,6 +17,8 @@ int PST_PPDrawing::parser()
 		case COMMON_OfficeArtDgContainer:
 		{
 			dwingContinerPtr = QSharedPointer<PST_DrawingContainer>::create(m_srcData, stVar);
+			addChildNodePtr(dwingContinerPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, dwingContinerPtr);
 		}
 		break;
 		default:

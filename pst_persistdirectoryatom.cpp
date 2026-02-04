@@ -6,7 +6,7 @@ PST_PersistDirectoryAtom::PST_PersistDirectoryAtom(const QByteArray& srcData, co
 
 }
 
-int PST_PersistDirectoryAtom::parser()
+int PST_PersistDirectoryAtom::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);

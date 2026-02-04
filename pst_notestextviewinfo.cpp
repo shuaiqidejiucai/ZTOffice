@@ -1,9 +1,9 @@
 #include "pst_notestextviewinfo.h"
-
+#include "pstsearch.h"
 PST_NotesTextViewInfo::PST_NotesTextViewInfo(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_NotesTextViewInfo::parser()
+int PST_NotesTextViewInfo::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -19,6 +19,8 @@ int PST_NotesTextViewInfo::parser()
 		{
 			QSharedPointer<PST_ViewInfoAtom> viewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData, stVar));
 			viewInfoAtomList.append(viewInfoAtomPtr);
+			addChildNodePtr(viewInfoAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, viewInfoAtomPtr);
 		}
 		break;
 		default:

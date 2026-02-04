@@ -46,7 +46,7 @@ class OfficeArtClientAnchor : public PST_Base
 public:
     OfficeArtClientAnchor(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSearchPtr)override;
 
     virtual void clearParserData() override;
 

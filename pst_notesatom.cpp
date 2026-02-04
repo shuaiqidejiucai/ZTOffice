@@ -2,7 +2,7 @@
 
 PST_NotesAtom::PST_NotesAtom(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var) {}
 
-int PST_NotesAtom::parser()
+int PST_NotesAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_BinType;
 }

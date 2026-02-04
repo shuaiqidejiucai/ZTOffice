@@ -3,7 +3,7 @@
 PST_SlidePersistAtom::PST_SlidePersistAtom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_SlidePersistAtom::parser()
+int PST_SlidePersistAtom::parser(PSTSearch* pSearchPtr)
 {
 	quint32 pos = ST_SP(m_STVar);
 	PSRReference = GetFlagData<quint32>(m_srcData, pos);

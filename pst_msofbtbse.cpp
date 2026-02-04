@@ -6,7 +6,7 @@ PST_MSOfbtBSE::PST_MSOfbtBSE(const QByteArray &srcData, const ST_Variable& var)
 
 }
 
-int PST_MSOfbtBSE::parser()
+int PST_MSOfbtBSE::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);

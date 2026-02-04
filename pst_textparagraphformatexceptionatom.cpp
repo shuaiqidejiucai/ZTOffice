@@ -6,7 +6,7 @@ PST_TextParagraphFormatExceptionAtom::PST_TextParagraphFormatExceptionAtom(const
 
 }
 
-int PST_TextParagraphFormatExceptionAtom::parser()
+int PST_TextParagraphFormatExceptionAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

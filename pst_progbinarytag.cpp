@@ -1,9 +1,9 @@
 #include "pst_progbinarytag.h"
-
+#include "pstsearch.h"
 PST_ProgBinaryTag::PST_ProgBinaryTag(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 
-int PST_ProgBinaryTag::parser()
+int PST_ProgBinaryTag::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -18,11 +18,15 @@ int PST_ProgBinaryTag::parser()
 		case RT_CString:
 		{
 			ctring = QSharedPointer<PST_CString>::create(m_srcData, stVar);
+			addChildNodePtr(ctring);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, ctring);
 		}
 		break;
 		case RT_BinaryTagDataBlob:
 		{
 			binTagData = QSharedPointer<PST_BinaryTagData>::create(m_srcData, stVar);
+			addChildNodePtr(binTagData);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, binTagData);
 		}
 		break;
 		default:

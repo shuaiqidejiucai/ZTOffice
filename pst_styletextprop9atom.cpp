@@ -3,7 +3,7 @@
 PST_StyleTextProp9Atom::PST_StyleTextProp9Atom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 
-int PST_StyleTextProp9Atom::parser()
+int PST_StyleTextProp9Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

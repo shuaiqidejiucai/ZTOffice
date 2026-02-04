@@ -1,12 +1,12 @@
 #include "pst_headersfooters.h"
-
+#include "pstsearch.h"
 PST_HeadersFooters::PST_HeadersFooters(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
 
 }
 
-int PST_HeadersFooters::parser()
+int PST_HeadersFooters::parser(PSTSearch* pSearchPtr)
 {
 	m_isParser = true;
 	ST_Variable stVar;
@@ -23,6 +23,7 @@ int PST_HeadersFooters::parser()
 		{
 			headersFootersAtom = QSharedPointer<PST_HeadsFootersAtom>::create(m_srcData, stVar);
 			addChildNodePtr(headersFootersAtom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, headersFootersAtom);
 		}
 		break;
 		default:
@@ -49,7 +50,7 @@ PST_HeadsFootersAtom::PST_HeadsFootersAtom(const QByteArray &srcData, const ST_V
 
 }
 
-int PST_HeadsFootersAtom::parser()
+int PST_HeadsFootersAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

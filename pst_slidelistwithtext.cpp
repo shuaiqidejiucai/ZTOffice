@@ -1,9 +1,9 @@
 #include "pst_slidelistwithtext.h"
-
+#include "pstsearch.h"
 PST_SlideListWithText::PST_SlideListWithText(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 
-int PST_SlideListWithText::parser()
+int PST_SlideListWithText::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -18,6 +18,8 @@ int PST_SlideListWithText::parser()
 		{
 			QSharedPointer<PST_SlidePersistAtom> slidePersistAtom (new PST_SlidePersistAtom(m_srcData,stVar));
 			slidePerAtomList.append(slidePersistAtom);
+			addChildNodePtr(slidePersistAtom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slidePersistAtom);
 		}
 		pos = ST_EP(stVar);
 	} while (pos < ST_EP(m_STVar));

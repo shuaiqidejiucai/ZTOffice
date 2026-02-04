@@ -3,7 +3,7 @@
 PST_TextCharsAtom::PST_TextCharsAtom(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_TextCharsAtom::parser()
+int PST_TextCharsAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

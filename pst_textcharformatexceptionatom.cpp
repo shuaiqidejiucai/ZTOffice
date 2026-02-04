@@ -6,7 +6,7 @@ PST_TextCharFormatExceptionAtom::PST_TextCharFormatExceptionAtom(const QByteArra
 
 }
 
-int PST_TextCharFormatExceptionAtom::parser()
+int PST_TextCharFormatExceptionAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

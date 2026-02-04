@@ -1,10 +1,11 @@
 #include "pst_fontcollection.h"
+#include "pstsearch.h"
 PST_FontEntityAtom::PST_FontEntityAtom(const QByteArray& srcData, const ST_Variable& var) :PST_Base(srcData, var)
 {
 
 }
 
-int PST_FontEntityAtom::parser()
+int PST_FontEntityAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }
@@ -23,7 +24,7 @@ PST_FontCollection::PST_FontCollection(const QByteArray& srcData, const ST_Varia
 
 }
 
-int PST_FontCollection::parser()
+int PST_FontCollection::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -40,6 +41,7 @@ int PST_FontCollection::parser()
 			QSharedPointer<PST_FontEntityAtom> fontEntityAtomPtr(new PST_FontEntityAtom(m_srcData, stVar));
 			fontEntityAtomList.append(fontEntityAtomPtr);
 			addChildNodePtr(fontEntityAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, fontEntityAtomPtr);
 		}
 		break;
 		default:

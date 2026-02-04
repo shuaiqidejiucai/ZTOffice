@@ -8,7 +8,7 @@ PST_OfficeArtFSP::PST_OfficeArtFSP(const QByteArray& srcData, const ST_Variable&
 	
 }
 
-int PST_OfficeArtFSP::parser()
+int PST_OfficeArtFSP::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(stVar);

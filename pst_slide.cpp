@@ -1,11 +1,11 @@
 #include "pst_slide.h"
-
+#include "pstsearch.h"
 PST_Slide::PST_Slide(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData, var)
 {
 
 }
 
-int PST_Slide::parser()
+int PST_Slide::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -20,26 +20,36 @@ int PST_Slide::parser()
 		case RT_SlideAtom:
 		{
 			slideAtomPtr = QSharedPointer<PST_SlideAtom>::create(m_srcData, stVar);
+			addChildNodePtr(slideAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slideAtomPtr);
 		}
 		break;
 		case RT_Drawing:
 		{
 			ppdwingPtr = QSharedPointer<PST_PPDrawing>::create(m_srcData, stVar);
+			addChildNodePtr(ppdwingPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, ppdwingPtr);
 		}
 		break;
 		case RT_ColorSchemeAtom:
 		{
 			colorSchemeAtomPtr = QSharedPointer<PST_ColorSchemeAtom>::create(m_srcData, stVar);
+			addChildNodePtr(colorSchemeAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, colorSchemeAtomPtr);
 		}
 		break;
 		case RT_ProgTags:
 		{
 			proTagsPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
+			addChildNodePtr(proTagsPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, proTagsPtr);
 		}
 		break;
 		case RT_RoundTripContentMasterId12Atom:
 		{
 			roundTripContentMasterId12AtomPtr = QSharedPointer<PST_RoundTripContentMasterId12Atom>::create(m_srcData, stVar);
+			addChildNodePtr(roundTripContentMasterId12AtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripContentMasterId12AtomPtr);
 		}
 		break;
 		default:

@@ -3,7 +3,7 @@
 PST_ColorSchemeAtom::PST_ColorSchemeAtom(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_ColorSchemeAtom::parser()
+int PST_ColorSchemeAtom::parser(PSTSearch* pSearchPtr)
 {
 	//TODO:ÑÕÉ«½âÎö
 	return Error_TODO;

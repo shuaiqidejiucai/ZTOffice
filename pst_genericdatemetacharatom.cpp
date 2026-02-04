@@ -3,7 +3,7 @@
 PST_GenericDateMetaCharAtom::PST_GenericDateMetaCharAtom(const QByteArray& srcData, const ST_Variable& var)
 :PST_Base(srcData, var){}
 
-int PST_GenericDateMetaCharAtom::parser()
+int PST_GenericDateMetaCharAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

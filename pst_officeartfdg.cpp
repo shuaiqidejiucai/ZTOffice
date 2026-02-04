@@ -2,7 +2,7 @@
 
 PST_OfficeArtFDG::PST_OfficeArtFDG(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData,var) {}
 
-int PST_OfficeArtFDG::parser()
+int PST_OfficeArtFDG::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

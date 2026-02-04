@@ -2,12 +2,13 @@
 #define PST_BASE_H
 #include "global.h"
 #include "zttools.h"
+class PSTSearch;
 class PST_Base : public QEnableSharedFromThis<PST_Base>
 {
 public:
-    PST_Base(const QByteArray& srcData, const ST_Variable& var);
+    PST_Base(const QByteArray& srcData, const ST_Variable& var, PSTSearch * pSeachptr = nullptr);
 
-    int parserData();
+    int parserData(PSTSearch* pSeachptr = nullptr);
 
     void clearData();
 
@@ -15,7 +16,7 @@ public:
 
     virtual void clearTreeData();
 protected:
-    virtual int parser() = 0;
+    virtual int parser(PSTSearch* pSeachptr) = 0;
 
     virtual int priority() = 0;//”≈œ»º∂
 

@@ -3,7 +3,7 @@
 PST_OEPlaceHolderAtom::PST_OEPlaceHolderAtom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_OEPlaceHolderAtom::parser()
+int PST_OEPlaceHolderAtom::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);

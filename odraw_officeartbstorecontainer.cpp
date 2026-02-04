@@ -1,11 +1,11 @@
 #include "odraw_officeartbstorecontainer.h"
-
+#include "pstsearch.h"
 ODRAW_OfficeArtBStoreContainer::ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 
 }
 
-int ODRAW_OfficeArtBStoreContainer::parser()
+int ODRAW_OfficeArtBStoreContainer::parser(PSTSearch* pSeaechPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -23,6 +23,7 @@ int ODRAW_OfficeArtBStoreContainer::parser()
 			QSharedPointer<PST_MSOfbtBSE> msoFbtBSE = QSharedPointer<PST_MSOfbtBSE>::create(m_srcData, stVar);
 			msoBtBsePtrList.append(msoFbtBSE);
 			addChildNodePtr(msoFbtBSE);
+			if (pSeaechPtr) pSeaechPtr->insertRecordMap(stVar.originPos, msoFbtBSE);
 		}
 		break;
 		default:

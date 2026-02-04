@@ -12,12 +12,13 @@
 #include "pst_handout.h"
 #include "pst_slide.h"
 #include "pst_externaloleobjectstg.h"
+class PSTSearch;
 class PowerPointBinaryDocument : public PST_Base
 {
 public:
     PowerPointBinaryDocument(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSearchPtr)override;
     virtual void clearParserData() override;
     virtual int priority()override;
     QSharedPointer<PST_CurrentUserAtom> currentUserAtom;

@@ -8,7 +8,7 @@ class PST_KinsokuAtom : public PST_Base
 public:
     PST_KinsokuAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSearchPtr)override;
     virtual void clearParserData()override;
     virtual int priority()override;
 };
@@ -18,7 +18,7 @@ class PST_SrKinsoku : public PST_Base
 public:
     PST_SrKinsoku(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser() override;
+    virtual int parser(PSTSearch* pSearchPtr) override;
     virtual void clearParserData()override;
     virtual int priority()override;
     QList<QSharedPointer<PST_KinsokuAtom> > kinsokuAtmoList;

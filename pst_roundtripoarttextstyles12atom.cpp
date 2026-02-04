@@ -5,7 +5,7 @@ PST_RoundTripOArtTextStyles12Atom::PST_RoundTripOArtTextStyles12Atom(const QByte
 {
 }
 
-int PST_RoundTripOArtTextStyles12Atom::parser()
+int PST_RoundTripOArtTextStyles12Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

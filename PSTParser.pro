@@ -22,6 +22,7 @@ SOURCES += \
     pst_roundtripnotesmastertextstyles12atom.cpp \
     pst_roundtripoarttextstyles12atom.cpp \
     pst_roundtriporiginalmainmasterid12atom.cpp \
+    pstsearch.cpp \
     zttools.cpp \
     ztwppdocument.cpp
 HEADERS += \
@@ -37,6 +38,7 @@ HEADERS += \
         pst_roundtripnotesmastertextstyles12atom.h \
         pst_roundtripoarttextstyles12atom.h \
         pst_roundtriporiginalmainmasterid12atom.h \
+        pstsearch.h \
         zttools.h \
         ztwppdocument.h
 

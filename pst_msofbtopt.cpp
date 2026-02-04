@@ -6,7 +6,7 @@ PST_MSOfbtOPT::PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var)
 
 }
 
-int PST_MSOfbtOPT::parser()
+int PST_MSOfbtOPT::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVarA;
 	quint32 pos = ST_OP(m_STVar);
@@ -22,7 +22,7 @@ int PST_MSOfbtOPT::parser()
 		pos += 6;
 		ST_EP(stVar) = pos;
 		QSharedPointer<Fopte> foptePtr(new Fopte(m_srcData, stVar));
-		foptePtr->parser();
+		foptePtr->parser(pSearchPtr);
 		if (foptePtr->fComplex == 1)
 		{
 			sizeList.append(foptePtr->op);

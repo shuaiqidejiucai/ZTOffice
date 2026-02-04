@@ -1,12 +1,12 @@
 #include "pst_ppdrawinggroup.h"
-
+#include "pstsearch.h"
 PST_PPDrawingGroup::PST_PPDrawingGroup(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
 
 }
 
-int PST_PPDrawingGroup::parser()
+int PST_PPDrawingGroup::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -21,6 +21,8 @@ int PST_PPDrawingGroup::parser()
 		{
 			QSharedPointer<PST_DrawingGroupContainer> dwingGroupContainer(new PST_DrawingGroupContainer(m_srcData, stVar));
 			dwGroupContainterList.append(dwingGroupContainer);
+			addChildNodePtr(dwingGroupContainer);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, dwingGroupContainer);
 		}
 		
 		pos = ST_EP(stVar);

@@ -6,7 +6,7 @@ Fopte::Fopte(const QByteArray& srcData, const ST_Variable& var)
 
 }
 
-int Fopte::parser()
+int Fopte::parser(PSTSearch* pSeaechPtr)
 { 
     quint32 pos = ST_SP(m_STVar);
     quint16 value = GetFlagData<quint16>(m_srcData, pos);
@@ -39,7 +39,7 @@ FOPTEComplex::FOPTEComplex(const QByteArray& srcData, const ST_Variable& var) : 
 
 }
 
-int FOPTEComplex::parser()
+int FOPTEComplex::parser(PSTSearch* pSearchPtr)
 {
     return Error_BinType;
 }

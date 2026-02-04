@@ -6,7 +6,7 @@ PST_ViewInfoAtom::PST_ViewInfoAtom(const QByteArray &srcData, const ST_Variable&
 
 }
 
-int PST_ViewInfoAtom::parser()
+int PST_ViewInfoAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

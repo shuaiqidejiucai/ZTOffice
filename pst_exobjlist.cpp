@@ -1,12 +1,12 @@
 #include "pst_exobjlist.h"
-
+#include "pstsearch.h"
 PST_ExObjList::PST_ExObjList(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
 
 }
 
-int PST_ExObjList::parser()
+int PST_ExObjList::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -23,6 +23,7 @@ int PST_ExObjList::parser()
 		{
 			exObjListAtomPtr = QSharedPointer<PST_ExternalObjectListAtom>::create(m_srcData, stVar);
 			addChildNodePtr(exObjListAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, exObjListAtomPtr);
 		}
 		break;
 		case RT_ExternalOleEmbed:
@@ -30,6 +31,7 @@ int PST_ExObjList::parser()
 			QSharedPointer<PST_ExEmbed> exEmbed(new PST_ExEmbed(m_srcData, stVar));
 			exembedList.append(exEmbed);
 			addChildNodePtr(exEmbed);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, exEmbed);
 		}
 			break;
 		default:

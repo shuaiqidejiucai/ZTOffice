@@ -5,7 +5,7 @@ PST_CString::PST_CString(const QByteArray &srcData, const ST_Variable& var):PST_
 
 }
 
-int PST_CString::parser()
+int PST_CString::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);

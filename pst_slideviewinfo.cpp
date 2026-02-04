@@ -1,9 +1,9 @@
 #include "pst_slideviewinfo.h"
-
+#include "pstsearch.h"
 PST_SlideViewInfo::PST_SlideViewInfo(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_SlideViewInfo::parser()
+int PST_SlideViewInfo::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -19,12 +19,15 @@ int PST_SlideViewInfo::parser()
 		{
 			QSharedPointer<PST_SlideViewInfoAtom> slideViewInfoAtomPtr(new PST_SlideViewInfoAtom(m_srcData, stVar));
 			slideViewInfoAtomList.append(slideViewInfoAtomPtr);
+			addChildNodePtr(slideViewInfoAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slideViewInfoAtomPtr);
 		}
 		break;
 		case RT_ViewInfoAtom:
 		{
-			QSharedPointer<PST_ViewInfoAtom> slideViewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData, stVar));
-			viewInfoAtomList.append(slideViewInfoAtomPtr);
+			QSharedPointer<PST_ViewInfoAtom> viewInfoAtomPtr(new PST_ViewInfoAtom(m_srcData, stVar));
+			viewInfoAtomList.append(viewInfoAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, viewInfoAtomPtr);
 		}
 			break;
 		default:
@@ -52,7 +55,7 @@ PST_SlideViewInfoAtom::PST_SlideViewInfoAtom(const QByteArray &srcData, const ST
 
 }
 
-int PST_SlideViewInfoAtom::parser()
+int PST_SlideViewInfoAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

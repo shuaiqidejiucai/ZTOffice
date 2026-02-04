@@ -6,7 +6,7 @@ PST_RoundTripContentMasterInfo12Atom::PST_RoundTripContentMasterInfo12Atom(const
 {
 }
 
-int PST_RoundTripContentMasterInfo12Atom::parser()
+int PST_RoundTripContentMasterInfo12Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

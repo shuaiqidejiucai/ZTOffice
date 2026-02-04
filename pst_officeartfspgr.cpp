@@ -3,7 +3,7 @@
 PST_OfficeArtFSPGR::PST_OfficeArtFSPGR(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_OfficeArtFSPGR::parser()
+int PST_OfficeArtFSPGR::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

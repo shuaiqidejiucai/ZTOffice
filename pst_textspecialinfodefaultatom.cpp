@@ -6,7 +6,7 @@ PST_TextSpecialInfoDefaultAtom::PST_TextSpecialInfoDefaultAtom(const QByteArray 
 
 }
 
-int PST_TextSpecialInfoDefaultAtom::parser()
+int PST_TextSpecialInfoDefaultAtom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

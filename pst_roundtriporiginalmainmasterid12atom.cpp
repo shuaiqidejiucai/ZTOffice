@@ -5,7 +5,7 @@ PST_RoundTripOriginalMainMasterId12Atom::PST_RoundTripOriginalMainMasterId12Atom
 {
 }
 
-int PST_RoundTripOriginalMainMasterId12Atom::parser()
+int PST_RoundTripOriginalMainMasterId12Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

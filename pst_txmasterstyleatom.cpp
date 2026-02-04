@@ -6,7 +6,7 @@ PST_TxMasterStyleAtom::PST_TxMasterStyleAtom(const QByteArray& srcData, const ST
 
 }
 
-int PST_TxMasterStyleAtom::parser()
+int PST_TxMasterStyleAtom::parser(PSTSearch* pSeaechPtr)
 {
     return Error_TODO;
 }

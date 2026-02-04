@@ -3,7 +3,7 @@
 PST_RoundTripShapeld12Atom::PST_RoundTripShapeld12Atom(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_RoundTripShapeld12Atom::parser()
+int PST_RoundTripShapeld12Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

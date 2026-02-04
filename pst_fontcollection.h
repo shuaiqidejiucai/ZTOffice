@@ -8,7 +8,7 @@ class PST_FontEntityAtom : public PST_Base
 public:
     PST_FontEntityAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSearchPtr)override;
     virtual void clearParserData()override;
     virtual int priority()override;
 };
@@ -18,7 +18,7 @@ class PST_FontCollection : public PST_Base
 public:
     PST_FontCollection(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSearchPtr)override;
     virtual void clearParserData()override;
     virtual int priority()override;
     QList<QSharedPointer<PST_FontEntityAtom> > fontEntityAtomList;

@@ -8,7 +8,7 @@ class ODRAW_OfficeArtBStoreContainer : public PST_Base
 public:
     ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSeaechPtr)override;
 
     virtual void clearParserData() override;
 

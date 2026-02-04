@@ -1,9 +1,9 @@
 #include "pst_groupshapecontainer.h"
-
+#include "pstsearch.h"
 PST_GroupShapeContainer::PST_GroupShapeContainer(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_GroupShapeContainer::parser()
+int PST_GroupShapeContainer::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -21,6 +21,7 @@ int PST_GroupShapeContainer::parser()
 			QSharedPointer<PST_ShapeContainer> shapContainerPtr(new PST_ShapeContainer(m_srcData, stVar));
 			shapeContainerList.append(shapContainerPtr);
 			addChildNodePtr(shapContainerPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, shapContainerPtr);
 		}
 		break;
 		default:

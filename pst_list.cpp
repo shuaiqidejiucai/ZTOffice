@@ -1,8 +1,8 @@
 #include "pst_list.h"
-
+#include "pstsearch.h"
 PST_List::PST_List(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData, var) {}
 
-int PST_List::parser()
+int PST_List::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -19,6 +19,7 @@ int PST_List::parser()
 			QSharedPointer<PST_NormalViewSetInfo> normalViewSetInfo(new PST_NormalViewSetInfo(m_srcData, stVar));
 			normalViewSetInfoList.append(normalViewSetInfo);
 			addChildNodePtr(normalViewSetInfo);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, normalViewSetInfo);
 		}
 			break;
 		case RT_NotesTextViewInfo9:
@@ -26,6 +27,7 @@ int PST_List::parser()
 			QSharedPointer<PST_NotesTextViewInfo> notesTextViewInfo (new PST_NotesTextViewInfo(m_srcData, stVar));
 			notesTxtViewInfoList.append(notesTextViewInfo);
 			addChildNodePtr(notesTextViewInfo);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, notesTextViewInfo);
 		}
 			break;
 		case RT_SlideViewInfo:
@@ -33,6 +35,7 @@ int PST_List::parser()
 			QSharedPointer<PST_SlideViewInfo> slideViewInfo(new PST_SlideViewInfo(m_srcData, stVar));
 			slideViewInfoList.append(slideViewInfo);
 			addChildNodePtr(slideViewInfo);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slideViewInfo);
 		}
 			break;
 		case RT_ProgTags:
@@ -40,6 +43,7 @@ int PST_List::parser()
 			QSharedPointer<PST_ProgTags> progTagsPtr(new PST_ProgTags(m_srcData, stVar));
 			progTagsList.append(progTagsPtr);
 			addChildNodePtr(progTagsPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, progTagsPtr);
 		}
 			break;
 		default:

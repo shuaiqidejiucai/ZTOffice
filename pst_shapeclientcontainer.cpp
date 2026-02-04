@@ -1,9 +1,9 @@
 #include "pst_shapeclientcontainer.h"
-
+#include "pstsearch.h"
 PST_ShapeClientContainer::PST_ShapeClientContainer(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_ShapeClientContainer::parser()
+int PST_ShapeClientContainer::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -19,11 +19,15 @@ int PST_ShapeClientContainer::parser()
 		case RT_PlaceholderAtom:
 		{
 			oePlaceHolderAtom = QSharedPointer<PST_OEPlaceHolderAtom>::create(m_srcData, stVar);
+			addChildNodePtr(oePlaceHolderAtom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, oePlaceHolderAtom);
 		}
 		break;
 		case RT_ProgTags:
 		{
 			progTagsPtr = QSharedPointer<PST_ProgTags>::create(m_srcData, stVar);
+			addChildNodePtr(progTagsPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, progTagsPtr);
 		}
 		break;
 		default:

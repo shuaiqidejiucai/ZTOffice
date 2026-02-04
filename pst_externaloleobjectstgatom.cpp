@@ -6,7 +6,7 @@ PST_ExternalOleObjectStgAtom::PST_ExternalOleObjectStgAtom(const QByteArray& src
 
 }
 
-int PST_ExternalOleObjectStgAtom::parser()
+int PST_ExternalOleObjectStgAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

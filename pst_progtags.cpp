@@ -1,9 +1,9 @@
 #include "pst_progtags.h"
-
+#include "pstsearch.h"
 PST_ProgTags::PST_ProgTags(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 
-int PST_ProgTags::parser()
+int PST_ProgTags::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -19,6 +19,8 @@ int PST_ProgTags::parser()
 		{
 			QSharedPointer<PST_ProgBinaryTag> progBinTagPtr (new PST_ProgBinaryTag(m_srcData, stVar));
 			progBinTagList.append(progBinTagPtr);
+			addChildNodePtr(progBinTagPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, progBinTagPtr);
 		}
 		break;
 		default:

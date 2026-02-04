@@ -1,11 +1,12 @@
 #include "pst_srkinsoku.h"
+#include "pstsearch.h"
 PST_KinsokuAtom::PST_KinsokuAtom(const QByteArray& srcData, const ST_Variable& var) 
 	:PST_Base(srcData, var)
 {
 
 }
 
-int PST_KinsokuAtom::parser()
+int PST_KinsokuAtom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }
@@ -25,7 +26,7 @@ PST_SrKinsoku::PST_SrKinsoku(const QByteArray& srcData, const ST_Variable& var)
 
 }
 
-int PST_SrKinsoku::parser()
+int PST_SrKinsoku::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -41,6 +42,8 @@ int PST_SrKinsoku::parser()
 		{
 			QSharedPointer<PST_KinsokuAtom> srKinsoKuAtomPtr(new PST_KinsokuAtom(m_srcData, stVar));
 			kinsokuAtmoList.append(srKinsoKuAtomPtr);
+			addChildNodePtr(srKinsoKuAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, srKinsoKuAtomPtr);
 		}
 			break;
 		default:

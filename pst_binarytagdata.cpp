@@ -1,9 +1,9 @@
 #include "pst_binarytagdata.h"
-
+#include "pstsearch.h"
 PST_BinaryTagData::PST_BinaryTagData(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_BinaryTagData::parser()
+int PST_BinaryTagData::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -20,6 +20,7 @@ int PST_BinaryTagData::parser()
 			QSharedPointer<PST_RoundTripDocFlags12Atom> roundTripDocFlags12Atom (new PST_RoundTripDocFlags12Atom(m_srcData, stVar));
 			roundTripDocFlags12AtomList.append(roundTripDocFlags12Atom);
 			addChildNodePtr(roundTripDocFlags12Atom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripDocFlags12Atom);
 		}
 		break;
 		case RT_GridSpacing10Atom:
@@ -27,6 +28,7 @@ int PST_BinaryTagData::parser()
 			QSharedPointer<PST_GridSpacing10Atom> gridSpacing10Atom (new PST_GridSpacing10Atom(m_srcData, stVar));
 			gridSpacing10AtomList.append(gridSpacing10Atom);
 			addChildNodePtr(gridSpacing10Atom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, gridSpacing10Atom);
 		}
 		break;
 		case RT_SlideTime10Atom:
@@ -34,6 +36,7 @@ int PST_BinaryTagData::parser()
 			QSharedPointer<PST_SlideTime10Atom> slideTime10Atom (new PST_SlideTime10Atom(m_srcData, stVar));
 			slideTime10AtomList.append(slideTime10Atom);
 			addChildNodePtr(slideTime10Atom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slideTime10Atom);
 		}
 		break;
 		case RT_RoundTripHeaderFooterDefaults12Atom:
@@ -41,6 +44,7 @@ int PST_BinaryTagData::parser()
 			QSharedPointer<PST_RoundTripHeaderFooterDefaults12Atom> roundTripHFDefaults12Atom (new PST_RoundTripHeaderFooterDefaults12Atom(m_srcData, stVar));
 			RTHFD12AtomList.append(roundTripHFDefaults12Atom);
 			addChildNodePtr(roundTripHFDefaults12Atom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripHFDefaults12Atom);
 		}
 		break;
 		default:

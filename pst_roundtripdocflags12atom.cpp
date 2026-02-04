@@ -6,7 +6,7 @@ PST_RoundTripDocFlags12Atom::PST_RoundTripDocFlags12Atom(const QByteArray &srcDa
 
 }
 
-int PST_RoundTripDocFlags12Atom::parser()
+int PST_RoundTripDocFlags12Atom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

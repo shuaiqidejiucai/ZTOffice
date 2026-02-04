@@ -3,7 +3,7 @@
 PST_RoundTripTheme12Atom::PST_RoundTripTheme12Atom(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 
-int PST_RoundTripTheme12Atom::parser()
+int PST_RoundTripTheme12Atom::parser(PSTSearch* pSearchPtr)
 {
 	return Error_TODO;
 }

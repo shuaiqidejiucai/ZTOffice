@@ -9,7 +9,7 @@ class PST_PPDrawing : public PST_Base
 public:
     PST_PPDrawing(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser()override;
+    virtual int parser(PSTSearch* pSearchPtr)override;
     virtual void clearParserData()override;
     virtual int priority()override;
     QSharedPointer<PST_DrawingContainer> dwingContinerPtr;

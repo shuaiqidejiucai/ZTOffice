@@ -1,12 +1,13 @@
 #include "pst_document.h"
 #include "zttools.h"
+#include "pstsearch.h"
 PST_Document::PST_Document(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
 
 }
 
-int PST_Document::parser()
+int PST_Document::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
@@ -22,6 +23,7 @@ int PST_Document::parser()
 		{
 			documentAtomPtr = QSharedPointer<PST_DocumentAtom>::create(m_srcData, stVar);
 			addChildNodePtr(documentAtomPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, documentAtomPtr);
 		}
 			break;
 		case RT_ExternalObjectList:
@@ -29,6 +31,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_ExObjList> exObjPtr(new PST_ExObjList(m_srcData, stVar));
 			exObjListObjList.append(exObjPtr);
 			addChildNodePtr(exObjPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, exObjPtr);
 		}
 			break;
 		case RT_Environment:
@@ -36,6 +39,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_Environment> envPtr(new PST_Environment(m_srcData, stVar));
 			envmentList.append(envPtr);
 			addChildNodePtr(envPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, envPtr);
 		}
 			break;
 		case RT_DrawingGroup:
@@ -43,6 +47,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_PPDrawingGroup> dwingGroupPtr(new PST_PPDrawingGroup(m_srcData, stVar));
 			ppdwGroupList.append(dwingGroupPtr);
 			addChildNodePtr(dwingGroupPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, dwingGroupPtr);
 		}
 			break;
 		case RT_SlideListWithText:
@@ -50,6 +55,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_SlideListWithText> slideListWithTextPtr(new PST_SlideListWithText(m_srcData, stVar));
 			slideListWithTxtList.append(slideListWithTextPtr);
 			addChildNodePtr(slideListWithTextPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, slideListWithTextPtr);
 		}
 		break;
 		case RT_List:
@@ -57,6 +63,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_List> pstListPtr(new PST_List(m_srcData, stVar));
 			PSTList.append(pstListPtr);
 			addChildNodePtr(pstListPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, pstListPtr);
 		}
 		break;
 		case RT_HeadersFooters:
@@ -64,6 +71,7 @@ int PST_Document::parser()
 			QSharedPointer<PST_HeadersFooters> headersFootersPtr(new PST_HeadersFooters(m_srcData, stVar));
 			headersFootersList.append(headersFootersPtr);
 			addChildNodePtr(headersFootersPtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, headersFootersPtr);
 		}
 		break;
 		case RT_RoundTripCustomTableStyles12Atom:
@@ -71,12 +79,14 @@ int PST_Document::parser()
 			QSharedPointer<PST_RoundTripCustomTableStyles12> roundTripTableStylePtr(new PST_RoundTripCustomTableStyles12(m_srcData, stVar));
 			roundTripTableStyleList.append(roundTripTableStylePtr);
 			addChildNodePtr(roundTripTableStylePtr);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, roundTripTableStylePtr);
 		}
 			break;
 		case RT_EndDocumentAtom:
 		{
 			endDocumentAtom = QSharedPointer<PST_EndDocumentAtom>::create(m_srcData,stVar);
 			addChildNodePtr(endDocumentAtom);
+			if (pSearchPtr) pSearchPtr->insertRecordMap(stVar.originPos, endDocumentAtom);
 		}
 			break;
 		default:

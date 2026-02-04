@@ -7,7 +7,7 @@ class PST_DocumentAtom : public PST_Base
 public:
     PST_DocumentAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser();
+    virtual int parser(PSTSearch* pSearchPtr);
     virtual void clearParserData()override;
     virtual int priority()override;
 public:

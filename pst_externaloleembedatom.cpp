@@ -6,7 +6,7 @@ PST_ExternalOleEmbedAtom::PST_ExternalOleEmbedAtom(const QByteArray &srcData, co
 
 }
 
-int PST_ExternalOleEmbedAtom::parser()
+int PST_ExternalOleEmbedAtom::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);

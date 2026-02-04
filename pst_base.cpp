@@ -1,16 +1,20 @@
 #include "pst_base.h"
+#include "pstsearch.h"
+PST_Base::PST_Base(const QByteArray& srcData, const ST_Variable& var, PSTSearch* pSeachptr)
+	:m_STVar(var), m_srcData(srcData), m_isParser(false)
+{
+	
+}
 
-PST_Base::PST_Base(const QByteArray& srcData, const ST_Variable& var):m_STVar(var), m_srcData(srcData), m_isParser(false){}
 
-
-int PST_Base::parserData()
+int PST_Base::parserData(PSTSearch* pSeachptr)
 {
 	if (m_isParser)
 	{
 		clearData();
 	}
 	m_isParser = true;
-	return parser();
+	return parser(pSeachptr);
 }
 
 void PST_Base::clearData()

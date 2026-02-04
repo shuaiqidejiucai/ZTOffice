@@ -5,7 +5,7 @@ PST_GridSpacing10Atom::PST_GridSpacing10Atom(const QByteArray& srcData, const ST
 {
 }
 
-int PST_GridSpacing10Atom::parser()
+int PST_GridSpacing10Atom::parser(PSTSearch* pSearchPtr)
 {
     return Error_TODO;
 }

@@ -8,7 +8,7 @@ PST_UserEditAtom::PST_UserEditAtom(const QByteArray &srcData, const ST_Variable&
 
 }
 
-int PST_UserEditAtom::parser()
+int PST_UserEditAtom::parser(PSTSearch* pSearchPtr)
 {
 	ST_Variable stVar;
 	quint32 pos = ST_SP(m_STVar);
