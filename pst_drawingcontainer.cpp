@@ -2,6 +2,7 @@
 #include "pstsearch.h"
 #include "pst_officeartfdg.h"
 #include "pst_groupshapecontainer.h"
+#include "pst_shapecontainer.h"
 PST_DrawingContainer::PST_DrawingContainer(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 

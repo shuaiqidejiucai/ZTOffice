@@ -10,6 +10,8 @@ include($$shareRoot/common/common.pri)
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+
+
 SOURCES += \
     officeartclientanchor.cpp \
     officeartclientdata.cpp \
@@ -24,25 +26,6 @@ SOURCES += \
     pst_roundtriporiginalmainmasterid12atom.cpp \
     pstsearch.cpp \
     zttools.cpp \
-    ztwppdocument.cpp
-HEADERS += \
-        global.h \
-        officeartclientanchor.h \
-        officeartclientdata.h \
-        pptdocument.h \
-        pst_genericdatemetacharatom.h \
-        pst_gridspacing10atom.h \
-        pst_mastertextpropatom.h \
-        pst_roundtripcontentmasterid12atom.h \
-        pst_roundtripcontentmasterinfo12atom.h \
-        pst_roundtripnotesmastertextstyles12atom.h \
-        pst_roundtripoarttextstyles12atom.h \
-        pst_roundtriporiginalmainmasterid12atom.h \
-        pstsearch.h \
-        zttools.h \
-        ztwppdocument.h
-
-SOURCES += \
     fopte.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -122,6 +105,7 @@ SOURCES += \
     pst_txmasterstyleatom.cpp \
     pst_usereditatom.cpp \
     pst_viewinfoatom.cpp
+    # ztwppdocument.cpp
 
 HEADERS += \
     fopte.h \
@@ -201,7 +185,22 @@ HEADERS += \
     pst_textspecialinfodefaultatom.h \
     pst_txmasterstyleatom.h \
     pst_usereditatom.h \
-    pst_viewinfoatom.h
+    pst_viewinfoatom.h \
+    global.h \
+    officeartclientanchor.h \
+    officeartclientdata.h \
+    pptdocument.h \
+    pst_genericdatemetacharatom.h \
+    pst_gridspacing10atom.h \
+    pst_mastertextpropatom.h \
+    pst_roundtripcontentmasterid12atom.h \
+    pst_roundtripcontentmasterinfo12atom.h \
+    pst_roundtripnotesmastertextstyles12atom.h \
+    pst_roundtripoarttextstyles12atom.h \
+    pst_roundtriporiginalmainmasterid12atom.h \
+    pstsearch.h \
+    zttools.h
+    # ztwppdocument.h
 
 FORMS += \
     mainwindow.ui

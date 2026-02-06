@@ -127,14 +127,14 @@ int main(int argc, char* argv[])
     // QString qsETFilePath = "E:\\test\\indoc.et";
     QString qsPPTFilePath = "E:\\test\\new.ppt";
 
-    ZTWPPDocument wk;
+    /*ZTWPPDocument wk;
     wk.openWPPFile(qsPPTFilePath);
     wk.readPPTData();
     const QByteArray& srcData = wk.GetSrcData();
     ST_Variable stVar;
-    ST_EP(stVar) = srcData.size();
-    QSharedPointer<PowerPointBinaryDocument> powerPointBinDocPtr(new PowerPointBinaryDocument(srcData, stVar));
-    powerPointBinDocPtr->parser();
+    ST_EP(stVar) = srcData.size();*/
+   // QSharedPointer<PowerPointBinaryDocument> powerPointBinDocPtr(new PowerPointBinaryDocument(srcData, stVar));
+   // powerPointBinDocPtr->parser();
     
     //wk.parserData();
 

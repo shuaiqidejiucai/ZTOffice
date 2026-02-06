@@ -8,7 +8,7 @@ class PST_SlideAtom : public PST_Base
 public:
     PST_SlideAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser(PSTSearch* pSearchPtr)override;
+    virtual int parser(PSTSearch* pSearchPtr = nullptr)override;
 
     virtual void clearParserData()override;
 

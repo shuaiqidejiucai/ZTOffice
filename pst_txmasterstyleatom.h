@@ -8,7 +8,7 @@ class PST_TxMasterStyleAtom : public PST_Base
 public:
     PST_TxMasterStyleAtom(const QByteArray& srcData, const ST_Variable& var);
 
-    virtual int parser(PSTSearch * pSeaechPtr)override;
+    virtual int parser(PSTSearch * pSeaechPtr = nullptr)override;
 
     virtual void clearParserData()override;
 
