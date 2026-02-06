@@ -1,5 +1,13 @@
 #include "pst_shapecontainer.h"
 #include "pstsearch.h"
+#include "pst_officeartfspgr.h"
+#include "pst_officeartfsp.h"
+#include "pst_msofbtopt.h"
+#include "officeartspcontainer.h"
+#include "pst_shapeclientcontainer.h"
+#include "pst_clienttextbox.h"
+#include "pst_msofbttertiaryopt.h"
+#include "officeartclientanchor.h"
 PST_ShapeContainer::PST_ShapeContainer(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 

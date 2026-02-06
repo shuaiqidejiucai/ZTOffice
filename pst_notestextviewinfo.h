@@ -2,8 +2,8 @@
 #define PST_NOTESTEXTVIEWINFO_H
 
 #include "pst_base.h"
-#include "pst_viewinfoatom.h"
 
+class PST_ViewInfoAtom;
 class PST_NotesTextViewInfo : public PST_Base
 {
 public:

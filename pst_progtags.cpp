@@ -1,5 +1,6 @@
 #include "pst_progtags.h"
 #include "pstsearch.h"
+#include "pst_progbinarytag.h"
 PST_ProgTags::PST_ProgTags(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 

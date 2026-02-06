@@ -1,5 +1,6 @@
 #include "pst_ppdrawinggroup.h"
 #include "pstsearch.h"
+#include "pst_drawinggroupcontainer.h"
 PST_PPDrawingGroup::PST_PPDrawingGroup(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {

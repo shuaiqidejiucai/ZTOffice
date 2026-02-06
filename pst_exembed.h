@@ -2,9 +2,10 @@
 #define PST_EXEMBED_H
 
 #include "pst_base.h"
-#include "pst_externaloleembedatom.h"
-#include "pst_externaloleobjectatom.h"
-#include "pst_cstring.h"
+
+class PST_ExternalOleObjectAtom;
+class PST_ExternalOleEmbedAtom;
+class PST_CString;
 class PST_ExEmbed : public PST_Base
 {
 public:

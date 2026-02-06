@@ -3,16 +3,17 @@
 
 #include "global.h"
 #include "pst_base.h"
-#include "pst_currentuseratom.h"
-#include "pst_usereditatom.h"
-#include "pst_persistdirectoryatom.h"
-#include "pst_document.h"
-#include "pst_mainmaster.h"
-#include "pst_notes.h"
-#include "pst_handout.h"
-#include "pst_slide.h"
-#include "pst_externaloleobjectstg.h"
+
 class PSTSearch;
+class PST_CurrentUserAtom;
+class PST_UserEditAtom;
+class PST_PersistDirectoryAtom;
+class PST_Document;
+class PST_MainMaster;
+class PST_Notes;
+class PST_Handout;
+class PST_Slide;
+class PST_ExternaloleObjectStg;
 class PowerPointBinaryDocument : public PST_Base
 {
 public:

@@ -2,13 +2,14 @@
 #define PST_NOTES_H
 
 #include "pst_base.h"
-#include "pst_notesatom.h"
-#include "pst_ppdrawing.h"
-#include "pst_colorschemeatom.h"
-#include "pst_progtags.h"
-#include "pst_roundtriptheme12atom.h"
-#include "pst_roundtripcolormapping12atom.h"
-#include "pst_roundtripnotesmastertextstyles12atom.h"
+
+class PST_NotesAtom;
+class PST_PPDrawing;
+class PST_ColorSchemeAtom;
+class PST_ProgTags;
+class PST_RoundTripTheme12Atom;
+class PST_RoundTripColorMapping12Atom;
+class PST_RoundTripNotesMasterTextStyles12Atom;
 class PST_Notes : public PST_Base
 {
 public:

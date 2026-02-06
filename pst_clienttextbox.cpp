@@ -1,5 +1,13 @@
 #include "pst_clienttextbox.h"
 #include "pstsearch.h"
+#include "pst_textheaderatom.h"
+#include "pst_textcharsatom.h"
+#include "pst_textspecialinfoatom.h"
+#include "pst_textruleratom.h"
+#include "pst_slidenumbermetacharatom.h"
+#include "pst_mastertextpropatom.h"
+#include "pst_styletextpropatom.h"
+#include "pst_genericdatemetacharatom.h"
 PST_ClientTextBox::PST_ClientTextBox(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 

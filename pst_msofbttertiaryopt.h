@@ -2,8 +2,9 @@
 #define PST_MSOFBTTERTIARYOPT_H
 
 #include "pst_base.h"
-#include "fopte.h"
 
+class Fopte;
+class FOPTEComplex;
 class PST_MSOfbtTertiaryOPT : public PST_Base
 {
 public:

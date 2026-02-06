@@ -1,5 +1,9 @@
 #include "pst_list.h"
 #include "pstsearch.h"
+#include "pst_normalviewsetinfo.h"
+#include "pst_notestextviewinfo.h"
+#include "pst_slideviewinfo.h"
+#include "pst_progtags.h"
 PST_List::PST_List(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData, var) {}
 
 int PST_List::parser(PSTSearch* pSearchPtr)

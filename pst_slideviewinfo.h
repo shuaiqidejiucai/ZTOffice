@@ -2,7 +2,7 @@
 #define PST_SLIDEVIEWINFO_H
 
 #include "pst_base.h"
-#include "pst_viewinfoatom.h"
+class PST_ViewInfoAtom;
 class PST_SlideViewInfoAtom : public PST_Base
 {
 public:

@@ -2,11 +2,12 @@
 #define PST_SLIDE_H
 
 #include "pst_base.h"
-#include "pst_slideatom.h"
-#include "pst_ppdrawing.h"
-#include "pst_colorschemeatom.h"
-#include "pst_progtags.h"
-#include "pst_roundtripcontentmasterid12atom.h"
+
+class PST_SlideAtom;
+class PST_PPDrawing;
+class PST_ColorSchemeAtom;
+class PST_ProgTags;
+class PST_RoundTripContentMasterId12Atom;
 class PST_Slide : public PST_Base
 {
 public:

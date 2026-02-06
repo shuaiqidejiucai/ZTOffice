@@ -1,5 +1,8 @@
 #include "pst_drawinggroupcontainer.h"
 #include "pstsearch.h"
+#include "odraw_officeartbstorecontainer.h"
+#include "pst_msofbtopt.h"
+#include "odraw_officeartsplitmenucolorcontainer.h"
 PST_DrawingGroupContainer::PST_DrawingGroupContainer(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var)
 {

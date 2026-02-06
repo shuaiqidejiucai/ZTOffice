@@ -2,7 +2,8 @@
 #define PST_PERSISTDIRECTORYATOM_H
 
 #include "pst_base.h"
-#include "persistdirectoryentry.h"
+
+class PersistDirectoryEntry;
 class PST_PersistDirectoryAtom : public PST_Base
 {
 public:

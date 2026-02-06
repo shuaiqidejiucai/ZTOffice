@@ -2,7 +2,8 @@
 #define PST_SLIDELISTWITHTEXT_H
 
 #include "pst_base.h"
-#include "pst_slidepersistatom.h"
+
+class PST_SlidePersistAtom;
 class PST_SlideListWithText : public PST_Base
 {
 public:

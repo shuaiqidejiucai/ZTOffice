@@ -2,10 +2,9 @@
 #define PST_SHAPECLIENTCONTAINER_H
 
 #include "pst_base.h"
-#include "pst_oeplaceholderatom.h"
-#include "pst_roundtriphfplaceholder12atom.h"
-#include "pst_externalobjectrefatom.h"
-#include "pst_progtags.h"
+
+class PST_OEPlaceHolderAtom;
+class PST_ProgTags;
 class PST_ShapeClientContainer : public PST_Base
 {
 public:

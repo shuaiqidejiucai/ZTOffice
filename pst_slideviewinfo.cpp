@@ -1,5 +1,6 @@
 #include "pst_slideviewinfo.h"
 #include "pstsearch.h"
+#include "pst_viewinfoatom.h"
 PST_SlideViewInfo::PST_SlideViewInfo(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 

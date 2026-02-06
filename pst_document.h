@@ -1,16 +1,18 @@
 #ifndef PST_DOCUMENT_H
 #define PST_DOCUMENT_H
 
-#include "pst_documentatom.h"
-#include "pst_exobjlist.h"
 #include "pst_base.h"
-#include "pst_environment.h"
-#include "pst_ppdrawinggroup.h"
-#include "pst_slidelistwithtext.h"
-#include "pst_list.h"
-#include "pst_headersfooters.h"
-#include "pst_roundtripcustomtablestyles12.h"
-#include "pst_enddocumentatom.h"
+
+class PST_DocumentAtom;
+class PST_ExObjList;
+class PST_Environment;
+class PST_PPDrawingGroup;
+class PST_SlideListWithText;
+class PST_List;
+class PST_HeadersFooters;
+class PST_RoundTripCustomTableStyles12;
+class PST_EndDocumentAtom;
+
 class PST_Document : public PST_Base
 {
 public:

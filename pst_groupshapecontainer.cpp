@@ -1,5 +1,6 @@
 #include "pst_groupshapecontainer.h"
 #include "pstsearch.h"
+#include "pst_shapecontainer.h"
 PST_GroupShapeContainer::PST_GroupShapeContainer(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 

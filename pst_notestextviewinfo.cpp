@@ -1,5 +1,6 @@
 #include "pst_notestextviewinfo.h"
 #include "pstsearch.h"
+#include "pst_viewinfoatom.h"
 PST_NotesTextViewInfo::PST_NotesTextViewInfo(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 

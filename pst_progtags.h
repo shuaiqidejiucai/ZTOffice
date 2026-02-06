@@ -2,8 +2,8 @@
 #define PST_PROGTAGS_H
 
 #include "pst_base.h"
-#include "pst_progbinarytag.h"
 
+class PST_ProgBinaryTag;
 class PST_ProgTags : public PST_Base
 {
 public:

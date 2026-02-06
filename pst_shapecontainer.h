@@ -2,14 +2,15 @@
 #define PST_SHAPECONTAINER_H
 
 #include "pst_base.h"
-#include "pst_officeartfspgr.h"
-#include "pst_officeartfsp.h"
-#include "pst_msofbtopt.h"
-#include "officeartspcontainer.h"
-#include "pst_shapeclientcontainer.h"
-#include "pst_clienttextbox.h"
-#include "pst_msofbttertiaryopt.h"
-#include "officeartclientanchor.h"
+
+class PST_OfficeArtFSPGR;
+class PST_OfficeArtFSP;
+class PST_MSOfbtOPT;
+class OfficeArtClientAnchor;
+class PST_ShapeClientContainer;
+class PST_MSOfbtTertiaryOPT;
+class OfficeArtSpContainer;
+class PST_ClientTextBox;
 class PST_ShapeContainer : public PST_Base
 {
 public:

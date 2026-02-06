@@ -1,5 +1,6 @@
 #include "pst_slidelistwithtext.h"
 #include "pstsearch.h"
+#include "pst_slidepersistatom.h"
 PST_SlideListWithText::PST_SlideListWithText(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var) {}
 

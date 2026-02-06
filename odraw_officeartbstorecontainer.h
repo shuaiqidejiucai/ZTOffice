@@ -2,7 +2,8 @@
 #define ODRAW_OFFICEARTBSTORECONTAINER_H
 
 #include "pst_base.h"
-#include "pst_msofbtbse.h"
+
+class PST_MSOfbtBSE;
 class ODRAW_OfficeArtBStoreContainer : public PST_Base
 {
 public:

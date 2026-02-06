@@ -1,5 +1,10 @@
 #include "pst_handout.h"
 #include "pstsearch.h"
+#include "pst_ppdrawing.h"
+#include "pst_colorschemeatom.h"
+#include "pst_progtags.h"
+#include "pst_roundtripcolormapping12atom.h"
+#include "pst_roundtriptheme12atom.h"
 PST_Handout::PST_Handout(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 

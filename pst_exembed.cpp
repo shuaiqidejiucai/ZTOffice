@@ -1,5 +1,8 @@
 #include "pst_exembed.h"
 #include "pstsearch.h"
+#include "pst_externaloleembedatom.h"
+#include "pst_externaloleobjectatom.h"
+#include "pst_cstring.h"
 PST_ExEmbed::PST_ExEmbed(const QByteArray &srcData, const ST_Variable& var) 
 	: PST_Base(srcData,var)
 {

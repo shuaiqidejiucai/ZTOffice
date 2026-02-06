@@ -1,5 +1,12 @@
 #include "pst_notes.h"
 #include "pstsearch.h"
+#include "pst_notesatom.h"
+#include "pst_ppdrawing.h"
+#include "pst_colorschemeatom.h"
+#include "pst_progtags.h"
+#include "pst_roundtriptheme12atom.h"
+#include "pst_roundtripcolormapping12atom.h"
+#include "pst_roundtripnotesmastertextstyles12atom.h"
 PST_Notes::PST_Notes(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var)
 {

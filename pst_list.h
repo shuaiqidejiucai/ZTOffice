@@ -2,11 +2,11 @@
 #define PST_LIST_H
 
 #include "pst_base.h"
-#include "pst_normalviewsetinfo.h"
-#include "pst_notestextviewinfo.h"
-#include "pst_slideviewinfo.h"
-#include "pst_progtags.h"
 
+class PST_NormalViewSetInfo;
+class PST_NotesTextViewInfo;
+class PST_SlideViewInfo;
+class PST_ProgTags;
 class PST_List : public PST_Base
 {
 public:

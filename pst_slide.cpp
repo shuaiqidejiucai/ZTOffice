@@ -1,5 +1,10 @@
 #include "pst_slide.h"
 #include "pstsearch.h"
+#include "pst_slideatom.h"
+#include "pst_ppdrawing.h"
+#include "pst_colorschemeatom.h"
+#include "pst_progtags.h"
+#include "pst_roundtripcontentmasterid12atom.h"
 PST_Slide::PST_Slide(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData, var)
 {
 

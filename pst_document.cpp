@@ -1,6 +1,15 @@
 #include "pst_document.h"
 #include "zttools.h"
 #include "pstsearch.h"
+#include "pst_documentatom.h"
+#include "pst_exobjlist.h"
+#include "pst_environment.h"
+#include "pst_ppdrawinggroup.h"
+#include "pst_slidelistwithtext.h"
+#include "pst_list.h"
+#include "pst_headersfooters.h"
+#include "pst_roundtripcustomtablestyles12.h"
+#include "pst_enddocumentatom.h"
 PST_Document::PST_Document(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {

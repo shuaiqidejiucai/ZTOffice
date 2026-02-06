@@ -1,5 +1,11 @@
 #include "pst_environment.h"
 #include "pstsearch.h"
+#include "pst_srkinsoku.h"
+#include "pst_fontcollection.h"
+#include "pst_textcharformatexceptionatom.h"
+#include "pst_textparagraphformatexceptionatom.h"
+#include "pst_textspecialinfodefaultatom.h"
+#include "pst_txmasterstyleatom.h"
 PST_Environment::PST_Environment(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData, var)
 {

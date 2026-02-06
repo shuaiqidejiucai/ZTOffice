@@ -2,13 +2,13 @@
 #define PST_ENVIRONMENT_H
 
 #include "pst_base.h"
-#include "pst_srkinsoku.h"
-#include "pst_fontcollection.h"
-#include "pst_textcharformatexceptionatom.h"
-#include "pst_textparagraphformatexceptionatom.h"
-#include "pst_textspecialinfodefaultatom.h"
-#include "pst_txmasterstyleatom.h"
 
+class PST_SrKinsoku;
+class PST_FontCollection;
+class PST_TextCharFormatExceptionAtom;
+class PST_TextParagraphFormatExceptionAtom;
+class PST_TextSpecialInfoDefaultAtom;
+class PST_TxMasterStyleAtom;
 class PST_Environment : public PST_Base
 {
 public:

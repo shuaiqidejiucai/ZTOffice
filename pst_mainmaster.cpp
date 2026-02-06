@@ -1,5 +1,16 @@
 #include "pst_mainmaster.h"
 #include "pstsearch.h"
+#include "pst_slideatom.h"
+#include "pst_colorschemeatom.h"
+#include "pst_txmasterstyleatom.h"
+#include "pst_roundtripoarttextstyles12atom.h"
+#include "pst_progtags.h"
+#include "pst_roundtripcolormapping12atom.h"
+#include "pst_roundtriptheme12atom.h"
+#include "pst_roundtripcontentmasterinfo12atom.h"
+#include "pst_roundtriporiginalmainmasterid12atom.h"
+#include "pst_cstring.h"
+#include "pst_ppdrawing.h"
 PST_MainMaster::PST_MainMaster(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData, var)
 {

@@ -1,5 +1,6 @@
 #include "pst_ppdrawing.h"
 #include "pstsearch.h"
+#include "pst_drawingcontainer.h"
 PST_PPDrawing::PST_PPDrawing(const QByteArray &srcData, const ST_Variable& var):PST_Base(srcData,var) {}
 
 int PST_PPDrawing::parser(PSTSearch* pSearchPtr)

@@ -2,7 +2,9 @@
 #define PST_MSOFBTOPT_H
 
 #include "pst_base.h"
-#include "fopte.h"
+
+class Fopte;
+class FOPTEComplex;
 class PST_MSOfbtOPT : public PST_Base
 {
 public:

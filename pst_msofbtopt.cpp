@@ -1,5 +1,5 @@
 #include "pst_msofbtopt.h"
-
+#include "fopte.h"
 PST_MSOfbtOPT::PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {

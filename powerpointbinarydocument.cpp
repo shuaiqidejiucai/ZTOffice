@@ -1,5 +1,14 @@
 #include "powerpointbinarydocument.h"
 #include "pstsearch.h"
+#include "pst_currentuseratom.h"
+#include "pst_usereditatom.h"
+#include "pst_persistdirectoryatom.h"
+#include "pst_document.h"
+#include "pst_mainmaster.h"
+#include "pst_notes.h"
+#include "pst_handout.h"
+#include "pst_slide.h"
+#include "pst_externaloleobjectstg.h"
 PowerPointBinaryDocument::PowerPointBinaryDocument(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {

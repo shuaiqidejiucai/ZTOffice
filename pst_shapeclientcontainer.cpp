@@ -1,5 +1,9 @@
 #include "pst_shapeclientcontainer.h"
 #include "pstsearch.h"
+#include "pst_oeplaceholderatom.h"
+#include "pst_roundtriphfplaceholder12atom.h"
+#include "pst_externalobjectrefatom.h"
+#include "pst_progtags.h"
 PST_ShapeClientContainer::PST_ShapeClientContainer(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var) {}
 

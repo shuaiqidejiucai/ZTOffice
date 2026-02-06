@@ -2,14 +2,15 @@
 #define PST_CLIENTTEXTBOX_H
 
 #include "pst_base.h"
-#include "pst_textheaderatom.h"
-#include "pst_textcharsatom.h"
-#include "pst_textspecialinfoatom.h"
-#include "pst_textruleratom.h"
-#include "pst_slidenumbermetacharatom.h"
-#include "pst_mastertextpropatom.h"
-#include "pst_styletextpropatom.h"
-#include "pst_genericdatemetacharatom.h"
+
+class PST_TextHeaderAtom;
+class PST_TextCharsAtom;
+class PST_MasterTextPropAtom;
+class PST_TextSpecialInfoAtom;
+class PST_StyleTextPropAtom;
+class PST_GenericDateMetaCharAtom;
+class PST_TextRulerAtom;
+class PST_SlideNumberMetaCharAtom;
 class PST_ClientTextBox : public PST_Base
 {
 public:

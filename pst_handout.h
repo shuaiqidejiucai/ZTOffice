@@ -1,11 +1,12 @@
 #ifndef PST_HANDOUT_H
 #define PST_HANDOUT_H
 #include "pst_base.h"
-#include "pst_ppdrawing.h"
-#include "pst_colorschemeatom.h"
-#include "pst_progtags.h"
-#include "pst_roundtripcolormapping12atom.h"
-#include "pst_roundtriptheme12atom.h"
+
+class PST_PPDrawing;
+class PST_ColorSchemeAtom;
+class PST_ProgTags;
+class PST_RoundTripTheme12Atom;
+class PST_RoundTripColorMapping12Atom;
 class PST_Handout : public PST_Base
 {
 public:

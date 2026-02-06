@@ -2,8 +2,8 @@
 #define PST_PPDRAWINGGROUP_H
 
 #include "pst_base.h"
-#include "pst_drawinggroupcontainer.h"
 
+class PST_DrawingGroupContainer;
 class PST_PPDrawingGroup : public PST_Base
 {
 public:

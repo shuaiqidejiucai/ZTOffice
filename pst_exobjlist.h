@@ -1,8 +1,10 @@
 #ifndef PST_EXOBJLIST_H
 #define PST_EXOBJLIST_H
 
-#include "pst_externalobjectlistatom.h"
-#include "pst_exembed.h"
+#include "pst_base.h"
+
+class PST_ExternalObjectListAtom;
+class PST_ExEmbed;
 class PST_ExObjList : public PST_Base
 {
 public:

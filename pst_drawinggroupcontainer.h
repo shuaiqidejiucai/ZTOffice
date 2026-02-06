@@ -2,9 +2,11 @@
 #define PST_DRAWINGGROUPCONTAINER_H
 
 #include "pst_base.h"
-#include "odraw_officeartbstorecontainer.h"
-#include "pst_msofbtopt.h"
-#include "odraw_officeartsplitmenucolorcontainer.h"
+
+class PST_DrawingGroupAtom;
+class ODRAW_OfficeArtBStoreContainer;
+class PST_MSOfbtOPT;
+class ODRAW_OfficeArtSplitMenuColorContainer;
 class PST_DrawingGroupAtom : public PST_Base
 {
 public:

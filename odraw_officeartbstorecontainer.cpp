@@ -1,5 +1,6 @@
 #include "odraw_officeartbstorecontainer.h"
 #include "pstsearch.h"
+#include "pst_msofbtbse.h"
 ODRAW_OfficeArtBStoreContainer::ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData, const ST_Variable& var):PST_Base(srcData,var)
 {
 

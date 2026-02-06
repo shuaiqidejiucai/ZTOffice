@@ -2,8 +2,10 @@
 #define PST_DRAWINGCONTAINER_H
 
 #include "pst_base.h"
-#include "pst_officeartfdg.h"
-#include "pst_groupshapecontainer.h"
+
+class PST_OfficeArtFDG;
+class PST_GroupShapeContainer;
+class PST_ShapeContainer;
 class PST_DrawingContainer : public PST_Base
 {
 public:

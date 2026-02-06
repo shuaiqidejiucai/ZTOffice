@@ -1,17 +1,18 @@
 #ifndef PST_MAINMASTER_H
 #define PST_MAINMASTER_H
 #include "pst_base.h"
-#include "pst_slideatom.h"
-#include "pst_colorschemeatom.h"
-#include "pst_txmasterstyleatom.h"
-#include "pst_roundtripoarttextstyles12atom.h"
-#include "pst_progtags.h"
-#include "pst_roundtripcolormapping12atom.h"
-#include "pst_roundtriptheme12atom.h"
-#include "pst_roundtripcontentmasterinfo12atom.h"
-#include "pst_roundtriporiginalmainmasterid12atom.h"
-#include "pst_cstring.h"
-#include "pst_ppdrawing.h"
+
+class PST_SlideAtom;
+class PST_ColorSchemeAtom;
+class PST_TxMasterStyleAtom;
+class PST_RoundTripOArtTextStyles12Atom;
+class PST_PPDrawing;
+class PST_ProgTags;
+class PST_RoundTripTheme12Atom;
+class PST_RoundTripColorMapping12Atom;
+class PST_RoundTripContentMasterInfo12Atom;
+class PST_RoundTripOriginalMainMasterId12Atom;
+class PST_CString;
 class PST_MainMaster : public PST_Base
 {
 public:

@@ -1,5 +1,7 @@
 #include "pst_exobjlist.h"
 #include "pstsearch.h"
+#include "pst_externalobjectlistatom.h"
+#include "pst_exembed.h"
 PST_ExObjList::PST_ExObjList(const QByteArray &srcData, const ST_Variable& var)
 	:PST_Base(srcData,var)
 {
