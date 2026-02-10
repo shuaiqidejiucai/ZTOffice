@@ -6,7 +6,7 @@
 class PST_ExternalOleObjectAtom;
 class PST_ExternalOleEmbedAtom;
 class PST_CString;
-class PST_ExEmbed : public PST_Base
+class PSTParser_EXPORT PST_ExEmbed : public PST_Base
 {
 public:
     PST_ExEmbed(const QByteArray& srcData, const ST_Variable& var);

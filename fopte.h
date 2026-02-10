@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 //TODO:获取不用PST_Base
-class Fopte : public PST_Base
+class PSTParser_EXPORT Fopte : public PST_Base
 {
 public:
     Fopte(const QByteArray& srcData, const ST_Variable& var);
@@ -18,7 +18,7 @@ public:
     quint32 op;
 };
 
-class FOPTEComplex : public PST_Base
+class PSTParser_EXPORT FOPTEComplex : public PST_Base
 {
 public:
     FOPTEComplex(const QByteArray& srcData, const ST_Variable& var);

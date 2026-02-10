@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_RoundTripTheme12Atom : public PST_Base
+class PSTParser_EXPORT PST_RoundTripTheme12Atom : public PST_Base
 {
 public:
     PST_RoundTripTheme12Atom(const QByteArray& srcData, const ST_Variable& var);

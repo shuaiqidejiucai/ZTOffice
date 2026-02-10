@@ -1,7 +1,7 @@
 #ifndef PSTSEARCH_H
 #define PSTSEARCH_H
 #include "pst_base.h"
-class PSTSearch
+class PSTParser_EXPORT PSTSearch
 {
 public:
     PSTSearch();

@@ -13,7 +13,7 @@ class PST_HeadersFooters;
 class PST_RoundTripCustomTableStyles12;
 class PST_EndDocumentAtom;
 
-class PST_Document : public PST_Base
+class PSTParser_EXPORT PST_Document : public PST_Base
 {
 public:
     PST_Document(const QByteArray& srcData, const ST_Variable& var);

@@ -41,7 +41,7 @@ struct ST_RectStruct
     } anchoData;
 };
 
-class OfficeArtClientAnchor : public PST_Base
+class PSTParser_EXPORT OfficeArtClientAnchor : public PST_Base
 {
 public:
     OfficeArtClientAnchor(const QByteArray& srcData, const ST_Variable& var);

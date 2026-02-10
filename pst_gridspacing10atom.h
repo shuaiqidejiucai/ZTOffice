@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_GridSpacing10Atom : public PST_Base
+class PSTParser_EXPORT PST_GridSpacing10Atom : public PST_Base
 {
 public:
     PST_GridSpacing10Atom(const QByteArray& srcData, const ST_Variable& var);

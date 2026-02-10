@@ -5,7 +5,7 @@
 
 class PST_ExternalObjectListAtom;
 class PST_ExEmbed;
-class PST_ExObjList : public PST_Base
+class PSTParser_EXPORT PST_ExObjList : public PST_Base
 {
 public:
     PST_ExObjList(const QByteArray& srcData, const ST_Variable& var);

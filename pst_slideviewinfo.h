@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 class PST_ViewInfoAtom;
-class PST_SlideViewInfoAtom : public PST_Base
+class PSTParser_EXPORT PST_SlideViewInfoAtom : public PST_Base
 {
 public:
     PST_SlideViewInfoAtom(const QByteArray& srcData, const ST_Variable& var);
@@ -15,7 +15,7 @@ public:
     virtual int priority()override;
 };
 
-class PST_SlideViewInfo : public PST_Base
+class PSTParser_EXPORT PST_SlideViewInfo : public PST_Base
 {
 public:
     PST_SlideViewInfo(const QByteArray& srcData, const ST_Variable& var);

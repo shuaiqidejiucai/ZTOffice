@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 class PST_DrawingGroupContainer;
-class PST_PPDrawingGroup : public PST_Base
+class PSTParser_EXPORT PST_PPDrawingGroup : public PST_Base
 {
 public:
     PST_PPDrawingGroup(const QByteArray& srcData, const ST_Variable& var);

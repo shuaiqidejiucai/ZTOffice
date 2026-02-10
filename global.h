@@ -15,6 +15,15 @@
 #include <qbytearray.h>
 #include <QString>
 
+
+#include <QtCore/qglobal.h>
+
+#if defined(PSTParser_LIBRARY)
+#define PSTParser_EXPORT Q_DECL_EXPORT
+#else
+#define PSTParser_EXPORT Q_DECL_IMPORT
+#endif
+
 enum EU_ErrorCodeType
 {
     Error_FailedType = -1,

@@ -130,39 +130,39 @@ enum HeaderType
 };
 
 namespace ZT_Libolecf {
-    void oleItemDeleter(libolecf_item_t* item);
+    PSTParser_EXPORT void oleItemDeleter(libolecf_item_t* item);
 
-    void oleFileDeleter(libolecf_file_t* file);
+    PSTParser_EXPORT void oleFileDeleter(libolecf_file_t* file);
 
-    void oleErrorDeleter(libolecf_error_t* oleError);
+    PSTParser_EXPORT void oleErrorDeleter(libolecf_error_t* oleError);
 
-    int ZT_libolecf_item_get_sub_item(const QSharedPointer<libolecf_item_t>& parentItem, int num, QSharedPointer<libolecf_item_t>& subItem, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_item_get_sub_item(const QSharedPointer<libolecf_item_t>& parentItem, int num, QSharedPointer<libolecf_item_t>& subItem, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_item_get_sub_item_by_utf8_path(const QSharedPointer<libolecf_item_t>& item,
+    PSTParser_EXPORT int ZT_libolecf_item_get_sub_item_by_utf8_path(const QSharedPointer<libolecf_item_t>& item,
         const uint8_t* utf8_string,
         size_t utf8_string_length,
         QSharedPointer<libolecf_item_t>& subItem,
         QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_file_initialize(QSharedPointer<libolecf_file_t>& file, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_file_initialize(QSharedPointer<libolecf_file_t>& file, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_file_open(const QSharedPointer<libolecf_file_t>& file, const char* filename, int access_flags, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_file_open(const QSharedPointer<libolecf_file_t>& file, const char* filename, int access_flags, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_item_get_number_of_sub_items(const QSharedPointer<libolecf_item_t>& oleItem, int& count, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_item_get_number_of_sub_items(const QSharedPointer<libolecf_item_t>& oleItem, int& count, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_item_get_utf8_name_size(const QSharedPointer<libolecf_item_t>& oleItem, size_t* utf8_string_size, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_item_get_utf8_name_size(const QSharedPointer<libolecf_item_t>& oleItem, size_t* utf8_string_size, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_item_get_utf8_name(const QSharedPointer<libolecf_item_t>& oleItem, uint8_t* utf8_string, const size_t& utf8_string_size, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_item_get_utf8_name(const QSharedPointer<libolecf_item_t>& oleItem, uint8_t* utf8_string, const size_t& utf8_string_size, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_item_get_size(const QSharedPointer<libolecf_item_t>& item, uint32_t* size, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_item_get_size(const QSharedPointer<libolecf_item_t>& item, uint32_t* size, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_stream_read_buffer(const QSharedPointer<libolecf_item_t>& intputItem, uint8_t* buffer, const size_t& size, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_stream_read_buffer(const QSharedPointer<libolecf_item_t>& intputItem, uint8_t* buffer, const size_t& size, QSharedPointer<libolecf_error_t>* error = nullptr);
 
-    int ZT_libolecf_file_get_root_item(const QSharedPointer<libolecf_file_t>& file, QSharedPointer<libolecf_item_t>& pRootIem, QSharedPointer<libolecf_error_t>* error = nullptr);
+    PSTParser_EXPORT int ZT_libolecf_file_get_root_item(const QSharedPointer<libolecf_file_t>& file, QSharedPointer<libolecf_item_t>& pRootIem, QSharedPointer<libolecf_error_t>* error = nullptr);
 
 }
 
-class ZTTools
+class PSTParser_EXPORT ZTTools
 {
 public:
 

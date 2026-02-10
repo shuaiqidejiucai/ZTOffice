@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_FontEntityAtom : public PST_Base
+class PSTParser_EXPORT PST_FontEntityAtom : public PST_Base
 {
 public:
     PST_FontEntityAtom(const QByteArray& srcData, const ST_Variable& var);
@@ -13,7 +13,7 @@ public:
     virtual int priority()override;
 };
 
-class PST_FontCollection : public PST_Base
+class PSTParser_EXPORT PST_FontCollection : public PST_Base
 {
 public:
     PST_FontCollection(const QByteArray& srcData, const ST_Variable& var);

@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_RoundTripNotesMasterTextStyles12Atom : public PST_Base
+class PSTParser_EXPORT PST_RoundTripNotesMasterTextStyles12Atom : public PST_Base
 {
 public:
     PST_RoundTripNotesMasterTextStyles12Atom(const QByteArray& srcData, const ST_Variable& var);

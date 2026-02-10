@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_TxMasterStyleAtom : public PST_Base
+class PSTParser_EXPORT PST_TxMasterStyleAtom : public PST_Base
 {
 public:
     PST_TxMasterStyleAtom(const QByteArray& srcData, const ST_Variable& var);

@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 typedef quint32 PersistOffsetEntry;
-class PersistDirectoryEntry
+class PSTParser_EXPORT PersistDirectoryEntry
 {
 public:
     PersistDirectoryEntry();

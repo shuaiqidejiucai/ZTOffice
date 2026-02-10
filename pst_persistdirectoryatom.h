@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 class PersistDirectoryEntry;
-class PST_PersistDirectoryAtom : public PST_Base
+class PSTParser_EXPORT PST_PersistDirectoryAtom : public PST_Base
 {
 public:
     PST_PersistDirectoryAtom(const QByteArray& srcData, const ST_Variable& var);

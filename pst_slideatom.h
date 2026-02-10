@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_SlideAtom : public PST_Base
+class PSTParser_EXPORT PST_SlideAtom : public PST_Base
 {
 public:
     PST_SlideAtom(const QByteArray& srcData, const ST_Variable& var);

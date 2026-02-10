@@ -11,7 +11,7 @@ class PST_StyleTextPropAtom;
 class PST_GenericDateMetaCharAtom;
 class PST_TextRulerAtom;
 class PST_SlideNumberMetaCharAtom;
-class PST_ClientTextBox : public PST_Base
+class PSTParser_EXPORT PST_ClientTextBox : public PST_Base
 {
 public:
     PST_ClientTextBox(const QByteArray& srcData, const ST_Variable& var);

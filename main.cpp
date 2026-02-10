@@ -133,7 +133,7 @@ int main(int argc, char* argv[])
     const QByteArray& srcData = wk.GetSrcData();
     ST_Variable stVar;
     ST_EP(stVar) = srcData.size();*/
-   // QSharedPointer<PowerPointBinaryDocument> powerPointBinDocPtr(new PowerPointBinaryDocument(srcData, stVar));
+    QSharedPointer<PowerPointBinaryDocument> powerPointBinDocPtr(new PowerPointBinaryDocument(srcData, stVar));
    // powerPointBinDocPtr->parser();
     
     //wk.parserData();

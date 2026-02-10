@@ -14,7 +14,7 @@ class PST_Notes;
 class PST_Handout;
 class PST_Slide;
 class PST_ExternaloleObjectStg;
-class PowerPointBinaryDocument : public PST_Base
+class PSTParser_EXPORT PowerPointBinaryDocument : public PST_Base
 {
 public:
     PowerPointBinaryDocument(const QByteArray& srcData, const ST_Variable& var);

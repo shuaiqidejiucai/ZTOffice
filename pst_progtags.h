@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 class PST_ProgBinaryTag;
-class PST_ProgTags : public PST_Base
+class PSTParser_EXPORT PST_ProgTags : public PST_Base
 {
 public:
     PST_ProgTags(const QByteArray& srcData, const ST_Variable& var);

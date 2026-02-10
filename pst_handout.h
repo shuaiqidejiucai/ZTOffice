@@ -7,7 +7,7 @@ class PST_ColorSchemeAtom;
 class PST_ProgTags;
 class PST_RoundTripTheme12Atom;
 class PST_RoundTripColorMapping12Atom;
-class PST_Handout : public PST_Base
+class PSTParser_EXPORT PST_Handout : public PST_Base
 {
 public:
     PST_Handout(const QByteArray& srcData, const ST_Variable& var);

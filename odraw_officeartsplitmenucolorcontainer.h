@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class ODRAW_OfficeArtSplitMenuColorContainer : public PST_Base
+class PSTParser_EXPORT ODRAW_OfficeArtSplitMenuColorContainer : public PST_Base
 {
 public:
     ODRAW_OfficeArtSplitMenuColorContainer(const QByteArray& srcData, const ST_Variable& var);

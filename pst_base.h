@@ -3,7 +3,7 @@
 #include "global.h"
 #include "zttools.h"
 class PSTSearch;
-class PST_Base : public QEnableSharedFromThis<PST_Base>
+class PSTParser_EXPORT PST_Base : public QEnableSharedFromThis<PST_Base>
 {
 public:
     PST_Base(const QByteArray& srcData, const ST_Variable& var, PSTSearch * pSeachptr = nullptr);

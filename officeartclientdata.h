@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class OfficeArtClientData : public PST_Base
+class PSTParser_EXPORT OfficeArtClientData : public PST_Base
 {
 public:
     OfficeArtClientData(const QByteArray& srcData, const ST_Variable& var);

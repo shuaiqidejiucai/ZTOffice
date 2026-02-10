@@ -11,7 +11,7 @@ class PST_ShapeClientContainer;
 class PST_MSOfbtTertiaryOPT;
 class OfficeArtSpContainer;
 class PST_ClientTextBox;
-class PST_ShapeContainer : public PST_Base
+class PSTParser_EXPORT PST_ShapeContainer : public PST_Base
 {
 public:
     PST_ShapeContainer(const QByteArray& srcData, const ST_Variable& var);

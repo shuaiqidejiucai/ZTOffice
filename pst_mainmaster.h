@@ -13,7 +13,7 @@ class PST_RoundTripColorMapping12Atom;
 class PST_RoundTripContentMasterInfo12Atom;
 class PST_RoundTripOriginalMainMasterId12Atom;
 class PST_CString;
-class PST_MainMaster : public PST_Base
+class PSTParser_EXPORT PST_MainMaster : public PST_Base
 {
 public:
     PST_MainMaster(const QByteArray& srcData, const ST_Variable& var);

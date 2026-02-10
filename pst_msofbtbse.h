@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_MSOfbtBSE : public PST_Base
+class PSTParser_EXPORT PST_MSOfbtBSE : public PST_Base
 {
 public:
     PST_MSOfbtBSE(const QByteArray& srcData, const ST_Variable& var);

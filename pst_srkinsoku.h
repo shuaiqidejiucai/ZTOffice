@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_KinsokuAtom : public PST_Base
+class PSTParser_EXPORT PST_KinsokuAtom : public PST_Base
 {
 public:
     PST_KinsokuAtom(const QByteArray& srcData, const ST_Variable& var);
@@ -13,7 +13,7 @@ public:
     virtual int priority()override;
 };
 
-class PST_SrKinsoku : public PST_Base
+class PSTParser_EXPORT PST_SrKinsoku : public PST_Base
 {
 public:
     PST_SrKinsoku(const QByteArray& srcData, const ST_Variable& var);

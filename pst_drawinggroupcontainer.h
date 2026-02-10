@@ -7,7 +7,7 @@ class PST_DrawingGroupAtom;
 class ODRAW_OfficeArtBStoreContainer;
 class PST_MSOfbtOPT;
 class ODRAW_OfficeArtSplitMenuColorContainer;
-class PST_DrawingGroupAtom : public PST_Base
+class PSTParser_EXPORT PST_DrawingGroupAtom : public PST_Base
 {
 public:
     PST_DrawingGroupAtom(const QByteArray& srcData, const ST_Variable& var);
@@ -17,7 +17,7 @@ public:
     virtual int priority()override;
 };
 
-class PST_DrawingGroupContainer : public PST_Base
+class PSTParser_EXPORT PST_DrawingGroupContainer : public PST_Base
 {
 public:
     PST_DrawingGroupContainer(const QByteArray& srcData, const ST_Variable& var);

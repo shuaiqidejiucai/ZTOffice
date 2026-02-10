@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 class PST_ViewInfoAtom;
-class PST_NotesTextViewInfo : public PST_Base
+class PSTParser_EXPORT PST_NotesTextViewInfo : public PST_Base
 {
 public:
     PST_NotesTextViewInfo(const QByteArray& srcData, const ST_Variable& var);

@@ -6,7 +6,7 @@
 class PST_OfficeArtFDG;
 class PST_GroupShapeContainer;
 class PST_ShapeContainer;
-class PST_DrawingContainer : public PST_Base
+class PSTParser_EXPORT PST_DrawingContainer : public PST_Base
 {
 public:
     PST_DrawingContainer(const QByteArray& srcData, const ST_Variable& var);

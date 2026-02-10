@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 class PST_MSOfbtBSE;
-class ODRAW_OfficeArtBStoreContainer : public PST_Base
+class PSTParser_EXPORT ODRAW_OfficeArtBStoreContainer : public PST_Base
 {
 public:
     ODRAW_OfficeArtBStoreContainer(const QByteArray& srcData, const ST_Variable& var);

@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_HeadsFootersAtom : public PST_Base
+class PSTParser_EXPORT PST_HeadsFootersAtom : public PST_Base
 {
 public:
     PST_HeadsFootersAtom(const QByteArray& srcData, const ST_Variable& var);
@@ -12,7 +12,7 @@ public:
     virtual int priority()override;
 };
 
-class PST_HeadersFooters : public PST_Base
+class PSTParser_EXPORT PST_HeadersFooters : public PST_Base
 {
 public:
     PST_HeadersFooters(const QByteArray& srcData, const ST_Variable& var);

@@ -4,7 +4,7 @@
 #include "pst_base.h"
 
 class PST_ShapeContainer;
-class PST_GroupShapeContainer : public PST_Base
+class PSTParser_EXPORT PST_GroupShapeContainer : public PST_Base
 {
 public:
     PST_GroupShapeContainer(const QByteArray& srcData, const ST_Variable& var);

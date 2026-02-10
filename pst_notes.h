@@ -10,7 +10,7 @@ class PST_ProgTags;
 class PST_RoundTripTheme12Atom;
 class PST_RoundTripColorMapping12Atom;
 class PST_RoundTripNotesMasterTextStyles12Atom;
-class PST_Notes : public PST_Base
+class PSTParser_EXPORT PST_Notes : public PST_Base
 {
 public:
     PST_Notes(const QByteArray& srcData, const ST_Variable& var);

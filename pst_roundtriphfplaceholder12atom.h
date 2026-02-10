@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_RoundTripHFPlaceholder12Atom : public PST_Base
+class PSTParser_EXPORT PST_RoundTripHFPlaceholder12Atom : public PST_Base
 {
 public:
     PST_RoundTripHFPlaceholder12Atom(const QByteArray& srcData, const ST_Variable& var);

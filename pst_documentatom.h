@@ -2,7 +2,7 @@
 #define PST_DOCUMENTATOM_H
 #include "global.h"
 #include "pst_base.h"
-class PST_DocumentAtom : public PST_Base
+class PSTParser_EXPORT PST_DocumentAtom : public PST_Base
 {
 public:
     PST_DocumentAtom(const QByteArray& srcData, const ST_Variable& var);

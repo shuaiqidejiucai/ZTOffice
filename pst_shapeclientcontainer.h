@@ -5,7 +5,7 @@
 
 class PST_OEPlaceHolderAtom;
 class PST_ProgTags;
-class PST_ShapeClientContainer : public PST_Base
+class PSTParser_EXPORT PST_ShapeClientContainer : public PST_Base
 {
 public:
     PST_ShapeClientContainer(const QByteArray& srcData, const ST_Variable& var);

@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_CString : public PST_Base
+class PSTParser_EXPORT PST_CString : public PST_Base
 {
 public:
     PST_CString(const QByteArray& srcData, const ST_Variable& var);

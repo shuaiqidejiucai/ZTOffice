@@ -7,7 +7,7 @@
 #include "pst_styletextprop9atom.h"
 #include "pst_roundtripheaderfooterdefaults12atom.h"
 #include "pst_gridspacing10atom.h"
-class PST_BinaryTagData : public PST_Base
+class PSTParser_EXPORT PST_BinaryTagData : public PST_Base
 {
 public:
     PST_BinaryTagData(const QByteArray& srcData, const ST_Variable& var);

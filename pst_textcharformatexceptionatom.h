@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_TextCharFormatExceptionAtom : public PST_Base
+class PSTParser_EXPORT PST_TextCharFormatExceptionAtom : public PST_Base
 {
 public:
     PST_TextCharFormatExceptionAtom(const QByteArray& srcData, const ST_Variable& var);

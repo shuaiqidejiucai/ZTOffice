@@ -5,7 +5,7 @@
 
 class PST_CString;
 class PST_BinaryTagData;
-class PST_ProgBinaryTag : public PST_Base
+class PSTParser_EXPORT PST_ProgBinaryTag : public PST_Base
 {
 public:
     PST_ProgBinaryTag(const QByteArray& srcData, const ST_Variable& var);

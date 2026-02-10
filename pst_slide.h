@@ -8,7 +8,7 @@ class PST_PPDrawing;
 class PST_ColorSchemeAtom;
 class PST_ProgTags;
 class PST_RoundTripContentMasterId12Atom;
-class PST_Slide : public PST_Base
+class PSTParser_EXPORT PST_Slide : public PST_Base
 {
 public:
     PST_Slide(const QByteArray& srcData, const ST_Variable& var);

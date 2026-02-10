@@ -1,8 +1,9 @@
-QT       += core gui
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core
 
 CONFIG += c++17
+
+TEMPLATE = lib
+DEFINES += PSTParser_LIBRARY
 
 shareRoot = $$PWD/share
 include($$shareRoot/common/common.pri)
@@ -25,10 +26,9 @@ SOURCES += \
     pst_roundtripoarttextstyles12atom.cpp \
     pst_roundtriporiginalmainmasterid12atom.cpp \
     pstsearch.cpp \
+    ztapi_file.cpp \
     zttools.cpp \
     fopte.cpp \
-    main.cpp \
-    mainwindow.cpp \
     odraw_officeartbstorecontainer.cpp \
     odraw_officeartsplitmenucolorcontainer.cpp \
     officeartspcontainer.cpp \
@@ -109,7 +109,6 @@ SOURCES += \
 
 HEADERS += \
     fopte.h \
-    mainwindow.h \
     odraw_officeartbstorecontainer.h \
     odraw_officeartsplitmenucolorcontainer.h \
     officeartspcontainer.h \
@@ -199,6 +198,7 @@ HEADERS += \
     pst_roundtripoarttextstyles12atom.h \
     pst_roundtriporiginalmainmasterid12atom.h \
     pstsearch.h \
+    ztapi_file.h \
     zttools.h
     # ztwppdocument.h
 

@@ -5,7 +5,7 @@
 
 class Fopte;
 class FOPTEComplex;
-class PST_MSOfbtOPT : public PST_Base
+class PSTParser_EXPORT PST_MSOfbtOPT : public PST_Base
 {
 public:
     PST_MSOfbtOPT(const QByteArray& srcData, const ST_Variable& var);

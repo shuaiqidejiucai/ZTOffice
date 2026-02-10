@@ -3,7 +3,7 @@
 
 #include "pst_base.h"
 
-class PST_ExternalOleObjectAtom : public PST_Base
+class PSTParser_EXPORT PST_ExternalOleObjectAtom : public PST_Base
 {
 public:
     PST_ExternalOleObjectAtom(const QByteArray& srcData, const ST_Variable& var);

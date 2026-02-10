@@ -7,7 +7,7 @@ class PST_NormalViewSetInfo;
 class PST_NotesTextViewInfo;
 class PST_SlideViewInfo;
 class PST_ProgTags;
-class PST_List : public PST_Base
+class PSTParser_EXPORT PST_List : public PST_Base
 {
 public:
     PST_List(const QByteArray& srcData, const ST_Variable& var);

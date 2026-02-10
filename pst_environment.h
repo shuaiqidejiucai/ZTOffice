@@ -9,7 +9,7 @@ class PST_TextCharFormatExceptionAtom;
 class PST_TextParagraphFormatExceptionAtom;
 class PST_TextSpecialInfoDefaultAtom;
 class PST_TxMasterStyleAtom;
-class PST_Environment : public PST_Base
+class PSTParser_EXPORT PST_Environment : public PST_Base
 {
 public:
     PST_Environment(const QByteArray& srcData, const ST_Variable& var);
